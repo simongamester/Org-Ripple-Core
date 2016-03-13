@@ -1,12 +1,12 @@
 <div class="modal-header">
   <h4 class="modal-title">{{ modal.title }}</h4>
 </div>
-
 <div class="modal-body">
   <div class="panel panel-default">
     <div class="panel-heading">
       <h4 class="panel-title">{{ patient.name }}</h4>
     </div>
+
     <div class="panel-body">
       <div class="row">
         <div class="col-sm-4 text-left">
@@ -19,8 +19,71 @@
     </div>
   </div>
 
-  <div>
-    <img class="dicom-image" ng-src="http://ripple-orthanc.answerappcloud.com/instances/{{dicomId}}/preview" width="70%" height="70%">
+  <div id="studyViewerTemplate" class="tab-pane active hidden" style="height:100%">
+    <div class="studyContainer" style="height:100%">
+      <div class="studyRow row" style="height:100%">
+        <div class="viewer">
+          <div class="text-center">
+            <div class="btn-group">
+              <button type="button" class="btn btn-sm btn-default" data-container='body' data-toggle="tooltip"
+                      data-placement="bottom" title="WW/WC"><span class="fa fa-sun-o"></span></button>
+              <button type="button" class="btn btn-sm btn-default" data-container='body' data-toggle="tooltip"
+                      data-placement="bottom" title="Invert"><span class="fa fa-adjust"></span></button>
+              <button type="button" class="btn btn-sm btn-default" data-container='body' data-toggle="tooltip"
+                      data-placement="bottom" title="Zoom"><span class="fa fa-search"></span></button>
+              <button type="button" class="btn btn-sm btn-default" data-container='body' data-toggle="tooltip"
+                      data-placement="bottom" title="Pan"><span class="fa fa-arrows"></span></button>
+              <button type="button" class="btn btn-sm btn-default" data-container='body' data-toggle="tooltip"
+                      data-placement="bottom" title="Stack Scroll"><span class="fa fa-bars"></span></button>
+              <button type="button" class="btn btn-sm btn-default" data-container='body' data-toggle="tooltip"
+                      data-placement="bottom" title="Length Measurement"><span class="fa fa-arrows-v"></span></button>
+              <button type="button" class="btn btn-sm btn-default" data-container='body' data-toggle="tooltip"
+                      data-placement="bottom" title="Pixel Probe"><span class="fa fa-dot-circle-o"></span></button>
+              <button type="button" class="btn btn-sm btn-default" data-container='body' data-toggle="tooltip"
+                      data-placement="bottom" title="Elliptical ROI"><span class="fa fa-circle-o"></span></button>
+              <button type="button" class="btn btn-sm btn-default" data-container='body' data-toggle="tooltip"
+                      data-placement="bottom" title="Rectangle ROI"><span class="fa fa-square-o"></span></button>
+              <button type="button" class="btn btn-sm btn-default" data-container='body' data-toggle="tooltip"
+                      data-placement="bottom" title="Play Clip"><span class="fa fa-play"></span></button>
+              <button type="button" class="btn btn-sm btn-default" data-container='body' data-toggle="tooltip"
+                      data-placement="bottom" title="Stop Clip"><span class="fa fa-stop"></span></button>
+            </div>
+          </div>
+          <div class="imageViewer">
+            <div class="viewportWrapper cornerstone-enabled-image"
+                 style="width:100%;height:100%;position:relative;color: white;display:inline-block;background-color:black;"
+                 oncontextmenu="return false"
+                 unselectable='on'
+                 onselectstart='return false;'
+                 onmousedown='return false;'>
+
+              <div class="viewport"></div>
+              <div class="overlay" style="top:0; left:0">
+                <div>Series Description</div>
+                <div>Series Date</div>
+              </div>
+              <div class="overlay" style="top:0; right:0">
+                <div class="stationName">Station Name:</div>
+                <div class="operatorName">Operator Name:</div>
+                <div class="currentImageAndTotalImages">Image #:</div>
+              </div>
+              <div class="overlay" style="bottom:0; left:0">
+                <div class="fps">FPS:</div>
+                <div class="renderTime">Render Time:</div>
+                <div class="currentImageAndTotalImages">Image #:</div>
+              </div>
+
+              <div class="overlay" style="bottom:0; right:0">
+                <div>WW/WL:</div>
+                <div>Zoom:</div>
+                <div>FPS:</div>
+                <div>Protocol Name:</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 

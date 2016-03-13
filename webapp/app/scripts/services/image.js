@@ -35,7 +35,7 @@ angular.module('rippleDemonstrator')
       return $http.get('/api/patients/' + patientId + '/dicom/' + 'series/' + seriesId + '/instance' + '?source=' + source);
     };
 
-    var getInstance = function (patientId, instanceId, source) {
+    var getInstanceMetaData = function (patientId, instanceId, source) {
       return $http.get('/api/patients/' + patientId + '/dicom/' + 'instances/' + instanceId + '?source=' + source)
     };
 
@@ -44,7 +44,6 @@ angular.module('rippleDemonstrator')
       getAllSeriesInStudy: getAllSeriesInStudy,
       getSeriesDetails: getSeriesDetails,
       getInstanceId: getInstanceId,
-      getInstance: getInstance
+      getInstanceMetaData: getInstanceMetaData
     };
-
   });

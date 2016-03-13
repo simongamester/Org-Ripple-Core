@@ -48,8 +48,13 @@ angular.module('rippleDemonstrator')
     var findSeriesMetadata = function(seriesId, index) {
       Image.getSeriesDetails($stateParams.patientId, seriesId).then(function (result) {
         $scope.series[index] = result.data;
-        $scope.series[index].seriesDate = moment($scope.series[index].seriesDate).format('DD-MMM-YYYY');
-        $scope.series[index].seriesTime = moment($scope.series[index].seriesTime).format('h:mma');
+
+        if ($scope.series[index].seriesDate !== null) {
+          $scope.series[index].seriesDate = moment($scope.series[index].seriesDate).format('DD-MMM-YYYY');
+        }
+        if ($scope.series[index].seriesTime !== null) {
+          $scope.series[index].seriesTime = moment($scope.series[index].seriesTime).format('h:mma');
+        }
       });
     };
 
@@ -68,12 +73,9 @@ angular.module('rippleDemonstrator')
               title: 'View Dicom Image'
             };
           },
-          dicomImageId: function () {
-            return imageId;
-          },
 
           seriesId: function () {
-            return Image.getInstance($stateParams.patientId, imageId).then(function (result) {
+            return Image.getInstanceMetaData($stateParams.patientId, imageId).then(function (result) {
               return result.data.parentSeries;
             });
           },

@@ -52,7 +52,10 @@ angular.module('rippleDemonstrator')
 
       for (var i = 0; i < $scope.images.length; i++) {
         var image = $scope.images[i];
-        image.dateRecorded = moment(image.dateRecorded).format('DD-MMM-YYYY');
+
+        if (image.dateRecorded !== null) {
+          image.dateRecorded = moment(image.dateRecorded).format('DD-MMM-YYYY');
+        }
 
         if (image.studyDescription === null || image.studyDescription === '') {
           image.studyDescription = 'N/A';

@@ -85,6 +85,15 @@ module.exports = function (grunt) {
           port: 19191,
           https: false,
           xforward: false
+        },
+        {
+          context: '/orthanc',
+          host: 'localhost',
+          port: 8042,
+          https: false,
+          rewrite: {
+            '^/orthanc': ''
+          }
         }
       ],
       livereload: {
