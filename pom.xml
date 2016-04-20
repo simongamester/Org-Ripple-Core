@@ -56,7 +56,7 @@
         <!-- Tells Sonar to use jacoco for coverage results -->
         <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
         <!-- Jacoco version to use -->
-        <jacoco.outputDir>${project.build.directory}</jacoco.outputDir>
+        <jacoco.outputDir>${session.executionRootDirectory}/target</jacoco.outputDir>
         <!-- Jacoco output file for ITs -->
         <jacoco.out.it.file>jacoco-it.exec</jacoco.out.it.file>
         <!-- Tells Sonar where the Jacoco coverage result file is located for Integration Tests -->
