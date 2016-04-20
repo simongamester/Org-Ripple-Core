@@ -28,6 +28,10 @@ import org.apache.commons.lang3.time.DateUtils;
  */
 public final class DateFormatter {
 
+    private DateFormatter() {
+        // Prevent construction
+    }
+
     public static Date toDate(String input) {
 
         if (input == null) {

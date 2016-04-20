@@ -127,8 +127,15 @@ public class DateFormatterTest {
     }
 
     @Test
-    public void shouldReturnNullForNullWhenCombiningDateAndTimeString() {
+    public void shouldReturnNullForNullWhenDateAndTimeStringsAreNull() {
         String parsedDate = DateFormatter.combineDateTime(null, null);
+        assertNull(parsedDate);
+    }
+    
+    @Test
+    public void shouldReturnNullForNullWhenDateAndTimeTimeStringIsNull() {
+        Date sourceDate = DateFormatter.toDateOnly("2015-08-24T13:06:38.012");
+        String parsedDate = DateFormatter.combineDateTime(sourceDate, null);
         assertNull(parsedDate);
     }
 }
