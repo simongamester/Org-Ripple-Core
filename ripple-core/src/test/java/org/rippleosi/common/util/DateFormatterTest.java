@@ -15,10 +15,12 @@
  */
 package org.rippleosi.common.util;
 
+import java.lang.reflect.Constructor;
 import static org.junit.Assert.assertNotNull;
 
 import java.util.Date;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 
 import org.junit.Test;
@@ -26,6 +28,16 @@ import org.junit.Test;
 /**
  */
 public class DateFormatterTest {
+
+    @Test
+    public void shouldNotBeAbleToCreateAnInstanceOfAUtilityClass() throws Exception {
+        Constructor[] ctors = DateFormatter.class.getDeclaredConstructors();
+        assertEquals("Utility class should only have one constructor", 1, ctors.length);
+        Constructor ctor = ctors[0];
+        assertFalse("Utility class constructor should be inaccessible", ctor.isAccessible());
+        ctor.setAccessible(true); // obviously we'd never do this in production
+        assertEquals("You'd expect the construct to return the expected type", DateFormatter.class, ctor.newInstance().getClass());
+    }
 
     @Test
     public void shouldReturnNullForNull() {
