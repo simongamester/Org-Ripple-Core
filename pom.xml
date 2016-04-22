@@ -26,6 +26,24 @@
     <packaging>pom</packaging>
 
     <name>Ripple OSI</name>
+    <description>Provides the core functional libararies to build Ripple based health systems</description>
+    <scm>
+        <connection>scm:git:https://github.com/RippleOSI/IDCR-Core.git</connection>
+        <tag>HEAD</tag>
+    </scm>
+
+    <distributionManagement>
+        <repository>
+            <id>deployment</id>
+            <name>Internal Releases</name>
+            <url>${nexus.url}/repository/maven-releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>deployment</id>
+            <name>Internal Snapshots</name>
+            <url>${nexus.url}/repository/maven-snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
 
     <properties>
         <java.version>1.8</java.version>
