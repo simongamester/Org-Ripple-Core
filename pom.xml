@@ -28,7 +28,7 @@
     <name>Ripple OSI</name>
     <description>Provides the core functional libararies to build Ripple based health systems</description>
     <scm>
-        <connection>scm:git:https://github.com/RippleOSI/IDCR-Core.git</connection>
+        <connection>scm:git:https://github.com/RippleOSI/Org-Ripple-core.git</connection>
         <tag>HEAD</tag>
     </scm>
 
