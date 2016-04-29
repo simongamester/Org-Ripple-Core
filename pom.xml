@@ -100,8 +100,8 @@
         <module>ripple-dicom</module>
         <module>ripple-ethercis</module>
         <module>ripple-openehr</module>
+        <module>ripple-packaging</module>
         <module>ripple-terminology-example</module>
-        <module>ripple-ui</module>
         <module>ripple-vista</module>
     </modules>
 
