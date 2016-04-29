@@ -25,7 +25,6 @@
     </parent>
 
     <artifactId>ripple-core</artifactId>
-    <name>Core Ripple Functionality</name>
     
     <dependencies>
         <dependency>
