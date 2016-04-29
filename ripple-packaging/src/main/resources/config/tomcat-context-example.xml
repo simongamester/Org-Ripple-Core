@@ -19,7 +19,7 @@
     <Environment name="c4hOpenEHR.referralsTemplate"    type="java.lang.String" override="false" value="RIPPLE - Minimal referral.v0"/>
     <Environment name="c4hOpenEHR.appointmentsTemplate" type="java.lang.String" override="false" value="RIPPLE - Minimal referral.v0"/>
 
-    <Environment name="etherCIS.address"                  type="java.lang.String" override="false" value="188.166.246.78:8080/rest/v1/"/>
+    <Environment name="etherCIS.address"                  type="java.lang.String" override="false" value="http://188.166.246.78:8080/rest/v1"/>
     <Environment name="etherCIS.user"                     type="java.lang.String" override="false" value="guest"/>
     <Environment name="etherCIS.password"                 type="java.lang.String" override="false" value="guest"/>
     <Environment name="etherCIS.subjectNamespace"         type="java.lang.String" override="false" value="uk.nhs.nhs_number"/>

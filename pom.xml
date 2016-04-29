@@ -93,19 +93,26 @@
     </properties>
 
     <modules>
+        <module>ripple-api</module>
         <module>ripple-audit-example</module>
         <module>ripple-core</module>
         <module>ripple-database</module>
-        <module>ripple-demonstrator-api</module>
+        <module>ripple-dicom</module>
         <module>ripple-ethercis</module>
         <module>ripple-openehr</module>
         <module>ripple-terminology-example</module>
+        <module>ripple-ui</module>
         <module>ripple-vista</module>
-        <module>ripple-dicom</module>
     </modules>
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>org.rippleosi</groupId>
+                <artifactId>ripple-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+		
             <dependency>
                 <groupId>org.rippleosi</groupId>
                 <artifactId>ripple-audit-example</artifactId>

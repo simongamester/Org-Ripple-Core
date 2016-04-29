@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+        <action>
+            <actionName>CUSTOM-Run Ripple Web App</actionName>
+            <displayName>Run Ripple Web App</displayName>
+            <goals>
+                <goal>clean</goal>
+                <goal>package</goal>
+            </goals>
+            <activatedProfiles>
+                <activatedProfile>webapp:run</activatedProfile>
+            </activatedProfiles>
+        </action>
+    </actions>
