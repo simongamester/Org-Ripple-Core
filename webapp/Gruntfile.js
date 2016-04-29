@@ -18,7 +18,7 @@ module.exports = function (grunt) {
   // Configurable paths for the application
   var appConfig = {
     app: require('./bower.json').appPath || 'app',
-    dist: '../ripple-demonstrator-api/src/main/webapp'
+    dist: '../ripple-packaging/src/main/webapp'
   };
 
   // Define the configuration for all the tasks
@@ -73,7 +73,7 @@ module.exports = function (grunt) {
     // The actual grunt server settings
     connect: {
       options: {
-        port: 9010,
+        port: 9000,
         // Change this to '0.0.0.0' to access the server from outside.
         hostname: 'localhost',
         livereload: 35729
