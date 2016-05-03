@@ -144,5 +144,19 @@ public class DateFormatterTest {
         String parsedDate = DateFormatter.combineDateTime(sourceDate, null);
         assertNull(parsedDate);
     }
+    
+    @Test
+    public void shouldReturnSimpleDateString() {
+        Date sourceDate = DateFormatter.toDateOnly("2015-08-24T13:06:38.012");
+        String parsedDate = DateFormatter.toSimpleDateString(sourceDate);
+        assertNotNull(parsedDate);
+        assertEquals("2015-08-24", parsedDate);
+    }
+    
+    @Test
+    public void shouldReturnNullForSimpleDateStringWhenDateIsNull() {
+        String parsedDate = DateFormatter.toSimpleDateString(null);
+        assertNull(parsedDate);
+    }
 
 }

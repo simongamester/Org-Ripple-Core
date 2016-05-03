@@ -108,4 +108,12 @@ public final class DateFormatter {
 
         return StringUtils.substringBefore(dateAsString, "T") + "T" + StringUtils.substringAfter(timeAsString, "T");
     }
+    
+    public static String toSimpleDateString(Date input) {
+        if (input == null) {
+            return null;
+        }
+
+        return DateFormatUtils.format(input, "yyyy-MM-dd");
+    }
 }
