@@ -21,7 +21,7 @@
     <parent>
         <groupId>org.rippleosi</groupId>
         <artifactId>ripple</artifactId>
-        <version>0.5.2.0-SNAPSHOT</version>
+        <version>0.5.4.0-SNAPSHOT</version>
     </parent>
 
     <artifactId>ripple-audit-example</artifactId>
