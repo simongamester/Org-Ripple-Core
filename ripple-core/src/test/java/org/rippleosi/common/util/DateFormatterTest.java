@@ -159,4 +159,17 @@ public class DateFormatterTest {
         assertNull(parsedDate);
     }
 
+    @Test
+    public void shouldReturnDateTimeString() {
+        Date sourceDate = DateFormatter.toDate("2015-08-24T13:06:38.012");
+        String parsedDate = DateFormatter.toDateTimeString(sourceDate);
+        assertNotNull(parsedDate);
+        assertEquals("2015-08-24T13:06", parsedDate);
+    }
+    
+    @Test
+    public void shouldReturnNullForDateTimeStringWhenDateIsNull() {
+        String parsedDate = DateFormatter.toDateTimeString(null);
+        assertNull(parsedDate);
+    }
 }
