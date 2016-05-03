@@ -116,4 +116,12 @@ public final class DateFormatter {
 
         return DateFormatUtils.format(input, "yyyy-MM-dd");
     }
+    
+    public static String toDateTimeString(Date input) {
+        if (input == null) {
+            return null;
+        }
+
+        return DateFormatUtils.format(input, "yyyy-MM-dd'T'HH:mm");
+    }
 }
