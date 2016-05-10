@@ -16,6 +16,9 @@
 
 package org.rippleosi.common.types;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  */
 public enum RepoSourceType implements RepoSource {
@@ -28,6 +31,8 @@ public enum RepoSourceType implements RepoSource {
     VISTA("Vista"),
     AUDIT("Audit"),
     TERMINOLOGY("Terminology");
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(RepoSourceType.class);
 
     private final String sourceName;
 
@@ -51,7 +56,7 @@ public enum RepoSourceType implements RepoSource {
             }
         }
 
-        // TODO Log this
+        LOGGER.warn("Could not find an enumeration for '" + sourceName +"'");
         return null;
     }
 }
