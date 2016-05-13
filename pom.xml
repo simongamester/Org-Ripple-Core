@@ -25,7 +25,8 @@
     <packaging>pom</packaging>
 
     <name>Ripple OSI</name>
-    <description>Provides the core functional libararies to build Ripple based health systems</description>
+    <description>Provides the core functional libraries to build Ripple based health systems</description>
+
     <scm>
         <connection>scm:git:https://github.com/RippleOSI/Org-Ripple-core.git</connection>
         <tag>HEAD</tag>
@@ -50,30 +51,39 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
         <activemq.version>5.12.2</activemq.version>
-        <mysql.version>5.1.36</mysql.version>
         <camel.version>2.15.3</camel.version>
+        <commons.lang.version>3.3.2</commons.lang.version>
+        <commons.beanutils.version>1.9.2</commons.beanutils.version>
+        <commons.codec.version>1.9</commons.codec.version>
+        <commons.collections.version>4.0</commons.collections.version>
         <cxf.version>3.0.2</cxf.version>
-        <fhir.version>1.2</fhir.version>
+        <fhir.dst2u.version>1.0.1.7108</fhir.dst2u.version>
+        <hibernate.version>5.0.1.Final</hibernate.version>
         <jackson.version>2.4.4</jackson.version>
         <log4j.version>1.2.17</log4j.version>
+        <mysql.version>5.1.36</mysql.version>
+        <querydsl.version>3.6.8</querydsl.version>
         <slf4j.version>1.7.10</slf4j.version>
         <spring.version>4.2.1.RELEASE</spring.version>
+        <spring.data.jpa.version>1.8.2.RELEASE</spring.data.jpa.version>
+        <spring.security.oauth2.version>2.0.9.RELEASE</spring.security.oauth2.version>
         <swagger.version>2.2.2</swagger.version>
-        <querydsl.version>3.6.8</querydsl.version>
-        
+        <tomcat.version>8.0.26</tomcat.version>
+        <xbean.spring.version>3.18</xbean.spring.version>
+
+        <clean.plugin.version>3.0.0</clean.plugin.version>
+        <compiler.plugin.version>3.5.1</compiler.plugin.version>
+        <gitscm.plugin.version>1.9.4</gitscm.plugin.version>
+        <jacoco.plugin.version>0.7.6.201602180812</jacoco.plugin.version>
+        <jar.plugin.version>2.6</jar.plugin.version>
         <junit.version>4.12</junit.version>
+        <mockito.plugin.version>1.10.8</mockito.plugin.version>
+        <release.plugin.version>2.5.3</release.plugin.version>
+        <resources.plugin.version>2.7</resources.plugin.version>
         <servlet.api.version>3.1.0</servlet.api.version>
         <surefire.plugin.version>2.19.1</surefire.plugin.version>
-        <mockito.plugin.version>1.10.8</mockito.plugin.version>
-        <jacoco.plugin.version>0.7.6.201602180812</jacoco.plugin.version>
-        <compiler.plugin.version>3.5.1</compiler.plugin.version>
-        <jar.plugin.version>2.6</jar.plugin.version>
-        <war.plugin.version>${jar.plugin.version}</war.plugin.version>
         <versions.plugin.version>2.2</versions.plugin.version>
-        <clean.plugin.version>3.0.0</clean.plugin.version>
-        <release.plugin.version>2.5.3</release.plugin.version>
-        <gitscm.plugin.version>1.9.4</gitscm.plugin.version>
-        <resources.plugin.version>2.7</resources.plugin.version>
+        <war.plugin.version>${jar.plugin.version}</war.plugin.version>
         
         <!-- ************************ -->
         <!-- Sonar/Reporting settings -->
@@ -200,13 +210,13 @@
             <dependency>
                 <groupId>commons-beanutils</groupId>
                 <artifactId>commons-beanutils</artifactId>
-                <version>1.9.2</version>
+                <version>${commons.beanutils.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>commons-codec</groupId>
                 <artifactId>commons-codec</artifactId>
-                <version>1.9</version>
+                <version>${commons.codec.version}</version>
             </dependency>
 
             <dependency>
@@ -242,7 +252,7 @@
             <dependency>
                 <groupId>me.fhir</groupId>
                 <artifactId>fhir-dstu2</artifactId>
-                <version>1.0.1.7108</version>
+                <version>${fhir.dst2u.version}</version>
             </dependency>
 
             <dependency>
@@ -326,13 +336,13 @@
             <dependency>
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-collections4</artifactId>
-                <version>4.0</version>
+                <version>${commons.collections.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-lang3</artifactId>
-                <version>3.3.2</version>
+                <version>${commons.lang.version}</version>
             </dependency>
 
             <dependency>
@@ -344,13 +354,13 @@
             <dependency>
                 <groupId>org.apache.tomcat</groupId>
                 <artifactId>tomcat-dbcp</artifactId>
-                <version>8.0.26</version>
+                <version>${tomcat.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>org.apache.xbean</groupId>
                 <artifactId>xbean-spring</artifactId>
-                <version>3.18</version>
+                <version>${xbean.spring.version}</version>
                 <exclusions>
                     <exclusion>
                         <groupId>commons-logging</groupId>
@@ -362,7 +372,7 @@
             <dependency>
                 <groupId>org.hibernate</groupId>
                 <artifactId>hibernate-entitymanager</artifactId>
-                <version>5.0.1.Final</version>
+                <version>${hibernate.version}</version>
             </dependency>
 
             <dependency>
@@ -422,7 +432,7 @@
             <dependency>
                 <groupId>org.springframework.data</groupId>
                 <artifactId>spring-data-jpa</artifactId>
-                <version>1.8.2.RELEASE</version>
+                <version>${spring.data.jpa.version}</version>
             </dependency>
 
             <dependency>
@@ -465,6 +475,12 @@
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-webmvc</artifactId>
                 <version>${spring.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.security.oauth</groupId>
+                <artifactId>spring-security-oauth2</artifactId>
+                <version>${spring.security.oauth2.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
