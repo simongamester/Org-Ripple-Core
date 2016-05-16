@@ -16,22 +16,23 @@
 package org.rippleosi.common.service;
 
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
 
-import org.rippleosi.common.exception.DataNotFoundException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.rippleosi.common.model.Result;
 import org.rippleosi.common.model.VistaRestResponse;
 import org.rippleosi.common.repo.Repository;
 import org.rippleosi.common.types.RepoSourceType;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 public abstract class AbstractVistaService implements Repository {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(AbstractVistaService.class);
 
     @Value("${repository.config.vista:1100}")
     private int priority;
@@ -50,20 +51,21 @@ public abstract class AbstractVistaService implements Repository {
     }
 
     protected <I, O> O findData(RequestStrategy<I, O> requestStrategy, Class expected) {
-        String uri = requestStrategy.getQueryUriComponents().toUriString();
 
-        ResponseEntity<VistaRestResponse> response = requestProxy.getWithoutSession(uri, VistaRestResponse.class);
+        final String uri = requestStrategy.getQueryUriComponents().toUriString();
+        final ResponseEntity<VistaRestResponse> response = requestProxy.getWithoutSession(uri, VistaRestResponse.class);
+
+        final ObjectMapper objectMapper = new ObjectMapper();
+        final List<I> data = new ArrayList<>();
 
         if (response.getStatusCode() != HttpStatus.OK) {
-            throw new DataNotFoundException("Vista query returned with status code " + response.getStatusCode());
+            LOGGER.warn("Vista query returned with status code " + response.getStatusCode());
         }
-
-        ObjectMapper objectMapper = new ObjectMapper();
-        ArrayList<I> data = new ArrayList<>();
-
-        for (Result result : response.getBody().getResults()) {
-            for (LinkedHashMap item : (List<LinkedHashMap>) result.getData().getItems()) {
-                data.add((I) objectMapper.convertValue(item, expected));
+        else {
+            for (final Result result : response.getBody().getResults()) {
+                for (final Object item : result.getData().getItems()) {
+                    data.add((I) objectMapper.convertValue(item, expected));
+                }
             }
         }
 
