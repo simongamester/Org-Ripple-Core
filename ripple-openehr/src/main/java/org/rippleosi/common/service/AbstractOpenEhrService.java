@@ -30,6 +30,7 @@ import org.rippleosi.common.model.EhrResponse;
 import org.rippleosi.common.model.QueryResponse;
 import org.rippleosi.common.repo.Repository;
 import org.rippleosi.common.types.RepoSourceType;
+import org.rippleosi.common.types.RepoSourceTypes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -57,7 +58,7 @@ public abstract class AbstractOpenEhrService implements Repository {
 
     @Override
     public RepoSourceType getSource() {
-        return RepoSourceType.MARAND;
+        return RepoSourceTypes.MARAND;
     }
 
     @Override

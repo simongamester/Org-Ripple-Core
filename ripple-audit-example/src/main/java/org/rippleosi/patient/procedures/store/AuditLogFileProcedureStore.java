@@ -16,8 +16,8 @@
 package org.rippleosi.patient.procedures.store;
 
 import org.apache.camel.Consume;
-import org.rippleosi.common.types.RepoSource;
 import org.rippleosi.common.types.RepoSourceType;
+import org.rippleosi.common.types.RepoSourceTypes;
 import org.rippleosi.patient.procedures.model.ProcedureDetails;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,8 +35,8 @@ public class AuditLogFileProcedureStore implements ProcedureStore {
     private int priority;
 
     @Override
-    public RepoSource getSource() {
-        return RepoSourceType.AUDIT;
+    public RepoSourceType getSource() {
+        return RepoSourceTypes.AUDIT;
     }
 
     @Override

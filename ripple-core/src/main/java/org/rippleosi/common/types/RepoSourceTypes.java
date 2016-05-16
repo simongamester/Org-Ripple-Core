@@ -13,17 +13,30 @@
  *    See the License for the specific language governing permissions and
  *    limitations under the License.
  */
+
 package org.rippleosi.common.types;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  */
-public enum TestSourceType implements RepoSourceType {
-    SOURCE1("Source 1"),
-    SOURCE2("Source 2");
+public enum RepoSourceTypes implements RepoSourceType {
+    NONE("Not Configured"),
+    ACTIVEMQ("ActiveMQ"),
+    LEGACY("Legacy"),
+    MARAND("Marand"),
+    ETHERCIS("EtherCIS"),
+    ORTHANC("Orthanc"),
+    VISTA("Vista"),
+    AUDIT("Audit"),
+    TERMINOLOGY("Terminology");
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(RepoSourceType.class);
 
     private final String sourceName;
 
-    private TestSourceType(final String sourceName) {
+    private RepoSourceTypes(final String sourceName) {
         this.sourceName = sourceName;
     }
 
@@ -37,12 +50,13 @@ public enum TestSourceType implements RepoSourceType {
             return null;
         }
 
-        for (RepoSourceType enumValue : TestSourceType.values()) {
+        for (RepoSourceType enumValue : RepoSourceTypes.values()) {
             if (enumValue.getSourceName().equalsIgnoreCase(sourceName)) {
                 return enumValue;
             }
         }
 
+        LOGGER.warn("Could not find an enumeration for '" + sourceName +"'");
         return null;
     }
 }

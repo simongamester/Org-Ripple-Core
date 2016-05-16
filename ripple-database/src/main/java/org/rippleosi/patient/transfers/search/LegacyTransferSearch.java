@@ -20,6 +20,7 @@ import java.util.List;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.rippleosi.common.types.RepoSourceType;
+import org.rippleosi.common.types.RepoSourceTypes;
 import org.rippleosi.patient.transfers.model.TransferOfCareDetails;
 import org.rippleosi.patient.transfers.model.TransferOfCareEntity;
 import org.rippleosi.patient.transfers.model.TransferOfCareSummary;
@@ -52,7 +53,7 @@ public class LegacyTransferSearch implements TransferOfCareSearch {
 
     @Override
     public RepoSourceType getSource() {
-        return RepoSourceType.LEGACY;
+        return RepoSourceTypes.LEGACY;
     }
 
     @Override

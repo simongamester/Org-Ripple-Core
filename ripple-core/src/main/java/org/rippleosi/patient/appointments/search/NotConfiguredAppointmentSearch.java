@@ -18,8 +18,8 @@ package org.rippleosi.patient.appointments.search;
 import java.util.List;
 
 import org.rippleosi.common.exception.ConfigurationException;
-import org.rippleosi.common.types.RepoSource;
 import org.rippleosi.common.types.RepoSourceType;
+import org.rippleosi.common.types.RepoSourceTypes;
 import org.rippleosi.patient.appointments.model.AppointmentDetails;
 import org.rippleosi.patient.appointments.model.AppointmentSummary;
 
@@ -28,8 +28,8 @@ import org.rippleosi.patient.appointments.model.AppointmentSummary;
 public class NotConfiguredAppointmentSearch implements AppointmentSearch {
 
     @Override
-    public RepoSource getSource() {
-        return RepoSourceType.NONE;
+    public RepoSourceType getSource() {
+        return RepoSourceTypes.NONE;
     }
 
     @Override

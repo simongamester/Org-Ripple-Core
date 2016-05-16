@@ -13,35 +13,17 @@
  *    See the License for the specific language governing permissions and
  *    limitations under the License.
  */
-package org.rippleosi.patient.referral.store;
+package org.rippleosi.common.types.lookup;
 
-import org.rippleosi.common.exception.ConfigurationException;
 import org.rippleosi.common.types.RepoSourceType;
 import org.rippleosi.common.types.RepoSourceTypes;
-import org.rippleosi.patient.referral.model.ReferralDetails;
 
 /**
  */
-public class NotConfiguredReferralStore implements ReferralStore {
+public class RepoSourceLookup implements RepoLookup {
 
     @Override
-    public RepoSourceType getSource() {
-        return RepoSourceTypes.NONE;
+    public RepoSourceType getSource(final String sourceName) {
+        return RepoSourceTypes.fromString(sourceName);
     }
-
-    @Override
-    public int getPriority() {
-        return Integer.MAX_VALUE;
-    }
-
-    @Override
-    public void create(String patientId, ReferralDetails referral) {
-        throw ConfigurationException.unimplementedTransaction(ReferralStore.class);
-    }
-
-    @Override
-    public void update(String patientId, ReferralDetails referral) {
-        throw ConfigurationException.unimplementedTransaction(ReferralStore.class);
-    }
-
 }

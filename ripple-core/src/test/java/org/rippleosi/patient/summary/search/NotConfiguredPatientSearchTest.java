@@ -21,6 +21,7 @@ import org.rippleosi.common.exception.ConfigurationException;
 import org.rippleosi.common.types.RepoSourceType;
 
 import static org.junit.Assert.assertEquals;
+import org.rippleosi.common.types.RepoSourceTypes;
 
 public class NotConfiguredPatientSearchTest {
 
@@ -33,7 +34,7 @@ public class NotConfiguredPatientSearchTest {
 
     @Test
     public void shouldReportAsNotConfiguredImplementation() {
-        assertEquals(RepoSourceType.NONE, patientSearch.getSource());
+        assertEquals(RepoSourceTypes.NONE, patientSearch.getSource());
     }
 
     @Test(expected = ConfigurationException.class)

@@ -13,13 +13,13 @@
  *    See the License for the specific language governing permissions and
  *    limitations under the License.
  */
-package org.rippleosi.common.repo;
+
+package org.rippleosi.common.types.lookup;
 
 import org.rippleosi.common.types.RepoSourceType;
 
 /**
  */
-@FunctionalInterface
-public interface RepositoryFactory<R> {
-    R select(RepoSourceType source);
+public interface RepoSource {
+    public RepoSourceType getSource(final String sourceName);
 }

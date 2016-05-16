@@ -21,7 +21,7 @@ import java.util.Map;
 
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.collections4.Transformer;
-import org.rippleosi.common.types.RepoSourceType;
+import org.rippleosi.common.types.RepoSourceTypes;
 import org.rippleosi.common.util.DateFormatter;
 import org.rippleosi.patient.procedures.model.ProcedureSummary;
 
@@ -38,7 +38,7 @@ public class EtherCISProcedureSummaryTransformer implements Transformer<Map<Stri
         Date time = DateFormatter.toTimeOnly(dateAsString);
 
         ProcedureSummary procedure = new ProcedureSummary();
-        procedure.setSource(RepoSourceType.ETHERCIS.name());
+        procedure.setSource(RepoSourceTypes.ETHERCIS.name());
         procedure.setSourceId(MapUtils.getString(input, "uid"));
 
         procedure.setName(MapUtils.getString(input, "procedure_name"));

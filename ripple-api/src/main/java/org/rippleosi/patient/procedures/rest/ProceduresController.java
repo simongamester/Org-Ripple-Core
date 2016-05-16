@@ -17,8 +17,9 @@ package org.rippleosi.patient.procedures.rest;
 
 import java.util.List;
 
-import org.rippleosi.common.types.RepoSource;
 import org.rippleosi.common.types.RepoSourceType;
+import org.rippleosi.common.types.RepoSourceTypes;
+import org.rippleosi.common.types.lookup.RepoSourceLookupFactory;
 import org.rippleosi.patient.procedures.model.ProcedureDetails;
 import org.rippleosi.patient.procedures.model.ProcedureSummary;
 import org.rippleosi.patient.procedures.search.ProcedureSearch;
@@ -40,6 +41,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class ProceduresController {
 
     @Autowired
+    private RepoSourceLookupFactory repoSourceLookup;
+        
+    @Autowired
     private ProcedureSearchFactory procedureSearchFactory;
 
     @Autowired
@@ -48,11 +52,11 @@ public class ProceduresController {
     @RequestMapping(method = RequestMethod.GET)
     public List<ProcedureSummary> findAllProcedures(@PathVariable("patientId") String patientId,
                                                     @RequestParam(required = false) String source) {
-        final RepoSource sourceType = RepoSourceType.fromString(source);
+        final RepoSourceType sourceType = repoSourceLookup.lookup(source);
         ProcedureSearch etherCISProcedureSearch = procedureSearchFactory.select(sourceType);
         List<ProcedureSummary> procedures = etherCISProcedureSearch.findAllProcedures(patientId);
 
-        ProcedureSearch marandProcedureSearch = procedureSearchFactory.select(RepoSourceType.MARAND);
+        ProcedureSearch marandProcedureSearch = procedureSearchFactory.select(RepoSourceTypes.MARAND);
         procedures.addAll(marandProcedureSearch.findAllProcedures(patientId));
 
         return procedures;
@@ -62,7 +66,7 @@ public class ProceduresController {
     public ProcedureDetails findProcedure(@PathVariable("patientId") String patientId,
                                           @PathVariable("procedureId") String procedureId,
                                           @RequestParam(required = false) String source) {
-        final RepoSource sourceType = RepoSourceType.fromString(source);
+        final RepoSourceType sourceType = repoSourceLookup.lookup(source);
         ProcedureSearch procedureSearch = procedureSearchFactory.select(sourceType);
 
         return procedureSearch.findProcedure(patientId, procedureId);
@@ -72,7 +76,7 @@ public class ProceduresController {
     public void createProcedure(@PathVariable("patientId") String patientId,
                                 @RequestParam(required = false) String source,
                                 @RequestBody ProcedureDetails procedure) {
-        final RepoSource sourceType = RepoSourceType.fromString(source);
+        final RepoSourceType sourceType = repoSourceLookup.lookup(source);
         ProcedureStore procedureStore = procedureStoreFactory.select(sourceType);
 
         procedureStore.create(patientId, procedure);
@@ -82,7 +86,7 @@ public class ProceduresController {
     public void updateProcedure(@PathVariable("patientId") String patientId,
                                 @RequestParam(required = false) String source,
                                 @RequestBody ProcedureDetails procedure) {
-        final RepoSource sourceType = RepoSourceType.fromString(source);
+        final RepoSourceType sourceType = repoSourceLookup.lookup(source);
         ProcedureStore procedureStore = procedureStoreFactory.select(sourceType);
 
         procedureStore.update(patientId, procedure);

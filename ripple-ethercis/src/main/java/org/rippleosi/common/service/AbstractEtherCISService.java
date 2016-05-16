@@ -34,6 +34,7 @@ import org.rippleosi.common.model.EtherCISQueryResponse;
 import org.rippleosi.common.model.EtherCISSessionResponse;
 import org.rippleosi.common.repo.Repository;
 import org.rippleosi.common.types.RepoSourceType;
+import org.rippleosi.common.types.RepoSourceTypes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -64,7 +65,7 @@ public class AbstractEtherCISService implements Repository {
 
     @Override
     public RepoSourceType getSource() {
-        return RepoSourceType.ETHERCIS ;
+        return RepoSourceTypes.ETHERCIS ;
     }
 
     @Override

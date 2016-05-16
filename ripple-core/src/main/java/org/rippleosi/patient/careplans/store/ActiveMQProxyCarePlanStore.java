@@ -17,6 +17,7 @@ package org.rippleosi.patient.careplans.store;
 
 import org.apache.camel.Produce;
 import org.rippleosi.common.types.RepoSourceType;
+import org.rippleosi.common.types.RepoSourceTypes;
 import org.rippleosi.patient.careplans.model.CarePlanDetails;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,7 +47,7 @@ public class ActiveMQProxyCarePlanStore implements CarePlanStore {
 
     @Override
     public RepoSourceType getSource() {
-        return RepoSourceType.ACTIVEMQ;
+        return RepoSourceTypes.ACTIVEMQ;
     }
 
     @Override

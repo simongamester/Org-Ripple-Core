@@ -13,9 +13,22 @@
  *    See the License for the specific language governing permissions and
  *    limitations under the License.
  */
+package org.rippleosi.common.types.lookup;
 
-package org.rippleosi.common.types;
+import org.springframework.stereotype.Service;
 
-public interface RepoSource {
-    public String getSourceName();
+/**
+ */
+@Service
+public class RepoSourceLookupFactory extends AbstractRepoSourceTypeLookup<RepoLookup> implements RepoLookupFactory{
+    
+    @Override
+    protected RepoLookup defaultSourceLookup() {
+        return new RepoSourceLookup();
+    }
+    
+    @Override
+    protected Class<RepoLookup> repoSourceClass() {
+        return RepoLookup.class;
+    }
 }

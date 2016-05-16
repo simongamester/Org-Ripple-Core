@@ -16,8 +16,8 @@
 package org.rippleosi.patient.allergies.store;
 
 import org.apache.camel.Produce;
-import org.rippleosi.common.types.RepoSource;
 import org.rippleosi.common.types.RepoSourceType;
+import org.rippleosi.common.types.RepoSourceTypes;
 import org.rippleosi.patient.allergies.model.AllergyDetails;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -44,8 +44,8 @@ public class ActiveMQProxyAllergyStore implements AllergyStore {
     }
 
     @Override
-    public RepoSource getSource() {
-        return RepoSourceType.ACTIVEMQ;
+    public RepoSourceType getSource() {
+        return RepoSourceTypes.ACTIVEMQ;
     }
 
     @Override

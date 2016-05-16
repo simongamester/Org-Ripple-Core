@@ -16,47 +16,6 @@
 
 package org.rippleosi.common.types;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-/**
- */
-public enum RepoSourceType implements RepoSource {
-    NONE("Not Configured"),
-    ACTIVEMQ("ActiveMQ"),
-    LEGACY("Legacy"),
-    MARAND("Marand"),
-    ETHERCIS("EtherCIS"),
-    ORTHANC("Orthanc"),
-    VISTA("Vista"),
-    AUDIT("Audit"),
-    TERMINOLOGY("Terminology");
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(RepoSourceType.class);
-
-    private final String sourceName;
-
-    private RepoSourceType(final String sourceName) {
-        this.sourceName = sourceName;
-    }
-
-    @Override
-    public String getSourceName() {
-        return sourceName;
-    }
-
-    public static RepoSource fromString(final String sourceName) {
-        if (sourceName == null) {
-            return null;
-        }
-
-        for (RepoSource enumValue : RepoSourceType.values()) {
-            if (enumValue.getSourceName().equalsIgnoreCase(sourceName)) {
-                return enumValue;
-            }
-        }
-
-        LOGGER.warn("Could not find an enumeration for '" + sourceName +"'");
-        return null;
-    }
+public interface RepoSourceType {
+    public String getSourceName();
 }

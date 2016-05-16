@@ -23,6 +23,7 @@ import org.rippleosi.common.model.Result;
 import org.rippleosi.common.model.VistaRestResponse;
 import org.rippleosi.common.repo.Repository;
 import org.rippleosi.common.types.RepoSourceType;
+import org.rippleosi.common.types.RepoSourceTypes;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +43,7 @@ public abstract class AbstractVistaService implements Repository {
 
     @Override
     public RepoSourceType getSource() {
-        return RepoSourceType.VISTA;
+        return RepoSourceTypes.VISTA;
     }
 
     @Override

@@ -18,8 +18,9 @@ package org.rippleosi.patient.medication.rest;
 
 import java.util.List;
 
-import org.rippleosi.common.types.RepoSource;
 import org.rippleosi.common.types.RepoSourceType;
+import org.rippleosi.common.types.RepoSourceTypes;
+import org.rippleosi.common.types.lookup.RepoSourceLookupFactory;
 import org.rippleosi.patient.medication.model.MedicationDetails;
 import org.rippleosi.patient.medication.model.MedicationHeadline;
 import org.rippleosi.patient.medication.model.MedicationSummary;
@@ -42,6 +43,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class MedicationsController {
 
     @Autowired
+    private RepoSourceLookupFactory repoSourceLookup;
+             
+    @Autowired
     private MedicationSearchFactory medicationSearchFactory;
 
     @Autowired
@@ -50,11 +54,11 @@ public class MedicationsController {
     @RequestMapping(method = RequestMethod.GET)
     public List<MedicationSummary> findAllMedications(@PathVariable("patientId") String patientId,
                                                       @RequestParam(required = false) String source) {
-        final RepoSource sourceType = RepoSourceType.fromString(source);
+        final RepoSourceType sourceType = repoSourceLookup.lookup(source);
         MedicationSearch etherCISSearch = medicationSearchFactory.select(sourceType);
         List<MedicationSummary> medication = etherCISSearch.findAllMedication(patientId);
 
-        MedicationSearch openehrSearch = medicationSearchFactory.select(RepoSourceType.MARAND);
+        MedicationSearch openehrSearch = medicationSearchFactory.select(RepoSourceTypes.MARAND);
         medication.addAll(openehrSearch.findAllMedication(patientId));
 
         return medication;
@@ -63,11 +67,11 @@ public class MedicationsController {
     @RequestMapping(value = "/headlines", method = RequestMethod.GET)
     public List<MedicationHeadline> findMedicationHeadlines(@PathVariable("patientId") String patientId,
                                                             @RequestParam(required = false) String source) {
-        final RepoSource sourceType = RepoSourceType.fromString(source);
+        final RepoSourceType sourceType = repoSourceLookup.lookup(source);
         MedicationSearch etherCISSearch = medicationSearchFactory.select(sourceType);
         List<MedicationHeadline> medicationHeadlines = etherCISSearch.findMedicationHeadlines(patientId);
 
-        MedicationSearch openehrSearch = medicationSearchFactory.select(RepoSourceType.MARAND);
+        MedicationSearch openehrSearch = medicationSearchFactory.select(RepoSourceTypes.MARAND);
         medicationHeadlines.addAll(openehrSearch.findMedicationHeadlines(patientId));
 
         return medicationHeadlines;
@@ -77,7 +81,7 @@ public class MedicationsController {
     public MedicationDetails findMedication(@PathVariable("patientId") String patientId,
                                             @PathVariable("medicationId") String medicationId,
                                             @RequestParam(required = false) String source) {
-        final RepoSource sourceType = RepoSourceType.fromString(source);
+        final RepoSourceType sourceType = repoSourceLookup.lookup(source);
         MedicationSearch medicationSearch = medicationSearchFactory.select(sourceType);
 
         return medicationSearch.findMedication(patientId, medicationId);
@@ -87,7 +91,7 @@ public class MedicationsController {
     public void createMedication(@PathVariable("patientId") String patientId,
                                  @RequestParam(required = false) String source,
                                  @RequestBody MedicationDetails medication) {
-        final RepoSource sourceType = RepoSourceType.fromString(source);
+        final RepoSourceType sourceType = repoSourceLookup.lookup(source);
         MedicationStore medicationStore = medicationStoreFactory.select(sourceType);
 
         medicationStore.create(patientId, medication);
@@ -97,7 +101,7 @@ public class MedicationsController {
     public void updateMedication(@PathVariable("patientId") String patientId,
                                  @RequestParam(required = false) String source,
                                  @RequestBody MedicationDetails medication) {
-        final RepoSource sourceType = RepoSourceType.fromString(source);
+        final RepoSourceType sourceType = repoSourceLookup.lookup(source);
         MedicationStore medicationStore = medicationStoreFactory.select(sourceType);
 
         medicationStore.update(patientId, medication);
