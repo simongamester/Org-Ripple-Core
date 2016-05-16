@@ -18,8 +18,8 @@ package org.rippleosi.search.patient;
 
 import java.util.List;
 
-import org.rippleosi.common.types.RepoSource;
 import org.rippleosi.common.types.RepoSourceType;
+import org.rippleosi.common.types.lookup.RepoSourceLookupFactory;
 import org.rippleosi.patient.summary.model.PatientSummary;
 import org.rippleosi.patient.summary.search.PatientSearch;
 import org.rippleosi.patient.summary.search.PatientSearchFactory;
@@ -39,6 +39,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class SearchByPatientController {
 
     @Autowired
+    private RepoSourceLookupFactory repoSourceLookup;
+    @Autowired
     private PatientSearchFactory patientSearchFactory;
 
     @Autowired
@@ -48,11 +50,11 @@ public class SearchByPatientController {
     public SearchTableResults findPatientTableData(@RequestParam(required = false) String patientSource,
                                                    @RequestParam(required = false) String patientDataSource,
                                                    @RequestBody PatientTableQuery tableQuery) {
-        final RepoSource patientSourceType = RepoSourceType.fromString(patientSource);
+        final RepoSourceType patientSourceType = repoSourceLookup.lookup(patientSource);
         PatientSearch patientSearch = patientSearchFactory.select(patientSourceType);
         List<PatientSummary> patientSummaries = patientSearch.findPatientsBySearchString(tableQuery);
 
-        final RepoSource patientDataSourceType = RepoSourceType.fromString(patientDataSource);
+        final RepoSourceType patientDataSourceType = repoSourceLookup.lookup(patientDataSource);
         PatientStatsSearch patientStatsSearch = patientStatsSearchFactory.select(patientDataSourceType);
         SearchTableResults associatedData = patientStatsSearch.findAssociatedPatientData(tableQuery, patientSummaries);
 

@@ -19,6 +19,7 @@ import org.apache.camel.Body;
 import org.apache.camel.Header;
 import org.apache.camel.Produce;
 import org.rippleosi.common.types.RepoSourceType;
+import org.rippleosi.common.types.RepoSourceTypes;
 import org.rippleosi.patient.transfers.model.TransferOfCareDetails;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,7 +44,7 @@ public class ActiveMQProxyTransferStore implements TransferOfCareStore {
 
     @Override
     public RepoSourceType getSource() {
-        return RepoSourceType.ACTIVEMQ;
+        return RepoSourceTypes.ACTIVEMQ;
     }
 
     @Override

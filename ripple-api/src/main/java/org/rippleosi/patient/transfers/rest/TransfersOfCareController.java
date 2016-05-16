@@ -17,8 +17,8 @@ package org.rippleosi.patient.transfers.rest;
 
 import java.util.List;
 
-import org.rippleosi.common.types.RepoSource;
 import org.rippleosi.common.types.RepoSourceType;
+import org.rippleosi.common.types.lookup.RepoSourceLookupFactory;
 import org.rippleosi.patient.transfers.model.TransferOfCareDetails;
 import org.rippleosi.patient.transfers.model.TransferOfCareSummary;
 import org.rippleosi.patient.transfers.search.TransferOfCareSearch;
@@ -38,6 +38,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class TransfersOfCareController {
 
     @Autowired
+    private RepoSourceLookupFactory repoSourceLookup;
+    
+    @Autowired
     private TransferOfCareSearchFactory transferOfCareSearchFactory;
 
     @Autowired
@@ -55,7 +58,7 @@ public class TransfersOfCareController {
     @RequestMapping(method = RequestMethod.GET)
     public List<TransferOfCareSummary> findAllTransfersOfCare(@PathVariable("patientId") String patientId,
                                                               @RequestParam(required = false) String source) {
-        final RepoSource sourceType = RepoSourceType.fromString(source);
+        final RepoSourceType sourceType = repoSourceLookup.lookup(source);
         TransferOfCareSearch search = transferOfCareSearchFactory.select(sourceType);
 
         return search.findAllTransfers(patientId);
@@ -76,7 +79,7 @@ public class TransfersOfCareController {
     public TransferOfCareDetails findTransferOfCare(@PathVariable("patientId") String patientId,
                                                     @PathVariable("transferId") String transferId,
                                                     @RequestParam(required = false) String source) {
-        final RepoSource sourceType = RepoSourceType.fromString(source);
+        final RepoSourceType sourceType = repoSourceLookup.lookup(source);
         TransferOfCareSearch search = transferOfCareSearchFactory.select(sourceType);
 
         return search.findTransferOfCare(patientId, transferId);
@@ -96,7 +99,7 @@ public class TransfersOfCareController {
     public void createTransferOfCare(@PathVariable("patientId") String patientId,
                                      @RequestParam(required = false) String source,
                                      @RequestBody TransferOfCareDetails transferOfCare) {
-        final RepoSource sourceType = RepoSourceType.fromString(source);
+        final RepoSourceType sourceType = repoSourceLookup.lookup(source);
         TransferOfCareStore store = transferOfCareStoreFactory.select(sourceType);
 
         store.create(patientId, transferOfCare);

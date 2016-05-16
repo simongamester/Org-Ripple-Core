@@ -17,8 +17,8 @@ package org.rippleosi.patient.mdtreports.rest;
 
 import java.util.List;
 
-import org.rippleosi.common.types.RepoSource;
 import org.rippleosi.common.types.RepoSourceType;
+import org.rippleosi.common.types.lookup.RepoSourceLookupFactory;
 import org.rippleosi.patient.mdtreports.model.MDTReportDetails;
 import org.rippleosi.patient.mdtreports.model.MDTReportSummary;
 import org.rippleosi.patient.mdtreports.search.MDTReportSearch;
@@ -40,6 +40,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class MDTReportsController {
 
     @Autowired
+    private RepoSourceLookupFactory repoSourceLookup;
+    
+    @Autowired
     private MDTReportSearchFactory mdtReportSearchFactory;
 
     @Autowired
@@ -48,7 +51,7 @@ public class MDTReportsController {
     @RequestMapping(method = RequestMethod.GET)
     public List<MDTReportSummary> findAllMDTReports(@PathVariable("patientId") String patientId,
                                                     @RequestParam(required = false) String source) {
-        final RepoSource sourceType = RepoSourceType.fromString(source);
+        final RepoSourceType sourceType = repoSourceLookup.lookup(source);
         MDTReportSearch mdtReportSearch = mdtReportSearchFactory.select(sourceType);
 
         return mdtReportSearch.findAllMDTReports(patientId);
@@ -58,7 +61,7 @@ public class MDTReportsController {
     public MDTReportDetails findMDTReport(@PathVariable("patientId") String patientId,
                                           @PathVariable("reportId") String reportId,
                                           @RequestParam(required = false) String source) {
-        final RepoSource sourceType = RepoSourceType.fromString(source);
+        final RepoSourceType sourceType = repoSourceLookup.lookup(source);
         MDTReportSearch mdtReportSearch = mdtReportSearchFactory.select(sourceType);
 
         return mdtReportSearch.findMDTReport(patientId, reportId);
@@ -68,7 +71,7 @@ public class MDTReportsController {
     public void createMDTReport(@PathVariable("patientId") String patientId,
                                 @RequestParam(required = false) String source,
                                 @RequestBody MDTReportDetails mdtReport) {
-        final RepoSource sourceType = RepoSourceType.fromString(source);
+        final RepoSourceType sourceType = repoSourceLookup.lookup(source);
         MDTReportStore mdtReportStore = mdtReportStoreFactory.select(sourceType);
 
         mdtReportStore.create(patientId, mdtReport);
@@ -78,7 +81,7 @@ public class MDTReportsController {
     public void updateMDTReport(@PathVariable("patientId") String patientId,
                                 @RequestParam(required = false) String source,
                                 @RequestBody MDTReportDetails mdtReport) {
-        final RepoSource sourceType = RepoSourceType.fromString(source);
+        final RepoSourceType sourceType = repoSourceLookup.lookup(source);
         MDTReportStore mdtReportStore = mdtReportStoreFactory.select(sourceType);
 
         mdtReportStore.update(patientId, mdtReport);

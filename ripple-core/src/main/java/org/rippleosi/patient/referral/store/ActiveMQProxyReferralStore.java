@@ -17,6 +17,7 @@ package org.rippleosi.patient.referral.store;
 
 import org.apache.camel.Produce;
 import org.rippleosi.common.types.RepoSourceType;
+import org.rippleosi.common.types.RepoSourceTypes;
 import org.rippleosi.patient.referral.model.ReferralDetails;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,7 +47,7 @@ public class ActiveMQProxyReferralStore implements ReferralStore {
 
     @Override
     public RepoSourceType getSource() {
-        return RepoSourceType.ACTIVEMQ;
+        return RepoSourceTypes.ACTIVEMQ;
     }
 
     @Override

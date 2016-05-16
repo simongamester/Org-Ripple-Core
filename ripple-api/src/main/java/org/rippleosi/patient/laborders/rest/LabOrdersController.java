@@ -17,8 +17,9 @@ package org.rippleosi.patient.laborders.rest;
 
 import java.util.List;
 
-import org.rippleosi.common.types.RepoSource;
 import org.rippleosi.common.types.RepoSourceType;
+import org.rippleosi.common.types.RepoSourceTypes;
+import org.rippleosi.common.types.lookup.RepoSourceLookupFactory;
 import org.rippleosi.patient.laborders.model.LabOrderDetails;
 import org.rippleosi.patient.laborders.model.LabOrderSummary;
 import org.rippleosi.patient.laborders.search.LabOrderSearch;
@@ -40,6 +41,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class LabOrdersController {
 
     @Autowired
+    private RepoSourceLookupFactory repoSourceLookup;
+    
+    @Autowired
     private LabOrderSearchFactory labOrderSearchFactory;
 
     @Autowired
@@ -48,11 +52,11 @@ public class LabOrdersController {
     @RequestMapping(method = RequestMethod.GET)
     public List<LabOrderSummary> findAllLabOrders(@PathVariable("patientId") String patientId,
                                                   @RequestParam(required = false) String source) {
-        final RepoSource sourceType = RepoSourceType.fromString(source);
+        final RepoSourceType sourceType = repoSourceLookup.lookup(source);
         LabOrderSearch labOrderSearch = labOrderSearchFactory.select(sourceType);
         List<LabOrderSummary> labOrders = labOrderSearch.findAllLabOrders(patientId);
 
-        LabOrderSearch openehrSearch = labOrderSearchFactory.select(RepoSourceType.MARAND);
+        LabOrderSearch openehrSearch = labOrderSearchFactory.select(RepoSourceTypes.MARAND);
         labOrders.addAll(openehrSearch.findAllLabOrders(patientId));
 
         return labOrders;
@@ -62,7 +66,7 @@ public class LabOrdersController {
     public LabOrderDetails findLabOrder(@PathVariable("patientId") String patientId,
                                         @PathVariable("orderId") String orderId,
                                         @RequestParam(required = false) String source) {
-        final RepoSource sourceType = RepoSourceType.fromString(source);
+        final RepoSourceType sourceType = repoSourceLookup.lookup(source);
         LabOrderSearch labOrderSearch = labOrderSearchFactory.select(sourceType);
 
         return labOrderSearch.findLabOrder(patientId, orderId);
@@ -72,7 +76,7 @@ public class LabOrdersController {
     public void createLabOrders(@PathVariable("patientId") String patientId,
                                 @RequestParam(required = false) String source,
                                 @RequestBody List<LabOrderDetails> labOrders) {
-        final RepoSource sourceType = RepoSourceType.fromString(source);
+        final RepoSourceType sourceType = repoSourceLookup.lookup(source);
         LabOrderStore labOrderStore = labOrderStoreFactory.select(sourceType);
 
         labOrderStore.create(patientId, labOrders);

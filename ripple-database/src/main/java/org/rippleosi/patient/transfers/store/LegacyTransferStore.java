@@ -19,6 +19,7 @@ import org.apache.camel.Body;
 import org.apache.camel.Consume;
 import org.apache.camel.Header;
 import org.rippleosi.common.types.RepoSourceType;
+import org.rippleosi.common.types.RepoSourceTypes;
 import org.rippleosi.patient.details.model.PatientEntity;
 import org.rippleosi.patient.details.repo.PatientRepository;
 import org.rippleosi.patient.transfers.model.TransferOfCareDetails;
@@ -44,7 +45,7 @@ public class LegacyTransferStore implements TransferOfCareStore {
 
     @Override
     public RepoSourceType getSource() {
-        return RepoSourceType.LEGACY;
+        return RepoSourceTypes.LEGACY;
     }
 
     @Override

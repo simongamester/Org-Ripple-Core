@@ -47,6 +47,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.mysema.query.BooleanBuilder;
 import com.mysema.util.ArrayUtils;
+import org.rippleosi.common.types.RepoSourceTypes;
 
 @Service
 @Transactional
@@ -66,7 +67,7 @@ public class LegacyPatientSearch implements PatientSearch {
 
     @Override
     public RepoSourceType getSource() {
-        return RepoSourceType.LEGACY;
+        return RepoSourceTypes.LEGACY;
     }
 
     @Override

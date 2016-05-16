@@ -19,6 +19,7 @@ import java.util.List;
 
 import org.rippleosi.common.exception.ConfigurationException;
 import org.rippleosi.common.types.RepoSourceType;
+import org.rippleosi.common.types.RepoSourceTypes;
 import org.rippleosi.patient.labresults.model.LabResultDetails;
 import org.rippleosi.patient.labresults.model.LabResultSummary;
 
@@ -28,7 +29,7 @@ public class NotConfiguredLabResultSearch implements LabResultSearch {
 
     @Override
     public RepoSourceType getSource() {
-        return RepoSourceType.NONE;
+        return RepoSourceTypes.NONE;
     }
 
     @Override

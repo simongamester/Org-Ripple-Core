@@ -18,8 +18,8 @@ package org.rippleosi.patient.dicom.search;
 import java.util.List;
 
 import org.rippleosi.common.exception.ConfigurationException;
-import org.rippleosi.common.types.RepoSource;
 import org.rippleosi.common.types.RepoSourceType;
+import org.rippleosi.common.types.RepoSourceTypes;
 import org.rippleosi.patient.dicom.model.DicomInstanceId;
 import org.rippleosi.patient.dicom.model.DicomInstanceSummary;
 import org.rippleosi.patient.dicom.model.DicomSeriesDetails;
@@ -30,7 +30,7 @@ public class NotConfiguredDicomSearch implements DicomSearch {
 
     @Override
     public RepoSourceType getSource() {
-        return RepoSourceType.NONE;
+        return RepoSourceTypes.NONE;
     }
 
     @Override
@@ -39,27 +39,27 @@ public class NotConfiguredDicomSearch implements DicomSearch {
     }
 
     @Override
-    public List<DicomStudySummary> findAllDicomStudies(String patientId, RepoSource source) {
+    public List<DicomStudySummary> findAllDicomStudies(String patientId, RepoSourceType source) {
         throw ConfigurationException.unimplementedTransaction(DicomSearch.class);
     }
 
     @Override
-    public DicomSeriesSummary findAllDicomSeriesInStudy(String patientId, String studyId, RepoSource source) {
+    public DicomSeriesSummary findAllDicomSeriesInStudy(String patientId, String studyId, RepoSourceType source) {
         throw ConfigurationException.unimplementedTransaction(DicomSearch.class);
     }
 
     @Override
-    public DicomSeriesDetails findSeriesDetails(String patientId, String seriesId, RepoSource source) {
+    public DicomSeriesDetails findSeriesDetails(String patientId, String seriesId, RepoSourceType source) {
         throw ConfigurationException.unimplementedTransaction(DicomSearch.class);
     }
 
     @Override
-    public DicomInstanceSummary findInstanceSummary(String patientId, String instanceId, RepoSource source) {
+    public DicomInstanceSummary findInstanceSummary(String patientId, String instanceId, RepoSourceType source) {
         throw ConfigurationException.unimplementedTransaction(DicomSearch.class);
     }
 
     @Override
-    public DicomInstanceId findFirstInstanceIdInSeries(String patientId, String seriesId, RepoSource source) {
+    public DicomInstanceId findFirstInstanceIdInSeries(String patientId, String seriesId, RepoSourceType source) {
         throw ConfigurationException.unimplementedTransaction(DicomSearch.class);
     }
 }

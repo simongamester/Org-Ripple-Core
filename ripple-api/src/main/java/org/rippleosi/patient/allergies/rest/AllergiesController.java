@@ -17,8 +17,9 @@ package org.rippleosi.patient.allergies.rest;
 
 import java.util.List;
 
-import org.rippleosi.common.types.RepoSource;
 import org.rippleosi.common.types.RepoSourceType;
+import org.rippleosi.common.types.RepoSourceTypes;
+import org.rippleosi.common.types.lookup.RepoSourceLookupFactory;
 import org.rippleosi.patient.allergies.model.AllergyDetails;
 import org.rippleosi.patient.allergies.model.AllergyHeadline;
 import org.rippleosi.patient.allergies.model.AllergySummary;
@@ -41,6 +42,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class AllergiesController {
 
     @Autowired
+    private RepoSourceLookupFactory repoSourceLookup;
+    
+    @Autowired
     private AllergySearchFactory allergySearchFactory;
 
     @Autowired
@@ -49,11 +53,11 @@ public class AllergiesController {
     @RequestMapping(method = RequestMethod.GET)
     public List<AllergySummary> findAllAllergies(@PathVariable("patientId") String patientId,
                                                  @RequestParam(required = false) String source) {
-        final RepoSource sourceType = RepoSourceType.fromString(source);
+        final RepoSourceType sourceType = repoSourceLookup.lookup(source);
         AllergySearch ethercisSearch = allergySearchFactory.select(sourceType);
         List<AllergySummary> allergies = ethercisSearch.findAllAllergies(patientId);
 
-        AllergySearch openehrSearch = allergySearchFactory.select(RepoSourceType.MARAND);
+        AllergySearch openehrSearch = allergySearchFactory.select(RepoSourceTypes.MARAND);
         allergies.addAll(openehrSearch.findAllAllergies(patientId));
 
         return allergies;
@@ -62,11 +66,11 @@ public class AllergiesController {
     @RequestMapping(value = "/headlines", method = RequestMethod.GET)
     public List<AllergyHeadline> findAllergyHeadlines(@PathVariable("patientId") String patientId,
                                                       @RequestParam(required = false) String source) {
-        final RepoSource sourceType = RepoSourceType.fromString(source);
+        final RepoSourceType sourceType = repoSourceLookup.lookup(source);
         AllergySearch ethercisSearch = allergySearchFactory.select(sourceType);
         List<AllergyHeadline> allergies = ethercisSearch.findAllergyHeadlines(patientId);
 
-        AllergySearch openehrSearch = allergySearchFactory.select(RepoSourceType.MARAND);
+        AllergySearch openehrSearch = allergySearchFactory.select(RepoSourceTypes.MARAND);
         allergies.addAll(openehrSearch.findAllergyHeadlines(patientId));
 
         return allergies;
@@ -76,7 +80,7 @@ public class AllergiesController {
     public AllergyDetails findAllergy(@PathVariable("patientId") String patientId,
                                       @PathVariable("allergyId") String allergyId,
                                       @RequestParam(required = false) String source) {
-        final RepoSource sourceType = RepoSourceType.fromString(source);
+        final RepoSourceType sourceType = repoSourceLookup.lookup(source);
         AllergySearch allergySearch = allergySearchFactory.select(sourceType);
 
         return allergySearch.findAllergy(patientId, allergyId);
@@ -86,7 +90,7 @@ public class AllergiesController {
     public void createAllergy(@PathVariable("patientId") String patientId,
                               @RequestParam(required = false) String source,
                               @RequestBody AllergyDetails allergy) {
-        final RepoSource sourceType = RepoSourceType.fromString(source);
+        final RepoSourceType sourceType = repoSourceLookup.lookup(source);
         AllergyStore allergyStore = allergyStoreFactory.select(sourceType);
 
         allergyStore.create(patientId, allergy);
@@ -96,7 +100,7 @@ public class AllergiesController {
     public void updateAllergy(@PathVariable("patientId") String patientId,
                               @RequestParam(required = false) String source,
                               @RequestBody AllergyDetails allergy) {
-        final RepoSource sourceType = RepoSourceType.fromString(source);
+        final RepoSourceType sourceType = repoSourceLookup.lookup(source);
         AllergyStore allergyStore = allergyStoreFactory.select(sourceType);
 
         allergyStore.update(patientId, allergy);

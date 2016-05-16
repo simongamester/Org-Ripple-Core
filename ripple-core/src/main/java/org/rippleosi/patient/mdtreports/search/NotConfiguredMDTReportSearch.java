@@ -19,6 +19,7 @@ import java.util.List;
 
 import org.rippleosi.common.exception.ConfigurationException;
 import org.rippleosi.common.types.RepoSourceType;
+import org.rippleosi.common.types.RepoSourceTypes;
 import org.rippleosi.patient.mdtreports.model.MDTReportDetails;
 import org.rippleosi.patient.mdtreports.model.MDTReportSummary;
 
@@ -28,7 +29,7 @@ public class NotConfiguredMDTReportSearch implements MDTReportSearch {
 
     @Override
     public RepoSourceType getSource() {
-        return RepoSourceType.NONE;
+        return RepoSourceTypes.NONE;
     }
 
     @Override

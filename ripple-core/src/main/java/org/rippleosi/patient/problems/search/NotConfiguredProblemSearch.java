@@ -20,6 +20,7 @@ import java.util.List;
 import org.hl7.fhir.instance.model.Condition;
 import org.rippleosi.common.exception.ConfigurationException;
 import org.rippleosi.common.types.RepoSourceType;
+import org.rippleosi.common.types.RepoSourceTypes;
 import org.rippleosi.patient.problems.model.ProblemDetails;
 import org.rippleosi.patient.problems.model.ProblemHeadline;
 import org.rippleosi.patient.problems.model.ProblemSummary;
@@ -30,7 +31,7 @@ public class NotConfiguredProblemSearch implements ProblemSearch {
 
     @Override
     public RepoSourceType getSource() {
-        return RepoSourceType.NONE;
+        return RepoSourceTypes.NONE;
     }
 
     @Override

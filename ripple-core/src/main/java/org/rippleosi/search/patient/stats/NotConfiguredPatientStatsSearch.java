@@ -20,6 +20,7 @@ import java.util.List;
 
 import org.rippleosi.common.exception.ConfigurationException;
 import org.rippleosi.common.types.RepoSourceType;
+import org.rippleosi.common.types.RepoSourceTypes;
 import org.rippleosi.patient.summary.model.PatientSummary;
 import org.rippleosi.search.common.model.PageableTableQuery;
 import org.rippleosi.search.patient.stats.model.SearchTableResults;
@@ -28,7 +29,7 @@ public class NotConfiguredPatientStatsSearch implements PatientStatsSearch {
 
     @Override
     public RepoSourceType getSource() {
-        return RepoSourceType.NONE;
+        return RepoSourceTypes.NONE;
     }
 
     @Override

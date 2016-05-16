@@ -21,6 +21,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.rippleosi.common.exception.ConfigurationException;
 import org.rippleosi.common.types.RepoSourceType;
+import org.rippleosi.common.types.RepoSourceTypes;
 
 /**
  */
@@ -35,7 +36,7 @@ public class NotConfiguredProcedureSearchTest {
 
     @Test
     public void shouldReportAsNotConfiguredImplementation() {
-        assertEquals(RepoSourceType.NONE, procedureSearch.getSource());
+        assertEquals(RepoSourceTypes.NONE, procedureSearch.getSource());
     }
 
     @Test(expected = ConfigurationException.class)

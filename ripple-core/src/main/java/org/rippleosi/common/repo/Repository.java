@@ -15,7 +15,7 @@
  */
 package org.rippleosi.common.repo;
 
-import org.rippleosi.common.types.RepoSource;
+import org.rippleosi.common.types.RepoSourceType;
 
 /**
  */
@@ -24,7 +24,7 @@ public interface Repository {
     /**
      * @return Used to identify a specific implementation of a Repository
      */
-    RepoSource getSource();
+    RepoSourceType getSource();
 
     /**
      * @return Used to determine order of preference for a Repository's data

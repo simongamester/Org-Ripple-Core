@@ -20,7 +20,7 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 import org.rippleosi.common.exception.ConfigurationException;
-import org.rippleosi.common.types.RepoSourceType;
+import org.rippleosi.common.types.RepoSourceTypes;
 
 /**
  */
@@ -35,7 +35,7 @@ public class NotConfiguredLabOrderStoreTest {
 
     @Test
     public void shouldReportAsNotConfiguredImplementation() {
-        assertEquals(RepoSourceType.NONE, labOrderStore.getSource());
+        assertEquals(RepoSourceTypes.NONE, labOrderStore.getSource());
     }
 
     @Test(expected = ConfigurationException.class)

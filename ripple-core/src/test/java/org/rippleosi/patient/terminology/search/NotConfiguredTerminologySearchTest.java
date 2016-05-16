@@ -21,6 +21,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.rippleosi.common.exception.ConfigurationException;
 import org.rippleosi.common.types.RepoSourceType;
+import org.rippleosi.common.types.RepoSourceTypes;
 
 public class NotConfiguredTerminologySearchTest {
 
@@ -33,7 +34,7 @@ public class NotConfiguredTerminologySearchTest {
 
     @Test
     public void shouldReportAsNotConfiguredImplementation() {
-        assertEquals(RepoSourceType.NONE, terminologySearch.getSource());
+        assertEquals(RepoSourceTypes.NONE, terminologySearch.getSource());
     }
 
     @Test(expected = ConfigurationException.class)

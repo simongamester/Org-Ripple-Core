@@ -20,13 +20,14 @@ import java.util.List;
 
 import org.rippleosi.common.exception.ConfigurationException;
 import org.rippleosi.common.types.RepoSourceType;
+import org.rippleosi.common.types.RepoSourceTypes;
 import org.rippleosi.search.reports.table.model.ReportTableQuery;
 
 public class NotConfiguredReportTableSearch implements ReportTableSearch {
 
     @Override
     public RepoSourceType getSource() {
-        return RepoSourceType.NONE;
+        return RepoSourceTypes.NONE;
     }
 
     @Override

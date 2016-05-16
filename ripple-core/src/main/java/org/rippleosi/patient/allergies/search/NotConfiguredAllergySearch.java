@@ -18,8 +18,8 @@ package org.rippleosi.patient.allergies.search;
 import java.util.List;
 
 import org.rippleosi.common.exception.ConfigurationException;
-import org.rippleosi.common.types.RepoSource;
 import org.rippleosi.common.types.RepoSourceType;
+import org.rippleosi.common.types.RepoSourceTypes;
 import org.rippleosi.patient.allergies.model.AllergyDetails;
 import org.rippleosi.patient.allergies.model.AllergyHeadline;
 import org.rippleosi.patient.allergies.model.AllergySummary;
@@ -29,8 +29,8 @@ import org.rippleosi.patient.allergies.model.AllergySummary;
 public class NotConfiguredAllergySearch implements AllergySearch {
 
     @Override
-    public RepoSource getSource() {
-        return RepoSourceType.NONE;
+    public RepoSourceType getSource() {
+        return RepoSourceTypes.NONE;
     }
 
     @Override

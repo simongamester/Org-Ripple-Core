@@ -17,8 +17,9 @@ package org.rippleosi.patient.labresults.rest;
 
 import java.util.List;
 
-import org.rippleosi.common.types.RepoSource;
 import org.rippleosi.common.types.RepoSourceType;
+import org.rippleosi.common.types.RepoSourceTypes;
+import org.rippleosi.common.types.lookup.RepoSourceLookupFactory;
 import org.rippleosi.patient.labresults.model.LabResultDetails;
 import org.rippleosi.patient.labresults.model.LabResultSummary;
 import org.rippleosi.patient.labresults.search.LabResultSearch;
@@ -37,16 +38,19 @@ import org.springframework.web.bind.annotation.RestController;
 public class LabResultsController {
 
     @Autowired
+    private RepoSourceLookupFactory repoSourceLookup;
+    
+    @Autowired
     private LabResultSearchFactory labResultSearchFactory;
 
     @RequestMapping(method = RequestMethod.GET)
     public List<LabResultSummary> findAllLabResults(@PathVariable("patientId") String patientId,
                                                     @RequestParam(required = false) String source) {
-        final RepoSource sourceType = RepoSourceType.fromString(source);
+        final RepoSourceType sourceType = repoSourceLookup.lookup(source);
         LabResultSearch labResultSearch = labResultSearchFactory.select(sourceType);
         List<LabResultSummary> results = labResultSearch.findAllLabResults(patientId);
 
-        LabResultSearch openEhrSearch = labResultSearchFactory.select(RepoSourceType.MARAND);
+        LabResultSearch openEhrSearch = labResultSearchFactory.select(RepoSourceTypes.MARAND);
         results.addAll(openEhrSearch.findAllLabResults(patientId));
 
         return results;
@@ -56,7 +60,7 @@ public class LabResultsController {
     public LabResultDetails findLabResult(@PathVariable("patientId") String patientId,
                                           @PathVariable("resultId") String resultId,
                                           @RequestParam(required = false) String source) {
-        final RepoSource sourceType = RepoSourceType.fromString(source);
+        final RepoSourceType sourceType = repoSourceLookup.lookup(source);
         LabResultSearch labResultSearch = labResultSearchFactory.select(sourceType);
 
         return labResultSearch.findLabResult(patientId, resultId);

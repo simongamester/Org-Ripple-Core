@@ -26,6 +26,7 @@ import org.apache.commons.collections4.Transformer;
 import org.apache.commons.lang3.StringUtils;
 import org.rippleosi.common.exception.DataNotFoundException;
 import org.rippleosi.common.types.RepoSourceType;
+import org.rippleosi.common.types.RepoSourceTypes;
 import org.rippleosi.patient.allergies.model.AllergyHeadline;
 import org.rippleosi.patient.allergies.search.AllergySearch;
 import org.rippleosi.patient.allergies.search.AllergySearchFactory;
@@ -144,7 +145,7 @@ public class PatientEntityToDetailsTransformer implements Transformer<PatientEnt
             ProblemSearch problemSearch = problemSearchFactory.select(null);
             List<ProblemHeadline> problems = problemSearch.findProblemHeadlines(patientId);
 
-            ProblemSearch vistaSearch = problemSearchFactory.select(RepoSourceType.VISTA);
+            ProblemSearch vistaSearch = problemSearchFactory.select(RepoSourceTypes.VISTA);
             problems.addAll(vistaSearch.findProblemHeadlines("17"));
 
             return CollectionUtils.collect(problems, new ProblemTransformer(), new ArrayList<>());

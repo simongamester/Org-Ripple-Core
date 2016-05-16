@@ -25,8 +25,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.rippleosi.common.types.RepoSource;
 import org.rippleosi.common.types.RepoSourceType;
+import org.rippleosi.common.types.RepoSourceTypes;
 import org.rippleosi.common.types.TestSourceType;
 import org.springframework.context.ApplicationContext;
 import org.springframework.test.util.ReflectionTestUtils;
@@ -57,7 +57,7 @@ public abstract class AbstractRepositoryFactoryTest<F extends RepositoryFactory<
         initContext(0);
 
         R repository = factory.select(null);
-        assertEquals(RepoSourceType.NONE, repository.getSource());
+        assertEquals(RepoSourceTypes.NONE, repository.getSource());
     }
 
     @Test
@@ -109,7 +109,7 @@ public abstract class AbstractRepositoryFactoryTest<F extends RepositoryFactory<
 
         Map<String, R> repositoryMap = new HashMap<>();
         for (int i = 1; i <= count; i++) {
-            RepoSource source = TestSourceType.fromString("Source " + i);
+            RepoSourceType source = TestSourceType.fromString("Source " + i);
             R repository = Mockito.mock(cls);
             when(repository.getSource()).thenReturn(source);
             when(repository.getPriority()).thenReturn(i);

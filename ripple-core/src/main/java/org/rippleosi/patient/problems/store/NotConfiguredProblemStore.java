@@ -19,6 +19,7 @@ import org.apache.camel.Body;
 import org.apache.camel.Header;
 import org.rippleosi.common.exception.ConfigurationException;
 import org.rippleosi.common.types.RepoSourceType;
+import org.rippleosi.common.types.RepoSourceTypes;
 import org.rippleosi.patient.problems.model.ProblemDetails;
 
 /**
@@ -27,7 +28,7 @@ public class NotConfiguredProblemStore implements ProblemStore {
 
     @Override
     public RepoSourceType getSource() {
-        return RepoSourceType.NONE;
+        return RepoSourceTypes.NONE;
     }
 
     @Override
