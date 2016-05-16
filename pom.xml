@@ -21,14 +21,14 @@
 
     <groupId>org.rippleosi</groupId>
     <artifactId>ripple</artifactId>
-    <version>0.5.4.0</version>
+    <version>0.5.5.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>Ripple OSI</name>
     <description>Provides the core functional libararies to build Ripple based health systems</description>
     <scm>
         <connection>scm:git:https://github.com/RippleOSI/Org-Ripple-core.git</connection>
-        <tag>v0.5.4.0</tag>
+        <tag>HEAD</tag>
     </scm>
 
     <distributionManagement>
