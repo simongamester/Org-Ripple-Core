@@ -46,6 +46,11 @@
 
         <dependency>
             <groupId>org.rippleosi</groupId>
+            <artifactId>ripple-security</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.rippleosi</groupId>
             <artifactId>ripple-terminology-example</artifactId>
             <scope>runtime</scope>
         </dependency>

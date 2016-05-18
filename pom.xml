@@ -114,6 +114,7 @@
         <module>ripple-packaging</module>
         <module>ripple-terminology-example</module>
         <module>ripple-vista</module>
+        <module>ripple-security</module>
     </modules>
 
     <dependencyManagement>
@@ -157,6 +158,12 @@
             <dependency>
                 <groupId>org.rippleosi</groupId>
                 <artifactId>ripple-openehr</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.rippleosi</groupId>
+                <artifactId>ripple-security</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
