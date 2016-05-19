@@ -15,7 +15,8 @@
 ~      limitations under the License.
 ~
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
 
@@ -67,7 +68,7 @@
         <spring.version>4.2.1.RELEASE</spring.version>
         <spring.data.jpa.version>1.8.2.RELEASE</spring.data.jpa.version>
         <spring.security.version>4.1.0.RELEASE</spring.security.version>
-        <spring.security.oauth2.version>2.0.9.RELEASE</spring.security.oauth2.version>
+        <spring.security.jwt.version>1.0.4.RELEASE</spring.security.jwt.version>
         <swagger.version>2.2.2</swagger.version>
         <tomcat.version>8.0.26</tomcat.version>
         <xbean.spring.version>3.18</xbean.spring.version>
@@ -85,7 +86,7 @@
         <surefire.plugin.version>2.19.1</surefire.plugin.version>
         <versions.plugin.version>2.2</versions.plugin.version>
         <war.plugin.version>${jar.plugin.version}</war.plugin.version>
-        
+
         <!-- ************************ -->
         <!-- Sonar/Reporting settings -->
         <!-- ************************ -->
@@ -124,7 +125,7 @@
                 <artifactId>ripple-api</artifactId>
                 <version>${project.version}</version>
             </dependency>
-		
+
             <dependency>
                 <groupId>org.rippleosi</groupId>
                 <artifactId>ripple-audit-example</artifactId>
@@ -499,6 +500,12 @@
 
             <dependency>
                 <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-jwt</artifactId>
+                <version>${spring.security.jwt.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.security</groupId>
                 <artifactId>spring-security-openid</artifactId>
                 <version>${spring.security.version}</version>
             </dependency>
@@ -523,7 +530,7 @@
                         <target>${java.version}</target>
                     </configuration>
                 </plugin>
-            
+
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-war-plugin</artifactId>
@@ -532,7 +539,7 @@
                         <failOnMissingWebXml>false</failOnMissingWebXml>
                     </configuration>
                 </plugin>
-                
+
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-jar-plugin</artifactId>
@@ -544,7 +551,7 @@
                     <artifactId>maven-clean-plugin</artifactId>
                     <version>${clean.plugin.version}</version>
                 </plugin>
-                
+
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-resources-plugin</artifactId>
@@ -575,13 +582,13 @@
                         <testFailureIgnore>false</testFailureIgnore>
                     </configuration>
                 </plugin>
-                
+
                 <plugin>
                     <groupId>org.jacoco</groupId>
                     <artifactId>jacoco-maven-plugin</artifactId>
                     <version>${jacoco.plugin.version}</version>
                 </plugin>
-                
+
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-release-plugin</artifactId>
@@ -599,7 +606,7 @@
                         <localCheckout>true</localCheckout>
                     </configuration>
                 </plugin>
-                
+
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>versions-maven-plugin</artifactId>
@@ -613,12 +620,12 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
             </plugin>
-            
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-clean-plugin</artifactId>
             </plugin>
-            
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-release-plugin</artifactId>
@@ -633,7 +640,7 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
             </plugin>
-            
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
