@@ -22,8 +22,11 @@ public final class JsonUtils {
         try {
             rootNode = mapper.readTree(rawJson);
         }
-        catch (final IOException e) {
+        catch (final IOException ioe) {
             LOGGER.warn("Failed to convert JSON string to a node for reuse.");
+        }
+        catch (final NullPointerException npe) {
+            LOGGER.warn("The input JSON string was null and could not be converted.");
         }
 
         return rootNode;
