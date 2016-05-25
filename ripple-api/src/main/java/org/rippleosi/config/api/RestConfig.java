@@ -22,7 +22,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -41,20 +40,32 @@ public class RestConfig extends WebMvcConfigurerAdapter {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new RequiresAuthenticationInterceptor(config, "OidcClient")).addPathPatterns("/*");
+        registry.addInterceptor(new RequiresAuthenticationInterceptor(config, "OidcClient")).addPathPatterns("/**").excludePathPatterns("/swagger-ui.html");
     }
+    
+//    antMatchers("/api/swagger-ui.html").permitAll()
+//                .antMatchers("/api/token").access("anonymous")
+//                .antMatchers("/api/**").authenticated()
+//                .antMatchers("/**").authenticated()
     
     @Bean
     public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
         return new PropertySourcesPlaceholderConfigurer();
     }
 
+//    @Bean
+//    public RequestMappingHandlerMapping requestMappingHandlerMapping() {
+//        RequestMappingHandlerMapping handlerMapping = new RequestMappingHandlerMapping();
+//        handlerMapping.setInterceptors(new Object[] {getAuthenticationHandler()});
+//        handlerMapping.setUseSuffixPatternMatch(false);
+//
+//        return handlerMapping;
+//    }
+    
     @Bean
-    public RequestMappingHandlerMapping requestMappingHandlerMapping() {
-        RequestMappingHandlerMapping handlerMapping = new RequestMappingHandlerMapping();
-        handlerMapping.setUseSuffixPatternMatch(false);
-
-        return handlerMapping;
+    public RequiresAuthenticationInterceptor getAuthenticationHandler(){
+       RequiresAuthenticationInterceptor authInterceptor = new RequiresAuthenticationInterceptor(config, "OidcClient");
+       return authInterceptor;
     }
 
     @Override

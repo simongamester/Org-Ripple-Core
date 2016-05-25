@@ -41,16 +41,15 @@ public class Pac4jConfig {
     public Config config() {
         final OidcClient oidcClient = new OidcClient();
         oidcClient.setClientID(clientId);
-        oidcClient.setSecret("");
+        oidcClient.setSecret("secret");
         oidcClient.setDiscoveryURI("https://ripple-identity-uat.answerappcloud.com/identity/.well-known/openid-configuration");
-        oidcClient.setUseNonce(true);
         oidcClient.addCustomParam("client_id", clientId);
         oidcClient.addCustomParam("scope", "openid profile email api");
         oidcClient.addCustomParam("response_type", "id_token token");
         oidcClient.addCustomParam("redirect_uri", redirectUri);
         oidcClient.addCustomParam("nonce", "nonce");
         oidcClient.addCustomParam("response_mode", "form_post");
-
+        
         final Clients clients = new Clients(redirectUri, oidcClient);
 
         final Config config = new Config(clients);
