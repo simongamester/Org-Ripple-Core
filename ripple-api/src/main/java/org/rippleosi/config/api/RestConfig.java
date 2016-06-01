@@ -50,6 +50,15 @@ public class RestConfig extends WebMvcConfigurerAdapter {
        return authInterceptor;
     }
 
+//    @Bean
+//    public RequestMappingHandlerMapping requestMappingHandlerMapping() {
+//        RequestMappingHandlerMapping handlerMapping = new RequestMappingHandlerMapping();
+//        handlerMapping.setInterceptors(new Object[] {getAuthenticationHandler()});
+//        handlerMapping.setUseSuffixPatternMatch(false);
+//
+//        return handlerMapping;
+//    }
+    
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("swagger-ui.html").addResourceLocations("classpath:/META-INF/resources/");

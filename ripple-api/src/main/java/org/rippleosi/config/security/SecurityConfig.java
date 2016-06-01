@@ -36,17 +36,4 @@ public class SecurityConfig extends WebMvcConfigurerAdapter {
         registry.addInterceptor(new RequiresAuthenticationInterceptor(config, "OidcClient", "clinitian")).addPathPatterns("/patients/**");
     }
 
-//    antMatchers("/api/swagger-ui.html").permitAll()
-//                .antMatchers("/api/token").access("anonymous")
-//                .antMatchers("/api/**").authenticated()
-//                .antMatchers("/**").authenticated()
-
-//    @Bean
-//    public RequestMappingHandlerMapping requestMappingHandlerMapping() {
-//        RequestMappingHandlerMapping handlerMapping = new RequestMappingHandlerMapping();
-//        handlerMapping.setInterceptors(new Object[] {getAuthenticationHandler()});
-//        handlerMapping.setUseSuffixPatternMatch(false);
-//
-//        return handlerMapping;
-//    }
 }
