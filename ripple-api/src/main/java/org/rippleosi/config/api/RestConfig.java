@@ -21,6 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -32,35 +33,16 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
  */
 @Configuration
 @EnableWebMvc
-@ComponentScan({"org.rippleosi","org.pac4j.springframework.web"})
+@ComponentScan("org.rippleosi")
 public class RestConfig extends WebMvcConfigurerAdapter {
     
     @Autowired
     private Config config;
-
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new RequiresAuthenticationInterceptor(config, "OidcClient")).addPathPatterns("/**").excludePathPatterns("/swagger-ui.html");
-    }
-    
-//    antMatchers("/api/swagger-ui.html").permitAll()
-//                .antMatchers("/api/token").access("anonymous")
-//                .antMatchers("/api/**").authenticated()
-//                .antMatchers("/**").authenticated()
     
     @Bean
     public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
         return new PropertySourcesPlaceholderConfigurer();
     }
-
-//    @Bean
-//    public RequestMappingHandlerMapping requestMappingHandlerMapping() {
-//        RequestMappingHandlerMapping handlerMapping = new RequestMappingHandlerMapping();
-//        handlerMapping.setInterceptors(new Object[] {getAuthenticationHandler()});
-//        handlerMapping.setUseSuffixPatternMatch(false);
-//
-//        return handlerMapping;
-//    }
     
     @Bean
     public RequiresAuthenticationInterceptor getAuthenticationHandler(){

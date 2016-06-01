@@ -23,7 +23,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
-//@Configuration
+@Configuration
 @ComponentScan("org.pac4j.springframework.web")
 public class SecurityConfig extends WebMvcConfigurerAdapter {
     
@@ -32,6 +32,21 @@ public class SecurityConfig extends WebMvcConfigurerAdapter {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new RequiresAuthenticationInterceptor(config, "OidcClient")).addPathPatterns("/patients");
+        registry.addInterceptor(new RequiresAuthenticationInterceptor(config, "OidcClient", "clinitian")).addPathPatterns("/patients"); //.excludePathPatterns("/swagger-ui.html","/token");
+        registry.addInterceptor(new RequiresAuthenticationInterceptor(config, "OidcClient", "clinitian")).addPathPatterns("/patients/**");
     }
+
+//    antMatchers("/api/swagger-ui.html").permitAll()
+//                .antMatchers("/api/token").access("anonymous")
+//                .antMatchers("/api/**").authenticated()
+//                .antMatchers("/**").authenticated()
+
+//    @Bean
+//    public RequestMappingHandlerMapping requestMappingHandlerMapping() {
+//        RequestMappingHandlerMapping handlerMapping = new RequestMappingHandlerMapping();
+//        handlerMapping.setInterceptors(new Object[] {getAuthenticationHandler()});
+//        handlerMapping.setUseSuffixPatternMatch(false);
+//
+//        return handlerMapping;
+//    }
 }

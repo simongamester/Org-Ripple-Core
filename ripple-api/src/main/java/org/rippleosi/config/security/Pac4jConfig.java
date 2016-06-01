@@ -15,6 +15,7 @@
  */
 package org.rippleosi.config.security;
 
+import org.pac4j.core.authorization.RequireAllRolesAuthorizer;
 import org.pac4j.core.authorization.RequireAnyRoleAuthorizer;
 import org.pac4j.core.client.Clients;
 import org.pac4j.core.config.Config;
@@ -53,7 +54,9 @@ public class Pac4jConfig {
         final Clients clients = new Clients(redirectUri, oidcClient);
 
         final Config config = new Config(clients);
-        config.addAuthorizer("admin", new RequireAnyRoleAuthorizer("ROLE_ADMIN"));
+        config.addAuthorizer("clinitian", new RequireAllRolesAuthorizer("csrf","IDCR"));
+        config.addAuthorizer("patient", new RequireAnyRoleAuthorizer("csrf","PHR"));
+        config.addAuthorizer("governance", new RequireAnyRoleAuthorizer("csrf","IG"));
         return config;
     }
     
