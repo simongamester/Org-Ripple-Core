@@ -54,7 +54,12 @@ public abstract class AbstractVistaService implements Repository {
     protected <I, O> O findData(RequestStrategy<I, O> requestStrategy, Class expected) {
 
         final String uri = requestStrategy.getQueryUriComponents().toUriString();
-        final ResponseEntity<VistaRestResponse> response = requestProxy.getWithoutSession(uri, VistaRestResponse.class);
+        ResponseEntity<VistaRestResponse> response = new ResponseEntity(HttpStatus.EXPECTATION_FAILED);
+        try{
+            response = requestProxy.getWithoutSession(uri, VistaRestResponse.class);
+        }catch(Exception e){
+            LOGGER.warn("Vista server returned a 500 error response" + e.getMessage());
+        }
 
         final ObjectMapper objectMapper = new ObjectMapper();
         final List<I> data = new ArrayList<>();
