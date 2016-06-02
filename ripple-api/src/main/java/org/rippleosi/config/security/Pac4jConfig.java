@@ -17,9 +17,12 @@ package org.rippleosi.config.security;
 
 import org.pac4j.core.authorization.RequireAllRolesAuthorizer;
 import org.pac4j.core.authorization.RequireAnyRoleAuthorizer;
+import org.pac4j.core.authorization.authorizer.csrf.CsrfAuthorizer;
+import org.pac4j.core.authorization.authorizer.csrf.DefaultCsrfTokenGenerator;
 import org.pac4j.core.client.Clients;
 import org.pac4j.core.config.Config;
 import org.pac4j.oidc.client.OidcClient;
+import org.rippleosi.security.authorizer.csrf.CsrfAngularTokenGeneratorAuthorizer;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -53,10 +56,16 @@ public class Pac4jConfig {
         
         final Clients clients = new Clients(redirectUri, oidcClient);
 
+        final CsrfAuthorizer angularCsrfAuthorizer = new CsrfAuthorizer("X-XRSF-TOKEN","X-XSRF-TOKEN");
+        angularCsrfAuthorizer.setOnlyCheckPostRequest(false);
+        
         final Config config = new Config(clients);
-        config.addAuthorizer("clinitian", new RequireAllRolesAuthorizer("csrf","IDCR"));
-        config.addAuthorizer("patient", new RequireAnyRoleAuthorizer("csrf","PHR"));
-        config.addAuthorizer("governance", new RequireAnyRoleAuthorizer("csrf","IG"));
+        config.addAuthorizer("clinitian", new RequireAllRolesAuthorizer("IDCR"));
+        config.addAuthorizer("patient", new RequireAllRolesAuthorizer("PHR"));
+        config.addAuthorizer("all", new RequireAnyRoleAuthorizer("IDCR","PHR"));
+        config.addAuthorizer("governance", new RequireAllRolesAuthorizer("IG"));
+        config.addAuthorizer("csrfAngularToken", new CsrfAngularTokenGeneratorAuthorizer(new DefaultCsrfTokenGenerator()));
+        config.addAuthorizer("csrfAngular", angularCsrfAuthorizer);
         return config;
     }
     

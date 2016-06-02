@@ -17,6 +17,7 @@ package org.rippleosi.config.security;
 
 import org.pac4j.core.config.Config;
 import org.pac4j.springframework.web.RequiresAuthenticationInterceptor;
+import org.rippleosi.springframework.web.StartCsrfInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -32,8 +33,11 @@ public class SecurityConfig extends WebMvcConfigurerAdapter {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new RequiresAuthenticationInterceptor(config, "OidcClient", "clinitian")).addPathPatterns("/patients"); //.excludePathPatterns("/swagger-ui.html","/token");
-        registry.addInterceptor(new RequiresAuthenticationInterceptor(config, "OidcClient", "clinitian")).addPathPatterns("/patients/**");
+        registry.addInterceptor(new StartCsrfInterceptor(config, "csrfAngularToken")).addPathPatterns("/token");
+        registry.addInterceptor(new RequiresAuthenticationInterceptor(config, "OidcClient", "clinitian,csrfAngular")).addPathPatterns("/**").excludePathPatterns("/token");
+        /* Swagger is uslesss unless logged in, so commenting out the paths that would make swagger available without authentication
+                "/swagger-ui.html", "/swagger-resources/**", "/v2/api-docs/**", "/configuration/**"
+        */
     }
 
 }
