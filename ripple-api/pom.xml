@@ -189,10 +189,6 @@
             <groupId>org.pac4j</groupId>
             <artifactId>pac4j-oidc</artifactId>
         </dependency>
-        
-        <dependency>
-            <groupId>org.pac4j</groupId>
-            <artifactId>pac4j-openid</artifactId>
-        </dependency>
+
     </dependencies>
 </project>
