@@ -46,7 +46,7 @@ public class SwaggerConfig {
     private ApiInfo apiInfo() {
         return new ApiInfo("Ripple OSI Demonstrator REST API",
                            "The Ripple OSI Demonstrator API.",
-                           "0.0.1-SNAPSHOT",
+                           "0.6.0.0-SNAPSHOT",
                            "",
                            "",
                            "Apache License v2",
