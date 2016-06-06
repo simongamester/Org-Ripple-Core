@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Ripple OSI
+ * Copyright 2016 Ripple OSI
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -15,13 +15,16 @@
  */
 package org.rippleosi.config.api;
 
-import org.rippleosi.config.security.SecurityConfig;
+import org.pac4j.core.config.Config;
+import org.pac4j.springframework.web.RequiresAuthenticationInterceptor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
@@ -31,22 +34,31 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
 @Configuration
 @EnableWebMvc
 @ComponentScan("org.rippleosi")
-@Import({ SecurityConfig.class })
 public class RestConfig extends WebMvcConfigurerAdapter {
-
+    
+    @Autowired
+    private Config config;
+    
     @Bean
     public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
         return new PropertySourcesPlaceholderConfigurer();
     }
-
+    
     @Bean
-    public RequestMappingHandlerMapping requestMappingHandlerMapping() {
-        RequestMappingHandlerMapping handlerMapping = new RequestMappingHandlerMapping();
-        handlerMapping.setUseSuffixPatternMatch(false);
-
-        return handlerMapping;
+    public RequiresAuthenticationInterceptor getAuthenticationHandler(){
+       RequiresAuthenticationInterceptor authInterceptor = new RequiresAuthenticationInterceptor(config, "OidcClient");
+       return authInterceptor;
     }
 
+//    @Bean
+//    public RequestMappingHandlerMapping requestMappingHandlerMapping() {
+//        RequestMappingHandlerMapping handlerMapping = new RequestMappingHandlerMapping();
+//        handlerMapping.setInterceptors(new Object[] {getAuthenticationHandler()});
+//        handlerMapping.setUseSuffixPatternMatch(false);
+//
+//        return handlerMapping;
+//    }
+    
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("swagger-ui.html").addResourceLocations("classpath:/META-INF/resources/");
