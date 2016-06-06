@@ -20,6 +20,10 @@ import org.slf4j.LoggerFactory;
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import java.net.URI;
+import java.net.URISyntaxException;
+
 import org.pac4j.core.client.Clients;
 import org.pac4j.core.client.Client;
 import org.pac4j.core.client.IndirectClient;
@@ -31,6 +35,9 @@ import org.pac4j.core.util.CommonHelper;
 import org.rippleosi.security.service.SecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -48,14 +55,22 @@ public class TokenController {
     @Value("${pac4j.callback.defaultUrl:}")
     protected String defaultUrl;
 
-    @RequestMapping("/token")
-    public String loginWithTokens(final HttpServletRequest request, final HttpServletResponse response) {
+    @PostConstruct
+    public void postConstruct() {
+        if (CommonHelper.isBlank(defaultUrl)) {
+            this.defaultUrl = Pac4jConstants.DEFAULT_URL_VALUE;
+        }
+    }
 
+    @RequestMapping("/token")
+    public ResponseEntity<String> loginWithTokens(final HttpServletRequest request, final HttpServletResponse response) {
         final WebContext context = new J2EContext(request, response);
 
         CommonHelper.assertNotNull("config", config);
+
         final Clients clients = config.getClients();
         CommonHelper.assertNotNull("clients", clients);
+
         final Client client = clients.findClient("OidcClient");
         LOGGER.debug("client: {}", client);
         CommonHelper.assertNotNull("client", client);
@@ -63,27 +78,45 @@ public class TokenController {
 
         securityService.setupSecurityContext(context);
 
-        return redirectToOriginallyRequestedUrl(context);
+        final String redirectUrl = calculateRedirectUrl(context);
+        return generateRedirectResponseEntity(redirectUrl);
     }
 
-    @PostConstruct
-    public void postContruct() {
-        if (CommonHelper.isBlank(defaultUrl)) {
-            this.defaultUrl = Pac4jConstants.DEFAULT_URL_VALUE;
-        }
-    }
-
-    protected String redirectToOriginallyRequestedUrl(final WebContext context) {
+    private String calculateRedirectUrl(final WebContext context) {
         final String requestedUrl = (String) context.getSessionAttribute(Pac4jConstants.REQUESTED_URL);
         LOGGER.debug("requestedUrl: {}", requestedUrl);
+
         final String redirectUrl;
+
         if (CommonHelper.isNotBlank(requestedUrl)) {
             context.setSessionAttribute(Pac4jConstants.REQUESTED_URL, null);
             redirectUrl = requestedUrl;
-        } else {
+        }
+        else {
             redirectUrl = this.defaultUrl;
         }
-        return "redirect:" + redirectUrl;
+
+        return redirectUrl;
+    }
+
+    private ResponseEntity<String> generateRedirectResponseEntity(final String redirectUrl) {
+        URI redirectPage = null;
+
+        try {
+            redirectPage = new URI(redirectUrl);
+        }
+        catch (final URISyntaxException e) {
+            LOGGER.warn("The security service has failed to redirect to the Ripple home page after authentication.");
+            LOGGER.debug("The security service has failed to redirect to the Ripple home page after authentication.", e);
+        }
+
+        final HttpHeaders httpHeaders = new HttpHeaders();
+
+        if (redirectPage != null) {
+            httpHeaders.setLocation(redirectPage);
+        }
+
+        return new ResponseEntity<>(httpHeaders, HttpStatus.SEE_OTHER);
     }
 
     public String getDefaultUrl() {

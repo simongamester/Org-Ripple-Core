@@ -33,8 +33,16 @@ public class SecurityConfig extends WebMvcConfigurerAdapter {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new StartCsrfInterceptor(config, "csrfAngularToken")).addPathPatterns("/token");
-        registry.addInterceptor(new RequiresAuthenticationInterceptor(config, "OidcClient", "clinitian,csrfAngular")).addPathPatterns("/**").excludePathPatterns("/token");
+        registry.addInterceptor(new StartCsrfInterceptor(config, "csrfAngularToken"))
+                .addPathPatterns("/token");
+
+        registry.addInterceptor(new RequiresAuthenticationInterceptor(config, "OidcClient", "all"))
+                .addPathPatterns("/user");
+
+        registry.addInterceptor(new RequiresAuthenticationInterceptor(config, "OidcClient", "clinician")) //,csrfAngular"))
+                .addPathPatterns("/**")
+                .excludePathPatterns("/token", "/user");
+
         /* Swagger is uslesss unless logged in, so commenting out the paths that would make swagger available without authentication
                 "/swagger-ui.html", "/swagger-resources/**", "/v2/api-docs/**", "/configuration/**"
         */

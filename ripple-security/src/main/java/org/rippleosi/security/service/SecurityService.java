@@ -26,6 +26,7 @@ public class SecurityService {
         final String rawIDToken = context.getRequestParameter("id_token");
         final String tokenScope = context.getRequestParameter("scope");
         final String tokenExpiry = context.getRequestParameter("expires_in");
+
         final Jwt accessToken = JwtHelper.decode(rawAccessToken);
         final Jwt idToken = JwtHelper.decode(rawIDToken);
 
@@ -35,12 +36,18 @@ public class SecurityService {
 
         String idClaims = idToken.getClaims();
         String accessClaims = accessToken.getClaims();
+
         try {
             JWTClaimsSet idClaimsSet = JWTClaimsSet.parse(idClaims);
+
             UserInfo userInfo = new UserInfo(idClaimsSet);
             profile.addAttributes(userInfo.toJWTClaimsSet().getClaims());
+
             JWTClaimsSet accessClaimsSet = JWTClaimsSet.parse(accessClaims);
             profile.addRole(accessClaimsSet.getStringClaim("role"));
+            profile.addAttribute("tenant", accessClaimsSet.getClaim("tenant"));
+            profile.addAttribute("nhs_number", accessClaimsSet.getClaim("nhs_number"));
+
             LOGGER.debug("profile: {}", profile);
             saveUserProfile(context, profile);
         } catch (ParseException pe) {
@@ -52,6 +59,7 @@ public class SecurityService {
 
     protected void saveUserProfile(final WebContext context, final UserProfile profile) {
         final ProfileManager manager = new ProfileManager(context);
+
         if (profile != null) {
             manager.save(true, profile);
         }

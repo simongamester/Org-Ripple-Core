@@ -15,9 +15,10 @@
  */
 package org.rippleosi.security.model;
 
+import java.util.List;
+
 public class UserDetails {
 
-    private String accessToken;
     private String sub;
     private String givenName;
     private String familyName;
@@ -25,15 +26,7 @@ public class UserDetails {
     private String role;
     private String tenant;
     private String nhsNumber;
-    private Claims claims;
-
-    public String getAccessToken() {
-        return accessToken;
-    }
-
-    public void setAccessToken(String accessToken) {
-        this.accessToken = accessToken;
-    }
+    private List<String> claims;
 
     public String getSub() {
         return sub;
@@ -91,11 +84,11 @@ public class UserDetails {
         this.nhsNumber = nhsNumber;
     }
 
-    public Claims getClaims() {
+    public List<String> getClaims() {
         return claims;
     }
 
-    public void setClaims(Claims claims) {
+    public void setClaims(List<String> claims) {
         this.claims = claims;
     }
 }

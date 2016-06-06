@@ -60,7 +60,7 @@ public class Pac4jConfig {
         angularCsrfAuthorizer.setOnlyCheckPostRequest(false);
         
         final Config config = new Config(clients);
-        config.addAuthorizer("clinitian", new RequireAllRolesAuthorizer("IDCR"));
+        config.addAuthorizer("clinician", new RequireAllRolesAuthorizer("IDCR"));
         config.addAuthorizer("patient", new RequireAllRolesAuthorizer("PHR"));
         config.addAuthorizer("all", new RequireAnyRoleAuthorizer("IDCR","PHR"));
         config.addAuthorizer("governance", new RequireAllRolesAuthorizer("IG"));

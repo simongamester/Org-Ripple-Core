@@ -15,42 +15,34 @@
  */
 package org.rippleosi.security.service;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import org.apache.commons.collections4.Transformer;
-import org.rippleosi.security.common.util.JsonUtils;
-import org.rippleosi.security.model.Claims;
-import org.rippleosi.security.model.TokenResponse;
-import org.rippleosi.security.model.UserDetails;
-import org.springframework.security.jwt.Jwt;
-import org.springframework.security.jwt.JwtHelper;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
-public class TokenResponseToUserDetailsTransformer implements Transformer<TokenResponse, UserDetails> {
+import org.apache.commons.collections4.MapUtils;
+import org.apache.commons.collections4.Transformer;
+import org.pac4j.core.profile.UserProfile;
+import org.rippleosi.security.model.UserDetails;
+
+public class TokenResponseToUserDetailsTransformer implements Transformer<UserProfile, UserDetails> {
 
     @Override
-    public UserDetails transform(final TokenResponse tokenResponse) {
-        final String rawAccessToken = tokenResponse.getAccess_token();
-        final String rawIdToken = tokenResponse.getId_token();
+    public UserDetails transform(final UserProfile userProfile) {
 
-        final Jwt accessToken = JwtHelper.decode(rawAccessToken);
-        final Jwt idToken = JwtHelper.decode(rawIdToken);
+        final Map<String, Object> profileAttributes = userProfile.getAttributes();
 
-        final JsonNode accessTokenClaims = JsonUtils.extractJsonFromString(accessToken.getClaims());
-        final JsonNode idTokenClaims = JsonUtils.extractJsonFromString(idToken.getClaims());
-
-        // TODO - need to be set in the ID server
-        final Claims claims = new Claims();
-        claims.setHomeView("");
-        claims.setAutoAdvancedSearch(false);
+        final List<String> claims = new ArrayList<>();
+        claims.add("READ");
+        claims.add("WRITE");
 
         final UserDetails userDetails = new UserDetails();
-        userDetails.setAccessToken(rawAccessToken);
-        userDetails.setSub(accessTokenClaims.get("sub").asText());
-        userDetails.setGivenName(idTokenClaims.get("given_name").asText());
-        userDetails.setFamilyName(idTokenClaims.get("family_name").asText());
-        userDetails.setEmail(idTokenClaims.get("email").asText());
-        userDetails.setRole(accessTokenClaims.get("role").asText());
-        userDetails.setTenant(accessTokenClaims.get("tenant").asText());
-        userDetails.setNhsNumber(accessTokenClaims.get("nhs_number").asText());
+        userDetails.setSub(MapUtils.getString(profileAttributes, "sub"));
+        userDetails.setGivenName(MapUtils.getString(profileAttributes, "given_name"));
+        userDetails.setFamilyName(MapUtils.getString(profileAttributes, "family_name"));
+        userDetails.setEmail(MapUtils.getString(profileAttributes, "email"));
+        userDetails.setRole(userProfile.getRoles().get(0));
+        userDetails.setTenant(MapUtils.getString(profileAttributes, "tenant"));
+        userDetails.setNhsNumber(MapUtils.getString(profileAttributes, "nhs_number"));
         userDetails.setClaims(claims);
 
         return userDetails;
