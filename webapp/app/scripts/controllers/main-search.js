@@ -1,10 +1,12 @@
 'use strict';
 
 angular.module('rippleDemonstrator')
-  .controller('MainSearchController', function($scope, AdvancedSearch, UserService) {
+  .controller('MainSearchController', function($scope, AdvancedSearch) {
     $scope.mainSearchEnabled = true;
     $scope.searchExpression = '';
-    $scope.isClickToAdvancedSearch = UserService.getCurrentUser().feature.autoAdvancedSearch;
+
+    $scope.isClickToAdvancedSearch = true;
+
     $scope.openAdvancedSearch = AdvancedSearch.openAdvancedSearch;
 
     $scope.$emit('toggleHeaderSearchEnabled', false);

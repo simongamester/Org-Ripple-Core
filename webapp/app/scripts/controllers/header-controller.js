@@ -10,25 +10,27 @@ angular.module('rippleDemonstrator')
     $scope.searchFocused = false;
 
     // Get current user
-    UserService.setCurrentUserFromQueryString();
-    $scope.currentUser = UserService.getCurrentUser();
-    $scope.autoAdvancedSearch = $scope.currentUser.feature.autoAdvancedSearch;
+    UserService.findCurrentUser().then( function (user) {
+      $scope.currentUser = user.data;
 
-    // Direct different roles to different pages at login
-    switch ($scope.currentUser.role) {
-    case 'idcr':
-      $state.go('main-search');
-      break;
-    case 'phr':
-      $state.go('patients-summary', {
-        patientId: 9999999001
-      }); // id is hard coded
-      break;
-    default:
-      $state.go('patients-summary', {
-        patientId: 9999999001
-      }); // id is hard coded
-    }
+      $scope.autoAdvancedSearch = true;
+
+      // Direct different roles to different pages at login
+      switch ($scope.currentUser.role) {
+        case 'IDCR':
+          $state.go('main-search');
+          break;
+        case 'PHR':
+          $state.go('patients-summary', {
+            patientId: 9999999001
+          }); // id is hard coded
+          break;
+        default:
+          $state.go('patients-summary', {
+            patientId: 9999999001
+          }); // id is hard coded
+      }
+    });
 
     $rootScope.$on('$stateChangeSuccess', function (event, toState) {
       var params = $stateParams;
@@ -271,21 +273,21 @@ angular.module('rippleDemonstrator')
         });
       };
 
-      if ($scope.currentUser.role === 'idcr') {
-        $scope.title = UserService.getContent('idcr_title');
+      if ($scope.currentUser.role === 'IDCR') {
+        $scope.title = 'IDCR POC'
       }
-      if ($scope.currentUser.role === 'phr') {
-        $scope.title = UserService.getContent('phr_title');
+      if ($scope.currentUser.role === 'PHR') {
+        $scope.title = 'PHR POC'
       }
 
-      $scope.footer = UserService.getContent('idcr_footer');
+      $scope.footer = 'Integrated Digital Care Record';
 
       $scope.goHome = function () {
         $scope.cancelSearchMode();
-        if ($scope.currentUser.role === 'idcr') {
+        if ($scope.currentUser.role === 'IDCR') {
           $state.go('patients-charts');
         }
-        if ($scope.currentUser.role === 'phr') {
+        if ($scope.currentUser.role === 'PHR') {
           $state.go('patients-summary', {
             patientId: 10
           }); // Id is hardcoded
