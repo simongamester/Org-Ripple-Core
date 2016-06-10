@@ -13,7 +13,7 @@
  *    See the License for the specific language governing permissions and
  *    limitations under the License.
  */
-package org.rippleosi.security.service;
+package org.rippleosi.users.service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,18 +22,14 @@ import java.util.Map;
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.collections4.Transformer;
 import org.pac4j.core.profile.UserProfile;
-import org.rippleosi.security.model.UserDetails;
+import org.rippleosi.users.model.UserDetails;
 
-public class TokenResponseToUserDetailsTransformer implements Transformer<UserProfile, UserDetails> {
+public class UserProfileToUserDetailsTransformer implements Transformer<UserProfile, UserDetails> {
 
     @Override
     public UserDetails transform(final UserProfile userProfile) {
 
         final Map<String, Object> profileAttributes = userProfile.getAttributes();
-
-        final List<String> claims = new ArrayList<>();
-        claims.add("READ");
-        claims.add("WRITE");
 
         final UserDetails userDetails = new UserDetails();
         userDetails.setSub(MapUtils.getString(profileAttributes, "sub"));
@@ -43,6 +39,16 @@ public class TokenResponseToUserDetailsTransformer implements Transformer<UserPr
         userDetails.setRole(userProfile.getRoles().get(0));
         userDetails.setTenant(MapUtils.getString(profileAttributes, "tenant"));
         userDetails.setNhsNumber(MapUtils.getString(profileAttributes, "nhs_number"));
+
+        final List<String> claims = new ArrayList<>();
+        if (userDetails.getRole().equalsIgnoreCase("IDCR")) {
+            claims.add("READ");
+            claims.add("WRITE");
+        }
+        else {
+            claims.add("READ");
+        }
+
         userDetails.setClaims(claims);
 
         return userDetails;

@@ -19,7 +19,10 @@
 angular.module('rippleDemonstrator')
   .controller('ImageModalCtrl', function ($scope, $modalInstance, UserService, dicomImageId, patient, modal) {
 
-    $scope.currentUser = UserService.getCurrentUser();
+    UserService.findCurrentUser().then( function (result) {
+      $scope.currentUser = result.data;
+    });
+
     $scope.patient = patient;
     $scope.modal = modal;
     $scope.dicomId = dicomImageId;

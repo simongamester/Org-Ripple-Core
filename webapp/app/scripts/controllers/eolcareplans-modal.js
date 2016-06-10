@@ -3,7 +3,10 @@
 angular.module('rippleDemonstrator')
   .controller('EolcareplansModalCtrl', function ($scope, $filter, $modalInstance, UserService, eolcareplan, patient, modal) {
 
-    $scope.currentUser = UserService.getCurrentUser();
+    UserService.findCurrentUser().then( function (result) {
+      $scope.currentUser = result.data;
+    });
+
     $scope.eolcareplan = eolcareplan;
     $scope.patient = patient;
     $scope.modal = modal;

@@ -7,7 +7,12 @@ angular.module('rippleDemonstrator')
        return $http.get('/api/user');
     };
 
+    var logout = function () {
+      return $http.get('/api/logout');
+    };
+
     return {
-      findCurrentUser: findCurrentUser
+      findCurrentUser: findCurrentUser,
+      logout: logout
     };
   });

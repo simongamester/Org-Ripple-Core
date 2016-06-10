@@ -3,7 +3,7 @@ package org.rippleosi.security.user.rest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.rippleosi.security.model.UserDetails;
+import org.rippleosi.users.model.UserDetails;
 import org.rippleosi.users.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;

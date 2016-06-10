@@ -13,7 +13,7 @@
  *    See the License for the specific language governing permissions and
  *    limitations under the License.
  */
-package org.rippleosi.springframework.web;
+package org.rippleosi.security.interceptor.csrf;
 
 import org.pac4j.core.authorization.AuthorizationChecker;
 import org.pac4j.core.authorization.Authorizer;

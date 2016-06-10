@@ -7,8 +7,7 @@ import org.pac4j.core.context.J2EContext;
 import org.pac4j.core.context.WebContext;
 import org.pac4j.core.profile.ProfileManager;
 import org.pac4j.core.profile.UserProfile;
-import org.rippleosi.security.model.UserDetails;
-import org.rippleosi.security.service.TokenResponseToUserDetailsTransformer;
+import org.rippleosi.users.model.UserDetails;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -20,6 +19,6 @@ public class UserService {
 
         final UserProfile userProfile = manager.get(true);
 
-        return new TokenResponseToUserDetailsTransformer().transform(userProfile);
+        return new UserProfileToUserDetailsTransformer().transform(userProfile);
     }
 }

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('rippleDemonstrator')
-  .controller('headerController', function ($scope, $rootScope, $state, usSpinnerService, $stateParams, UserService, AdvancedSearch) {
+  .controller('headerController', function ($scope, $rootScope, $window, $state, usSpinnerService, $stateParams, UserService, AdvancedSearch) {
 
     $rootScope.searchExpression = '';
     $scope.searchExpression = $rootScope.searchExpression;
@@ -9,28 +9,46 @@ angular.module('rippleDemonstrator')
 
     $scope.searchFocused = false;
 
+    var redirectUrl;
+
     // Get current user
-    UserService.findCurrentUser().then( function (user) {
-      $scope.currentUser = user.data;
+    UserService.findCurrentUser().then( function (response) {
+       redirectUrl = response.headers().location;
 
-      $scope.autoAdvancedSearch = true;
+      if (redirectUrl) {
+        $window.location = redirectUrl;
+      }
+      else {
+        $rootScope.currentUser = response.data;
+        $scope.autoAdvancedSearch = true;
 
-      // Direct different roles to different pages at login
-      switch ($scope.currentUser.role) {
-        case 'IDCR':
-          $state.go('main-search');
-          break;
-        case 'PHR':
-          $state.go('patients-summary', {
-            patientId: 9999999001
-          }); // id is hard coded
-          break;
-        default:
-          $state.go('patients-summary', {
-            patientId: 9999999001
-          }); // id is hard coded
+        // Direct different roles to different pages at login
+        switch ($scope.currentUser.role) {
+          case 'IDCR':
+            $state.go('main-search');
+            break;
+          case 'PHR':
+            $state.go('patients-summary', {
+              patientId: $rootScope.currentUser.nhsNumber
+            });
+            break;
+          default:
+            $state.go('patients-summary', {
+              patientId: $rootScope.currentUser.nhsNumber
+            });
+        }
       }
     });
+
+    $scope.logout = function () {
+      UserService.logout().then(function (response) {
+        redirectUrl = response.headers().location;
+
+        if (redirectUrl) {
+          $window.location = redirectUrl;
+        }
+      });
+    };
 
     $rootScope.$on('$stateChangeSuccess', function (event, toState) {
       var params = $stateParams;
@@ -273,11 +291,11 @@ angular.module('rippleDemonstrator')
         });
       };
 
-      if ($scope.currentUser.role === 'IDCR') {
-        $scope.title = 'IDCR POC'
-      }
       if ($scope.currentUser.role === 'PHR') {
         $scope.title = 'PHR POC'
+      }
+      else {
+        $scope.title = 'IDCR POC'
       }
 
       $scope.footer = 'Integrated Digital Care Record';
@@ -289,8 +307,8 @@ angular.module('rippleDemonstrator')
         }
         if ($scope.currentUser.role === 'PHR') {
           $state.go('patients-summary', {
-            patientId: 10
-          }); // Id is hardcoded
+            patientId: $scope.currentUser.nhsNumber
+          });
         }
       };
     });

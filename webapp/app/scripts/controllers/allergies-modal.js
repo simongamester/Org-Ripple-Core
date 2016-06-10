@@ -3,7 +3,10 @@
 angular.module('rippleDemonstrator')
   .controller('AllergiesModalCtrl', function ($scope, $modalInstance, allergy, UserService, patient, modal) {
 
-    $scope.currentUser = UserService.getCurrentUser();
+    UserService.findCurrentUser().then( function (result) {
+      $scope.currentUser = result.data;
+    });
+
     $scope.allergy = allergy;
     $scope.patient = patient;
     $scope.modal = modal;

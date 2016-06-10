@@ -15,17 +15,12 @@
  */
 package org.rippleosi.security.token.rest;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import java.net.URI;
-import java.net.URISyntaxException;
-
-import org.pac4j.core.client.Clients;
 import org.pac4j.core.client.Client;
+import org.pac4j.core.client.Clients;
 import org.pac4j.core.client.IndirectClient;
 import org.pac4j.core.config.Config;
 import org.pac4j.core.context.J2EContext;
@@ -33,9 +28,10 @@ import org.pac4j.core.context.Pac4jConstants;
 import org.pac4j.core.context.WebContext;
 import org.pac4j.core.util.CommonHelper;
 import org.rippleosi.security.service.SecurityService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -46,14 +42,14 @@ public class TokenController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(TokenController.class);
 
+    @Value("${pac4j.callback.defaultUrl}")
+    protected String defaultUrl;
+
     @Autowired
     private SecurityService securityService;
 
     @Autowired
     protected Config config;
-
-    @Value("${pac4j.callback.defaultUrl:}")
-    protected String defaultUrl;
 
     @PostConstruct
     public void postConstruct() {
@@ -78,60 +74,6 @@ public class TokenController {
 
         securityService.setupSecurityContext(context);
 
-        final String redirectUrl = calculateRedirectUrl(context);
-        return generateRedirectResponseEntity(redirectUrl);
-    }
-
-    private String calculateRedirectUrl(final WebContext context) {
-        final String requestedUrl = (String) context.getSessionAttribute(Pac4jConstants.REQUESTED_URL);
-        LOGGER.debug("requestedUrl: {}", requestedUrl);
-
-        final String redirectUrl;
-
-        if (CommonHelper.isNotBlank(requestedUrl)) {
-            context.setSessionAttribute(Pac4jConstants.REQUESTED_URL, null);
-            redirectUrl = requestedUrl;
-        }
-        else {
-            redirectUrl = this.defaultUrl;
-        }
-
-        return redirectUrl;
-    }
-
-    private ResponseEntity<String> generateRedirectResponseEntity(final String redirectUrl) {
-        URI redirectPage = null;
-
-        try {
-            redirectPage = new URI(redirectUrl);
-        }
-        catch (final URISyntaxException e) {
-            LOGGER.warn("The security service has failed to redirect to the Ripple home page after authentication.");
-            LOGGER.debug("The security service has failed to redirect to the Ripple home page after authentication.", e);
-        }
-
-        final HttpHeaders httpHeaders = new HttpHeaders();
-
-        if (redirectPage != null) {
-            httpHeaders.setLocation(redirectPage);
-        }
-
-        return new ResponseEntity<>(httpHeaders, HttpStatus.SEE_OTHER);
-    }
-
-    public String getDefaultUrl() {
-        return defaultUrl;
-    }
-
-    public void setDefaultUrl(String defaultUrl) {
-        this.defaultUrl = defaultUrl;
-    }
-
-    public Config getConfig() {
-        return config;
-    }
-
-    public void setConfig(Config config) {
-        this.config = config;
+        return securityService.generateRedirectResponseEntity(defaultUrl, null, HttpStatus.SEE_OTHER);
     }
 }
