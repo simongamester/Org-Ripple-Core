@@ -20,7 +20,7 @@ angular.module('rippleDemonstrator')
       }
       else {
         $rootScope.currentUser = response.data;
-        $scope.autoAdvancedSearch = true;
+        $scope.autoAdvancedSearch = false;
 
         // Direct different roles to different pages at login
         switch ($scope.currentUser.role) {

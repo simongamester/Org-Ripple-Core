@@ -43,7 +43,7 @@ public class SecurityConfig extends WebMvcConfigurerAdapter {
                 .addPathPatterns("/**")
                 .excludePathPatterns("/token", "/user", "/logout", "/patients/9999999000/**");
 
-        registry.addInterceptor(new RequiresAuthenticationInterceptor(config, "OidcClient", "patient")) //,csrfAngular"))
+        registry.addInterceptor(new RequiresAuthenticationInterceptor(config, "OidcClient", "all")) //,csrfAngular"))
                 .addPathPatterns("/patients/9999999000/**");
 
         /* Swagger is uslesss unless logged in, so commenting out the paths that would make swagger available without authentication

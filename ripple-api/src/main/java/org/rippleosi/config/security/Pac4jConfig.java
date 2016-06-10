@@ -46,7 +46,7 @@ public class Pac4jConfig {
         final OidcClient oidcClient = new OidcClient();
         oidcClient.setClientID(clientId);
         oidcClient.setSecret("secret");
-        oidcClient.setDiscoveryURI("https://ripple-identity-uat.answerappcloud.com/identity/.well-known/openid-configuration");
+        oidcClient.setDiscoveryURI(authenticationServerUrl + "/identity/.well-known/openid-configuration");
         oidcClient.addCustomParam("client_id", clientId);
         oidcClient.addCustomParam("scope", "openid profile email api");
         oidcClient.addCustomParam("response_type", "id_token token");
@@ -56,7 +56,7 @@ public class Pac4jConfig {
         
         final Clients clients = new Clients(redirectUri, oidcClient);
 
-        final CsrfAuthorizer angularCsrfAuthorizer = new CsrfAuthorizer("X-XRSF-TOKEN","X-XSRF-TOKEN");
+        final CsrfAuthorizer angularCsrfAuthorizer = new CsrfAuthorizer("X-XSRF-TOKEN","X-XSRF-TOKEN");
         angularCsrfAuthorizer.setOnlyCheckPostRequest(false);
         
         final Config config = new Config(clients);

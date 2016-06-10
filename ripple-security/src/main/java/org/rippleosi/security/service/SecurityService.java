@@ -15,6 +15,7 @@ import org.pac4j.core.profile.ProfileManager;
 import org.pac4j.core.profile.UserProfile;
 import org.pac4j.core.util.CommonHelper;
 import org.pac4j.oidc.profile.OidcProfile;
+import org.rippleosi.users.model.UserPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
@@ -55,9 +56,13 @@ public class SecurityService {
             profile.addAttributes(userInfo.toJWTClaimsSet().getClaims());
 
             final JWTClaimsSet accessClaimsSet = JWTClaimsSet.parse(accessClaims);
-            profile.addRole(accessClaimsSet.getStringClaim("role"));
+            final String role = accessClaimsSet.getStringClaim("role");
+            profile.addRole(role);
             profile.addAttribute("tenant", accessClaimsSet.getClaim("tenant"));
             profile.addAttribute("nhs_number", accessClaimsSet.getClaim("nhs_number"));
+
+            final UserPermissions userPermissions = new UserPermissions(role);
+            profile.addPermissions(userPermissions.loadUserPermissions());
 
             LOGGER.debug("profile: {}", profile);
             saveUserProfile(context, profile);

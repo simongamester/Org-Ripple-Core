@@ -15,7 +15,6 @@
  */
 package org.rippleosi.users.service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -23,6 +22,7 @@ import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.collections4.Transformer;
 import org.pac4j.core.profile.UserProfile;
 import org.rippleosi.users.model.UserDetails;
+import org.rippleosi.users.model.UserPermissions;
 
 public class UserProfileToUserDetailsTransformer implements Transformer<UserProfile, UserDetails> {
 
@@ -33,6 +33,7 @@ public class UserProfileToUserDetailsTransformer implements Transformer<UserProf
 
         final UserDetails userDetails = new UserDetails();
         userDetails.setSub(MapUtils.getString(profileAttributes, "sub"));
+        userDetails.setUsername(MapUtils.getString(profileAttributes, "preferred_username"));
         userDetails.setGivenName(MapUtils.getString(profileAttributes, "given_name"));
         userDetails.setFamilyName(MapUtils.getString(profileAttributes, "family_name"));
         userDetails.setEmail(MapUtils.getString(profileAttributes, "email"));
@@ -40,16 +41,10 @@ public class UserProfileToUserDetailsTransformer implements Transformer<UserProf
         userDetails.setTenant(MapUtils.getString(profileAttributes, "tenant"));
         userDetails.setNhsNumber(MapUtils.getString(profileAttributes, "nhs_number"));
 
-        final List<String> claims = new ArrayList<>();
-        if (userDetails.getRole().equalsIgnoreCase("IDCR")) {
-            claims.add("READ");
-            claims.add("WRITE");
-        }
-        else {
-            claims.add("READ");
-        }
+        final UserPermissions userPermissions = new UserPermissions(userDetails.getRole());
+        final List<String> permissions = userPermissions.loadUserPermissions();
 
-        userDetails.setClaims(claims);
+        userDetails.setPermissions(permissions);
 
         return userDetails;
     }

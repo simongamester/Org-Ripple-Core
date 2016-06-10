@@ -20,13 +20,14 @@ import java.util.List;
 public class UserDetails {
 
     private String sub;
+    private String username;
     private String givenName;
     private String familyName;
     private String email;
     private String role;
     private String tenant;
     private String nhsNumber;
-    private List<String> claims;
+    private List<String> permissions;
 
     public String getSub() {
         return sub;
@@ -34,6 +35,14 @@ public class UserDetails {
 
     public void setSub(String sub) {
         this.sub = sub;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getGivenName() {
@@ -84,11 +93,11 @@ public class UserDetails {
         this.nhsNumber = nhsNumber;
     }
 
-    public List<String> getClaims() {
-        return claims;
+    public List<String> getPermissions() {
+        return permissions;
     }
 
-    public void setClaims(List<String> claims) {
-        this.claims = claims;
+    public void setPermissions(List<String> permissions) {
+        this.permissions = permissions;
     }
 }
