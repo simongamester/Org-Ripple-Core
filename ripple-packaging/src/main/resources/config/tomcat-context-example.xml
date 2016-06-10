@@ -40,4 +40,10 @@
 
     <Environment name="orthancServer.address"       type="java.lang.String"  override="false" value="http://ripple-orthanc.answerappcloud.com"/>
 
+    <Environment name="authentication.client.id"     type="java.lang.String" override="false" value="Ripple-Development"/>
+    <Environment name="authentication.server.url"    type="java.lang.String" override="false" value="https://ripple-identity-uat.answerappcloud.com"/>
+    <Environment name="authentication.redirect.uri"  type="java.lang.String" override="false" value="http://localhost:19191/api/token"/>
+    
+    <Environment name="ripple.homepage.url"     type="java.lang.String" override="false" value="http://localhost:19191/"/>
+
 </Context>
