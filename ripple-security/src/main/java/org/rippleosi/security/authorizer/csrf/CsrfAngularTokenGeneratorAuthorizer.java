@@ -39,11 +39,14 @@ public class CsrfAngularTokenGeneratorAuthorizer implements Authorizer<UserProfi
     @Override
     public boolean isAuthorized(WebContext context, UserProfile profile) {
         CommonHelper.assertNotNull("csrfTokenGenerator", csrfTokenGenerator);
+
         final String token = csrfTokenGenerator.get(context);
         context.setRequestAttribute(ANGULAR_XSRF_TOKEN, token);
+
         final Cookie cookie = new Cookie(ANGULAR_XSRF_TOKEN, token);
         cookie.setDomain(context.getServerName());
         context.addResponseCookie(cookie);
+
         return true;
     }
     

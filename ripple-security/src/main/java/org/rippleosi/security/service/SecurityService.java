@@ -86,26 +86,24 @@ public class SecurityService {
         CommonHelper.assertNotNull("defaultUrl", defaultUrl);
         CommonHelper.assertNotBlank("defaultUrl", defaultUrl);
 
-        final String redirectUrl = getExpandUrl(defaultUrl, params);
+        final String redirectUrl = getExpandedUrl(defaultUrl, params);
+        final HttpHeaders httpHeaders = new HttpHeaders();
 
-        URI redirectPage = null;
+        URI redirectPage;
+
         try {
             redirectPage = new URI(redirectUrl);
+            httpHeaders.setLocation(redirectPage);
         }
         catch (final URISyntaxException e) {
             LOGGER.warn("The security service has failed to redirect to the requested URL.");
             LOGGER.debug("The security service has failed to redirect to the requested URL.", e);
         }
 
-        final HttpHeaders httpHeaders = new HttpHeaders();
-        if (redirectPage != null) {
-            httpHeaders.setLocation(redirectPage);
-        }
-
         return new ResponseEntity<>(httpHeaders, httpStatus);
     }
 
-    private String getExpandUrl(final String defaultUrl, final Map<String, String> params) {
+    private String getExpandedUrl(final String defaultUrl, final Map<String, String> params) {
         if (params == null) {
             return defaultUrl;
         }

@@ -62,6 +62,7 @@
         <hibernate.version>5.0.1.Final</hibernate.version>
         <jackson.version>2.4.4</jackson.version>
         <log4j.version>1.2.17</log4j.version>
+        <mockito.version>1.10.19</mockito.version>
         <mysql.version>5.1.36</mysql.version>
         <pac4j.version>1.8.8</pac4j.version>
         <querydsl.version>3.6.8</querydsl.version>
@@ -81,7 +82,6 @@
         <jacoco.plugin.version>0.7.6.201602180812</jacoco.plugin.version>
         <jar.plugin.version>2.6</jar.plugin.version>
         <junit.version>4.12</junit.version>
-        <mockito.plugin.version>1.10.8</mockito.plugin.version>
         <release.plugin.version>2.5.3</release.plugin.version>
         <resources.plugin.version>2.7</resources.plugin.version>
         <servlet.api.version>3.1.0</servlet.api.version>
@@ -389,7 +389,7 @@
             <dependency>
                 <groupId>org.mockito</groupId>
                 <artifactId>mockito-all</artifactId>
-                <version>${mockito.plugin.version}</version>
+                <version>${mockito.version}</version>
             </dependency>
 
             <dependency>
