@@ -37,7 +37,7 @@ public class BrokerConfig extends CamelConfiguration {
     public RouteBuilder route() {
         return new SourceRoute();
     }
-    
+
     @Bean
     public BrokerService brokerService() throws Exception {
         BrokerService brokerService = new BrokerService();
@@ -54,11 +54,10 @@ public class BrokerConfig extends CamelConfiguration {
     }
 
     @Bean(name = "activemq")
-	public ActiveMQConnectionFactory activeMQConnectionFactory() throws Exception {
-		ActiveMQConnectionFactory activeMQConnectionFactory = new ActiveMQConnectionFactory();
-		activeMQConnectionFactory.setBrokerURL("vm://embedded?create=false");
+    public ActiveMQConnectionFactory activeMQConnectionFactory() {
+        ActiveMQConnectionFactory activeMQConnectionFactory = new ActiveMQConnectionFactory("vm://embedded?create=false");
         activeMQConnectionFactory.setTrustAllPackages(true);
 
         return activeMQConnectionFactory;
-	}
+    }
 }
