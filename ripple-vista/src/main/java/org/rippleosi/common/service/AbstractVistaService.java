@@ -58,7 +58,7 @@ public abstract class AbstractVistaService implements Repository {
         try{
             response = requestProxy.getWithoutSession(uri, VistaRestResponse.class);
         }catch(Exception e){
-            LOGGER.warn("Vista server returned a 500 error response" + e.getMessage());
+            LOGGER.warn("Vista server returned a 500 error response" + e.getMessage(), e);
         }
 
         final ObjectMapper objectMapper = new ObjectMapper();

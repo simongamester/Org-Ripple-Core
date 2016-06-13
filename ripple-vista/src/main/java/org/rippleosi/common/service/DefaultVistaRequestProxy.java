@@ -24,6 +24,8 @@ import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
@@ -41,6 +43,8 @@ import org.springframework.web.client.RestTemplate;
 @Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE, proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class DefaultVistaRequestProxy implements VistaRequestProxy {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(AbstractVistaService.class);
+    
     @Override
     public <T> ResponseEntity<T> getWithoutSession(String uri, Class<T> cls) {
         HttpEntity<String> request = buildRequest(null);
@@ -93,7 +97,7 @@ public class DefaultVistaRequestProxy implements VistaRequestProxy {
                 SSLContext.setDefault(ctx);
                 return ctx;
             } catch (Exception ex) {
-                ex.printStackTrace();
+                LOGGER.debug("Problem setting up self signed certificates", ex);
             }
             return null;
         }

@@ -35,6 +35,8 @@ import org.rippleosi.common.model.EtherCISSessionResponse;
 import org.rippleosi.common.repo.Repository;
 import org.rippleosi.common.types.RepoSourceType;
 import org.rippleosi.common.types.RepoSourceTypes;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -42,6 +44,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.util.UriComponentsBuilder;
 
 public class AbstractEtherCISService implements Repository {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(AbstractEtherCISService.class);
 
     @Value("${repository.config.etherCIS:900}")
     private int priority;
@@ -227,6 +231,7 @@ public class AbstractEtherCISService implements Repository {
                              .replace("+", "%20");
         }
         catch (UnsupportedEncodingException e) {
+            LOGGER.debug("Encoding not supported",e);
             return param;
         }
     }

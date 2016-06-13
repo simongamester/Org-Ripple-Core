@@ -46,11 +46,15 @@ import org.rippleosi.patient.summary.model.TransferHeadline;
 import org.rippleosi.patient.transfers.model.TransferOfCareSummary;
 import org.rippleosi.patient.transfers.search.TransferOfCareSearch;
 import org.rippleosi.patient.transfers.search.TransferOfCareSearchFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class PatientEntityToDetailsTransformer implements Transformer<PatientEntity, PatientDetails> {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(PatientEntityToDetailsTransformer.class);
 
     @Autowired
     private AllergySearchFactory allergySearchFactory;
@@ -111,7 +115,8 @@ public class PatientEntityToDetailsTransformer implements Transformer<PatientEnt
             List<AllergyHeadline> allergies = allergySearch.findAllergyHeadlines(patientId);
 
             return CollectionUtils.collect(allergies, new AllergyTransformer(), new ArrayList<>());
-        } catch (DataNotFoundException ignore) {
+        } catch (DataNotFoundException dex) {
+            LOGGER.warn("No Data Dound",dex);
             return Collections.emptyList();
         }
     }
@@ -123,7 +128,8 @@ public class PatientEntityToDetailsTransformer implements Transformer<PatientEnt
             List<ContactHeadline> contacts = contactSearch.findContactHeadlines(patientId);
 
             return CollectionUtils.collect(contacts, new ContactTransformer(), new ArrayList<>());
-        } catch (DataNotFoundException ignore) {
+        } catch (DataNotFoundException dex) {
+            LOGGER.warn("No Data Dound",dex);
             return Collections.emptyList();
         }
     }
@@ -135,7 +141,8 @@ public class PatientEntityToDetailsTransformer implements Transformer<PatientEnt
             List<MedicationHeadline> medications = medicationSearch.findMedicationHeadlines(patientId);
 
             return CollectionUtils.collect(medications, new MedicationTransformer(), new ArrayList<>());
-        } catch (DataNotFoundException ignore) {
+        } catch (DataNotFoundException dex) {
+            LOGGER.warn("No Data Dound",dex);
             return Collections.emptyList();
         }
     }
@@ -149,7 +156,8 @@ public class PatientEntityToDetailsTransformer implements Transformer<PatientEnt
             problems.addAll(vistaSearch.findProblemHeadlines("17"));
 
             return CollectionUtils.collect(problems, new ProblemTransformer(), new ArrayList<>());
-        } catch (DataNotFoundException ignore) {
+        } catch (DataNotFoundException dex) {
+            LOGGER.warn("No Data Dound",dex);
             return Collections.emptyList();
         }
     }
@@ -161,7 +169,8 @@ public class PatientEntityToDetailsTransformer implements Transformer<PatientEnt
             List<TransferOfCareSummary> transfers = transferOfCareSearch.findAllTransfers(patientId);
 
             return CollectionUtils.collect(transfers, new TransferOfCareTransformer(), new ArrayList<>());
-        } catch (DataNotFoundException ignore) {
+        } catch (DataNotFoundException dex) {
+            LOGGER.warn("No Data Dound",dex);
             return Collections.emptyList();
         }
     }
