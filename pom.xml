@@ -21,11 +21,12 @@
 
     <groupId>org.rippleosi</groupId>
     <artifactId>ripple</artifactId>
-    <version>0.6.0.0-SNAPSHOT</version>
+    <version>0.7.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>Ripple OSI</name>
-    <description>Provides the core functional libararies to build Ripple based health systems</description>
+    <description>Provides the core functional libraries to build Ripple based health systems</description>
+
     <scm>
         <connection>scm:git:https://github.com/RippleOSI/Org-Ripple-core.git</connection>
         <tag>HEAD</tag>
@@ -50,31 +51,43 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
         <activemq.version>5.12.2</activemq.version>
-        <mysql.version>5.1.36</mysql.version>
         <camel.version>2.15.3</camel.version>
+        <commons.lang.version>3.3.2</commons.lang.version>
+        <commons.beanutils.version>1.9.2</commons.beanutils.version>
+        <commons.codec.version>1.9</commons.codec.version>
+        <commons.collections.version>4.0</commons.collections.version>
         <cxf.version>3.0.2</cxf.version>
-        <fhir.version>1.2</fhir.version>
+        <fhir.dst2u.version>1.0.1.7108</fhir.dst2u.version>
+        <hibernate.version>5.0.1.Final</hibernate.version>
         <jackson.version>2.4.4</jackson.version>
         <log4j.version>1.2.17</log4j.version>
+        <mockito.version>1.10.19</mockito.version>
+        <mysql.version>5.1.36</mysql.version>
+        <pac4j.version>1.8.8</pac4j.version>
+        <querydsl.version>3.6.8</querydsl.version>
         <slf4j.version>1.7.10</slf4j.version>
         <spring.version>4.2.1.RELEASE</spring.version>
+        <spring.data.jpa.version>1.8.2.RELEASE</spring.data.jpa.version>
+        <spring-webmvc-pac4j.version>1.0.2</spring-webmvc-pac4j.version>
+        <spring.security.version>4.1.0.RELEASE</spring.security.version>
+        <spring.security.jwt.version>1.0.4.RELEASE</spring.security.jwt.version>
         <swagger.version>2.2.2</swagger.version>
-        <querydsl.version>3.6.8</querydsl.version>
-        
+        <tomcat.version>8.0.26</tomcat.version>
+        <xbean.spring.version>3.18</xbean.spring.version>
+
+        <clean.plugin.version>3.0.0</clean.plugin.version>
+        <compiler.plugin.version>3.5.1</compiler.plugin.version>
+        <gitscm.plugin.version>1.9.4</gitscm.plugin.version>
+        <jacoco.plugin.version>0.7.6.201602180812</jacoco.plugin.version>
+        <jar.plugin.version>2.6</jar.plugin.version>
         <junit.version>4.12</junit.version>
+        <release.plugin.version>2.5.3</release.plugin.version>
+        <resources.plugin.version>2.7</resources.plugin.version>
         <servlet.api.version>3.1.0</servlet.api.version>
         <surefire.plugin.version>2.19.1</surefire.plugin.version>
-        <mockito.plugin.version>1.10.8</mockito.plugin.version>
-        <jacoco.plugin.version>0.7.6.201602180812</jacoco.plugin.version>
-        <compiler.plugin.version>3.5.1</compiler.plugin.version>
-        <jar.plugin.version>2.6</jar.plugin.version>
-        <war.plugin.version>${jar.plugin.version}</war.plugin.version>
         <versions.plugin.version>2.2</versions.plugin.version>
-        <clean.plugin.version>3.0.0</clean.plugin.version>
-        <release.plugin.version>2.5.3</release.plugin.version>
-        <gitscm.plugin.version>1.9.4</gitscm.plugin.version>
-        <resources.plugin.version>2.7</resources.plugin.version>
-        
+        <war.plugin.version>${jar.plugin.version}</war.plugin.version>
+
         <!-- ************************ -->
         <!-- Sonar/Reporting settings -->
         <!-- ************************ -->
@@ -103,6 +116,7 @@
         <module>ripple-packaging</module>
         <module>ripple-terminology-example</module>
         <module>ripple-vista</module>
+        <module>ripple-security</module>
     </modules>
 
     <dependencyManagement>
@@ -112,7 +126,7 @@
                 <artifactId>ripple-api</artifactId>
                 <version>${project.version}</version>
             </dependency>
-		
+
             <dependency>
                 <groupId>org.rippleosi</groupId>
                 <artifactId>ripple-audit-example</artifactId>
@@ -146,6 +160,12 @@
             <dependency>
                 <groupId>org.rippleosi</groupId>
                 <artifactId>ripple-openehr</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.rippleosi</groupId>
+                <artifactId>ripple-security</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
@@ -200,13 +220,13 @@
             <dependency>
                 <groupId>commons-beanutils</groupId>
                 <artifactId>commons-beanutils</artifactId>
-                <version>1.9.2</version>
+                <version>${commons.beanutils.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>commons-codec</groupId>
                 <artifactId>commons-codec</artifactId>
-                <version>1.9</version>
+                <version>${commons.codec.version}</version>
             </dependency>
 
             <dependency>
@@ -242,7 +262,7 @@
             <dependency>
                 <groupId>me.fhir</groupId>
                 <artifactId>fhir-dstu2</artifactId>
-                <version>1.0.1.7108</version>
+                <version>${fhir.dst2u.version}</version>
             </dependency>
 
             <dependency>
@@ -326,13 +346,13 @@
             <dependency>
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-collections4</artifactId>
-                <version>4.0</version>
+                <version>${commons.collections.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-lang3</artifactId>
-                <version>3.3.2</version>
+                <version>${commons.lang.version}</version>
             </dependency>
 
             <dependency>
@@ -344,13 +364,13 @@
             <dependency>
                 <groupId>org.apache.tomcat</groupId>
                 <artifactId>tomcat-dbcp</artifactId>
-                <version>8.0.26</version>
+                <version>${tomcat.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>org.apache.xbean</groupId>
                 <artifactId>xbean-spring</artifactId>
-                <version>3.18</version>
+                <version>${xbean.spring.version}</version>
                 <exclusions>
                     <exclusion>
                         <groupId>commons-logging</groupId>
@@ -362,13 +382,13 @@
             <dependency>
                 <groupId>org.hibernate</groupId>
                 <artifactId>hibernate-entitymanager</artifactId>
-                <version>5.0.1.Final</version>
+                <version>${hibernate.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>org.mockito</groupId>
                 <artifactId>mockito-all</artifactId>
-                <version>${mockito.plugin.version}</version>
+                <version>${mockito.version}</version>
             </dependency>
 
             <dependency>
@@ -377,6 +397,18 @@
                 <version>${slf4j.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>org.pac4j</groupId>
+                <artifactId>pac4j-oidc</artifactId>
+                <version>${pac4j.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.pac4j</groupId>
+                <artifactId>pac4j-openid</artifactId>
+                <version>${pac4j.version}</version>
+            </dependency>
+            
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-api</artifactId>
@@ -422,7 +454,7 @@
             <dependency>
                 <groupId>org.springframework.data</groupId>
                 <artifactId>spring-data-jpa</artifactId>
-                <version>1.8.2.RELEASE</version>
+                <version>${spring.data.jpa.version}</version>
             </dependency>
 
             <dependency>
@@ -466,6 +498,42 @@
                 <artifactId>spring-webmvc</artifactId>
                 <version>${spring.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-config</artifactId>
+                <version>${spring.security.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-core</artifactId>
+                <version>${spring.security.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-jwt</artifactId>
+                <version>${spring.security.jwt.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-openid</artifactId>
+                <version>${spring.security.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-web</artifactId>
+                <version>${spring.security.version}</version>
+            </dependency>
+            
+            <dependency>
+                <groupId>org.pac4j</groupId>
+                <artifactId>spring-webmvc-pac4j</artifactId>
+                <version>${spring-webmvc-pac4j.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -481,7 +549,7 @@
                         <target>${java.version}</target>
                     </configuration>
                 </plugin>
-            
+
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-war-plugin</artifactId>
@@ -490,7 +558,7 @@
                         <failOnMissingWebXml>false</failOnMissingWebXml>
                     </configuration>
                 </plugin>
-                
+
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-jar-plugin</artifactId>
@@ -502,7 +570,7 @@
                     <artifactId>maven-clean-plugin</artifactId>
                     <version>${clean.plugin.version}</version>
                 </plugin>
-                
+
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-resources-plugin</artifactId>
@@ -533,13 +601,13 @@
                         <testFailureIgnore>false</testFailureIgnore>
                     </configuration>
                 </plugin>
-                
+
                 <plugin>
                     <groupId>org.jacoco</groupId>
                     <artifactId>jacoco-maven-plugin</artifactId>
                     <version>${jacoco.plugin.version}</version>
                 </plugin>
-                
+
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-release-plugin</artifactId>
@@ -557,7 +625,7 @@
                         <localCheckout>true</localCheckout>
                     </configuration>
                 </plugin>
-                
+
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>versions-maven-plugin</artifactId>
@@ -571,12 +639,12 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
             </plugin>
-            
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-clean-plugin</artifactId>
             </plugin>
-            
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-release-plugin</artifactId>
@@ -591,7 +659,7 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
             </plugin>
-            
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>

@@ -1,39 +1,18 @@
 'use strict';
 
 angular.module('rippleDemonstrator')
-  .factory('UserService', function ($location, $http, claims, content) {
+  .factory('UserService', function ($http) {
 
-    var currentUser = {
-      role: claims.role,
-      email: claims.email,
-      tenant: {
-        id: claims.tenant_id,
-        name: claims.tenant_name
-      },
-      firstName: claims.given_name,
-      surname: claims.family_name,
-      isAuthenticated: true,
-      feature: claims.scope
+    var findCurrentUser = function () {
+       return $http.get('/api/user');
     };
 
-    var setCurrentUserFromQueryString = function () {
-      var claims = $location.search();
-      currentUser.email = claims.email || currentUser.email;
-      currentUser.role = claims.role || currentUser.role;
-    };
-
-    var getCurrentUser = function () {
-       return currentUser;
-    };
-
-    var getContent = function (key) {
-      return content[key];
+    var logout = function () {
+      return $http.get('/api/logout');
     };
 
     return {
-      setCurrentUserFromQueryString: setCurrentUserFromQueryString,
-      getCurrentUser: getCurrentUser,
-      getContent: getContent
+      findCurrentUser: findCurrentUser,
+      logout: logout
     };
-
   });

@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Context path="" reloadable="true">
 
+    <Environment name="authentication.client.id"            type="java.lang.String" override="false" value="Ripple-Development"/>
+    <Environment name="authentication.server.url"           type="java.lang.String" override="false" value="https://ripple-identity-uat.answerappcloud.com"/>
+    <Environment name="authentication.redirect.uri"         type="java.lang.String" override="false" value="http://localhost:19191/api/token"/>
+
+    <Environment name="pac4j.callback.defaultUrl"           type="java.lang.String" override="false" value="http://localhost:9000/"/>
+    <Environment name="pac4j.applicationLogout.logoutUrl"   type="java.lang.String" override="false" value="https://ripple-identity-uat.answerappcloud.com/identity/connect/endsession"/>
+
     <Environment name="c4hOpenEHR.address"          type="java.lang.String" override="false" value="https://ehrscape.code-4-health.org/rest/v1/"/>
     <Environment name="c4hOpenEHR.user"             type="java.lang.String" override="false" value="c4h_ripple_osi"/>
     <Environment name="c4hOpenEHR.password"         type="java.lang.String" override="false" value="InDeCoMP"/>

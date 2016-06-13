@@ -11,4 +11,43 @@
                 <activatedProfile>webapp:run</activatedProfile>
             </activatedProfiles>
         </action>
+        <action>
+            <actionName>CUSTOM-Debug Ripple Web App</actionName>
+            <displayName>Debug Ripple Web App</displayName>
+            <goals>
+                <goal>clean</goal>
+                <goal>package</goal>
+            </goals>
+            <properties>
+                <jpda.listen>maven</jpda.listen>
+            </properties>
+            <activatedProfiles>
+                <activatedProfile>webapp:run</activatedProfile>
+            </activatedProfiles>
+        </action>
+        <action>
+            <actionName>run</actionName>
+            <goals>
+                <goal>clean</goal>
+                <goal>package</goal>
+            </goals>
+            <activatedProfiles>
+                <activatedProfile>webapp:run</activatedProfile>
+            </activatedProfiles>
+        </action>
+        <action>
+            <actionName>debug</actionName>
+            <goals>
+                <goal>clean</goal>
+                <goal>package</goal>
+            </goals>
+            <properties>
+                <jpda.listen>maven</jpda.listen>
+            </properties>
+            <activatedProfiles>
+                <activatedProfile>webapp:run</activatedProfile>
+            </activatedProfiles>
+        </action>
+        
+        
     </actions>

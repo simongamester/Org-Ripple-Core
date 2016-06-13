@@ -13,13 +13,13 @@
  *    See the License for the specific language governing permissions and
  *    limitations under the License.
  */
-package org.rippleosi.config;
+package org.rippleosi.config.api;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 /**
  */
-public class WebInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
+public class WebInitialiser extends AbstractAnnotationConfigDispatcherServletInitializer {
 
     private static final Class<?>[] SERVLET_CONFIG_CLASSES = new Class<?>[0];
 

@@ -27,7 +27,7 @@ import org.slf4j.LoggerFactory;
  */
 public class TestResultTransformer implements Transformer<Map<String, Object>, LabResultDetails.TestResult> {
 
-    private static final Logger logger = LoggerFactory.getLogger(TestResultTransformer.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(TestResultTransformer.class);
 
     private String getValueAsString(Map<String, Object> input, String path) {
         try {
@@ -36,7 +36,7 @@ public class TestResultTransformer implements Transformer<Map<String, Object>, L
                 return value.toString();
             }
         } catch (Exception ex) {
-            logger.debug("{}: {}", ex.getClass().getName(), ex.getMessage());
+            LOGGER.debug("{}: {}", ex.getClass().getName(), ex.getMessage(), ex);
         }
 
         return null;

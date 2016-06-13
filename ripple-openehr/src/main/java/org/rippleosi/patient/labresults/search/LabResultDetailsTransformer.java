@@ -34,7 +34,7 @@ import org.slf4j.LoggerFactory;
  */
 public class LabResultDetailsTransformer implements Transformer<Map<String, Object>, LabResultDetails> {
 
-    private static final Logger logger = LoggerFactory.getLogger(LabResultDetailsTransformer.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(LabResultDetailsTransformer.class);
 
     @Override
     public LabResultDetails transform(Map<String, Object> input) {
@@ -70,7 +70,7 @@ public class LabResultDetailsTransformer implements Transformer<Map<String, Obje
         try {
             return (List<Map<String, Object>>)PropertyUtils.getNestedProperty(input, "test_panel.items");
         } catch (Exception ex) {
-            logger.debug("{}: {}", ex.getClass().getName(), ex.getMessage());
+            LOGGER.debug("{}: {}", ex.getClass().getName(), ex.getMessage(), ex);
             return Collections.emptyList();
         }
     }

@@ -18,10 +18,14 @@ package org.rippleosi.common.service;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Map;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import org.springframework.web.util.DefaultUriTemplateHandler;
 
 public class DefaultEtherCISURITemplateHandler extends DefaultUriTemplateHandler {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(AbstractEtherCISService.class);
 
     @Override
     public URI expand(String uriTemplate, Map<String, ?> uriVariables) {
@@ -38,6 +42,7 @@ public class DefaultEtherCISURITemplateHandler extends DefaultUriTemplateHandler
             return new URI(uriTemplate);
         }
         catch (URISyntaxException e) {
+            LOGGER.debug("Malformed URI", e);
             return null;
         }
     }
