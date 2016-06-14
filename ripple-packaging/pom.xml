@@ -30,7 +30,49 @@
     <dependencies>
         <dependency>
             <groupId>org.rippleosi</groupId>
+            <artifactId>ripple-audit-example</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+		
+        <dependency>
+            <groupId>org.rippleosi</groupId>
             <artifactId>ripple-api</artifactId>
+        </dependency>
+		
+        <dependency>
+            <groupId>org.rippleosi</groupId>
+            <artifactId>ripple-database</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.rippleosi</groupId>
+            <artifactId>ripple-dicom</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.rippleosi</groupId>
+            <artifactId>ripple-ethercis</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.rippleosi</groupId>
+            <artifactId>ripple-openehr</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.rippleosi</groupId>
+            <artifactId>ripple-terminology-example</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.rippleosi</groupId>
+            <artifactId>ripple-vista</artifactId>
+            <scope>runtime</scope>
         </dependency>
 		
         <dependency>
@@ -132,10 +174,6 @@
             <artifactId>spring-webmvc</artifactId>
         </dependency>
     </dependencies>
-
-    <build>
-        <finalName>ripple-ui</finalName>
-    </build>
 
     <profiles>
         <profile>
