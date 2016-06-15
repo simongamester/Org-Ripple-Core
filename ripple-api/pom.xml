@@ -11,54 +11,12 @@
     <dependencies>
         <dependency>
             <groupId>org.rippleosi</groupId>
-            <artifactId>ripple-audit-example</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.rippleosi</groupId>
             <artifactId>ripple-core</artifactId>
         </dependency>
 
         <dependency>
             <groupId>org.rippleosi</groupId>
-            <artifactId>ripple-database</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.rippleosi</groupId>
-            <artifactId>ripple-dicom</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.rippleosi</groupId>
-            <artifactId>ripple-ethercis</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.rippleosi</groupId>
-            <artifactId>ripple-openehr</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.rippleosi</groupId>
             <artifactId>ripple-security</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.rippleosi</groupId>
-            <artifactId>ripple-terminology-example</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.rippleosi</groupId>
-            <artifactId>ripple-vista</artifactId>
-            <scope>runtime</scope>
         </dependency>
         
         <dependency>
@@ -191,4 +149,13 @@
         </dependency>
 
     </dependencies>
+	
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+    </build>
 </project>

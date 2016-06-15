@@ -15,8 +15,10 @@
  */
 package org.rippleosi.config.swagger;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -30,8 +32,12 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @Configuration
 @EnableWebMvc
 @EnableSwagger2
+@PropertySource("classpath:app.properties")
 public class SwaggerConfig {
 
+    @Value("${app.version}")
+    private String appVersion;
+    
     @Bean
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
@@ -46,7 +52,7 @@ public class SwaggerConfig {
     private ApiInfo apiInfo() {
         return new ApiInfo("Ripple OSI Demonstrator REST API",
                            "The Ripple OSI Demonstrator API.",
-                           "0.6.0.0-SNAPSHOT",
+                           appVersion,
                            "",
                            "",
                            "Apache License v2",
