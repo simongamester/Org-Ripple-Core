@@ -21,7 +21,7 @@
 
     <groupId>org.rippleosi</groupId>
     <artifactId>ripple</artifactId>
-    <version>0.7.0.0-SNAPSHOT</version>
+    <version>0.6.1.0</version>
     <packaging>pom</packaging>
 
     <name>Ripple OSI</name>
@@ -29,7 +29,7 @@
 
     <scm>
         <connection>scm:git:https://github.com/RippleOSI/Org-Ripple-core.git</connection>
-        <tag>HEAD</tag>
+        <tag>v0.6.1.0</tag>
     </scm>
 
     <distributionManagement>
