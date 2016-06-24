@@ -1,7 +1,9 @@
 package org.rippleosi.common.routes;
 
 import org.apache.camel.builder.RouteBuilder;
+import org.springframework.stereotype.Component;
 
+@Component
 public class SourceRoute extends RouteBuilder {
 
     @Override
