@@ -18,25 +18,20 @@ package org.rippleosi.config.broker;
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.activemq.broker.BrokerService;
 import org.apache.camel.CamelContext;
-import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.spring.javaconfig.CamelConfiguration;
-import org.rippleosi.common.routes.SourceRoute;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 /**
  */
 @Configuration
+@ComponentScan("com.rippleosi.common.routes")
 public class BrokerConfig extends CamelConfiguration {
 
     @Value("${queue.broker.directory:activemq-data}")
     private String dataDirectory;
-
-    @Bean
-    public RouteBuilder route() {
-        return new SourceRoute();
-    }
 
     @Bean
     public BrokerService brokerService() throws Exception {
