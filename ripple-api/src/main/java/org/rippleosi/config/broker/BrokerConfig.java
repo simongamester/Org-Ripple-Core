@@ -42,7 +42,7 @@ public class BrokerConfig extends CamelConfiguration {
         return brokerService;
     }
 
-    @Bean
+    @Override
     public CamelContext camelContext() throws Exception {
         brokerService().start();
         return super.camelContext();
