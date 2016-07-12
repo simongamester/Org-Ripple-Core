@@ -1,5 +1,7 @@
-Ripple IDCR Demonstrator
+Ripple Core
 =========
+
+![Build Status](http://bamboo.rippleosi.org/plugins/servlet/wittified/build-status/RPLE-IDCRC)
 
 ### Requirements
 
