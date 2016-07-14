@@ -11,6 +11,7 @@ angular.module('rippleDemonstrator')
 
     $scope.noResults = '';
     $scope.tab = 'patientInfo';
+    $scope.tabName = 'Patient Info';
     $scope.patients = [];
     $rootScope.searchMode = true;
 
@@ -168,14 +169,17 @@ angular.module('rippleDemonstrator')
 
     $scope.viewPatients = function () {
       $scope.tab = 'patientInfo';
+      $scope.tabName = 'Patient Info';
     };
 
     $scope.viewDateTime = function () {
       $scope.tab = 'dateTime';
+      $scope.tabName = 'Date / Time';
     };
 
     $scope.viewCounts = function () {
       $scope.tab = 'counts';
+      $scope.tabName = 'Counts';
     };
 
 

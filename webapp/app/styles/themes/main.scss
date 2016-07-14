@@ -202,7 +202,6 @@ a[ui-sref] {
 }
 
 .btn-info,
-.btn-info:hover,
 .btn-info:focus,
 .btn-info:active,
 .btn-info.active {
@@ -210,6 +209,11 @@ a[ui-sref] {
   border-color: $button-info-background;
   color: #fff;
 }
+  
+  .btn-info:hover,
+  .open > .dropdown-toggle.btn-info {
+    background-color: $button-info-background-hover;
+  }
 
 .btn-success,
 .btn-success:hover,
