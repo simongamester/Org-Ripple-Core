@@ -1,11 +1,12 @@
-<div class="main-search" ng-class="{'searchBarHidden' : !mainSearchEnabled }">
-  <img class="search-logo"/>
-  <br/>
-  <div class="search-left-inner-addon">
-    <input class="form-control" placeholder="Search..." type="text" ng-keyup="hideSearch()" ng-model="searchExpression"/>
-    <div class="pull-right">
+<div class="row">
+  <div class="main-search text-center col-md-6 col-md-offset-3" ng-class="{'searchBarHidden' : !mainSearchEnabled }">
+    <img class="search-logo" />
+    <div class="main-search-inner form-group">
+      <input class="form-control" placeholder="Search..." type="text" ng-keyup="hideSearch()" ng-model="searchExpression"/>
+      <button class="btn btn-info" ng-click="searchFunction()"><i class="fa fa-search"></i><span class="hidden-xs"> Search</span></button>
+    </div>
+    <div class="text-right form-group search-left-inner-addon">
       <a ng-click="openAdvancedSearch()">Advanced search</a>
     </div>
   </div>
-  <button class="btn btn-info mainSearchButton" ng-click="searchFunction()"><i class="fa fa-search"></i> Search</button>
 </div>
