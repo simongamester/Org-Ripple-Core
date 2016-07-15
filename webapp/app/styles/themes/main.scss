@@ -1179,7 +1179,7 @@ table.table {
 
 .table tbody tr td {
   vertical-align: middle;
-  height: 37px;
+  /* height: 37px; */
 }
 
 .table tbody tr td:first-child {
@@ -2292,4 +2292,68 @@ div#age-chart div.morris-hover.morris-default-style {
 .patientFilterOptions:hover {
   text-decoration: overline;
   cursor: pointer !important;
+}
+
+
+// Responsive Tables - http://codepen.io/geoffyuen/pen/FCBEg
+
+.rwd-table {  
+  min-width: 300px; // adjust to your needs
+  
+  tr {
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  th {
+    display: none; // for accessibility, use a visually hidden method here instead! Thanks, reddit!   
+  }
+  
+  td {
+    display: block; 
+    
+    &:first-child {
+      padding-top: .5em;
+      padding-left: .5em;
+    }
+    &:last-child {
+      padding-bottom: .5em;
+    }
+
+    &:before {
+      content: attr(data-th)": "; // who knew you could do this? The internet, that's who.
+      font-weight: bold;
+
+      // optional stuff to make it look nicer
+      width: 6.5em; // magic number :( adjust according to your own content
+      display: inline-block;
+      // end options
+      
+      @media (min-width: $breakpoint-alpha) {
+        display: none;
+      }
+    }
+  }
+  
+  td.dateTime {
+    width: auto;
+  }
+  
+  th, td {
+    text-align: left;
+    
+    @media (min-width: $breakpoint-alpha) {
+      display: table-cell;
+      padding: .25em .5em;
+      
+      &:first-child {
+      }
+      
+      &:last-child {
+      }
+    }
+
+  }
+  
+  
 }
