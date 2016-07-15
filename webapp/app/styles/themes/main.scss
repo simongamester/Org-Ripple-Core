@@ -367,18 +367,34 @@ legend {
   margin-top: 20px;
 }
 
-.panel-patient .list-inline {
-  margin-bottom: 0;
-  margin-top: 2px;
-}
+  .panel-patient .list-inline {
+    margin-bottom: 0;
+    margin-top: 2px;
+  }
+  
+    @media (min-width: 992px){
+      .panel-patient .list-inline {
+        text-align: right;
+      }
+    }
+    
+  .panel-patient .panel-body label {
+    margin-bottom: 0;
+  }
 
 .panel-patient .list-inline label {
   color: #fff;
 }
 
 .panel-patient .panel-body {
-  padding: 0;
+  
 }
+  
+  @media (min-width: 768px){
+    .panel-patient .panel-body {
+      padding: 0;
+    }
+  }
 
 .panel-patient .table {
   margin: 0;

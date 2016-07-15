@@ -16,6 +16,7 @@ body {
     padding: 0 15px;
     min-height: 568px;
     background-color: transparent;
+    padding-bottom: 50px;
 }
 
 @media(min-width:768px) {

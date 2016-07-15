@@ -21,7 +21,7 @@
       <div class="col-md-4">
         <h4 class="panel-title">{{ patient.name }}</h4>
       </div>
-      <div class="col-md-8 text-right">
+      <div class="col-md-8">
         <ul class="list-inline">
           <li><label>Gender:</label> <strong>{{ patient.gender }}</strong></li>
           <li><label>DOB:</label>  <strong>{{ patient.dateOfBirth | date:'dd-MMM-yyyy' }}</strong></li>
@@ -30,7 +30,7 @@
       </div>
     </div>
   </div>
-  <div class="panel-body">
+  <div class="panel-body hidden-xs">
     <table class="table">
       <tbody>
         <tr>
@@ -40,6 +40,27 @@
           <td width="20%"><label>PAS No.:</label> <strong>{{ patient.pasNumber }}</strong></td>
         </tr>
       </tbody>
-  </table>
-</div>
+    </table>
+  </div>
+  <div class="panel-body visible-xs">
+    <div class="form-group">
+      <label>Address:</label><br/>
+      <strong>{{ patient.address }}</strong>
+    </div>
+    
+    <div class="form-group">
+      <label>Phone:</label><br/>
+      <strong>{{ patient.telephone }}</strong>
+    </div>
+    
+    <div class="form-group">
+      <label>GP Details:</label><br/>
+      <strong>{{ patient.gpDetails }}</strong>
+    </div>
+    
+    <div class="form-group">
+      <label>PAS No.:</label><br/>
+      <strong>{{ patient.pasNumber }}</strong>
+    </div>
+  </div>
 </div>
