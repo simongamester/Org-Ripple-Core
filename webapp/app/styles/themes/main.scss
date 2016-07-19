@@ -2130,7 +2130,7 @@ span.selectedTab {
 }
 
 .orderDateTime {
-  width: 23%;
+//   width: 23%;
 }
 
 .reportTypeSet {
@@ -2317,7 +2317,7 @@ div#age-chart div.morris-hover.morris-default-style {
       padding-left: .5em;
     }
     &:last-child {
-      padding-bottom: .5em;
+      border-bottom: 1px solid #999;
     }
 
     &:before {
@@ -2325,8 +2325,9 @@ div#age-chart div.morris-hover.morris-default-style {
       font-weight: bold;
 
       // optional stuff to make it look nicer
-      width: 6.5em; // magic number :( adjust according to your own content
+      width: 8em; // magic number :( adjust according to your own content
       display: inline-block;
+      padding-right: 10px;
       // end options
       
       @media (min-width: $breakpoint-alpha) {
@@ -2350,6 +2351,7 @@ div#age-chart div.morris-hover.morris-default-style {
       }
       
       &:last-child {
+        border-bottom: 1px solid #ddd;
       }
     }
 

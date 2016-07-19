@@ -5,7 +5,7 @@
     <input type="text" class="form-control" placeholder="Filter..." ng-model="query" />
 </div>
 
-<table class="table table-bordered table-striped table-hover">
+<table class="table table-bordered table-striped table-hover rwd-table">
   <thead>
   <tr>
     <th>Date of Request</th>
@@ -16,10 +16,10 @@
   </thead>
   <tbody>
   <tr dir-paginate="mdt in cancerMdtComposition | filter:search | itemsPerPage: 9" current-page="currentPage" ng-click="go('{{mdt.sourceId}}')" ng-class="{info: selected(mdt.sourceId)}">
-    <td class="dateTime">{{mdt.dateOfRequest}}</td>
-    <td>{{mdt.serviceTeam}}</td>
-    <td class="dateTime">{{mdt.dateOfMeeting}}</td>
-    <td>{{mdt.source}}</td>
+    <td data-th="Date of Request" class="dateTime">{{mdt.dateOfRequest}}</td>
+    <td data-th="Service / Team">{{mdt.serviceTeam}}</td>
+    <td data-th="Date of Meeting" class="dateTime">{{mdt.dateOfMeeting}}</td>
+    <td data-th="Source">{{mdt.source}}</td>
   </tr>
   <tr ng-if="!cancerMdtComposition.length">
     <td colspan="4"><span class="label label-default">No MDTs</span></td>

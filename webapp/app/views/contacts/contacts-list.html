@@ -5,7 +5,7 @@
   <input type="text" class="form-control" placeholder="Filter..." ng-model="query[queryBy]" />
 </div>
 
-<table class="table table-bordered table-striped table-hover">
+<table class="table table-bordered table-striped table-hover rwd-table">
   <thead>
     <tr>
       <th>Name</th>
@@ -17,10 +17,10 @@
 
   <tbody>
     <tr dir-paginate="contact in contacts | filter:query | itemsPerPage: 9" current-page="currentPage" ng-click="go('{{contact.sourceId}}', this)" ng-class="{info: selected(contact.sourceId)}">
-      <td>{{ contact.name }}</td>
-      <td>{{ contact.relationship }}</td>
-      <td><i class="fa fa-fw fa-check" ng-if="contact.nextOfKin"></i></td>
-      <td>{{ contact.source }}</td>
+      <td data-th="Name">{{ contact.name }}</td>
+      <td data-th="Relationship">{{ contact.relationship }}</td>
+      <td data-th="Next of Kin"><i class="fa fa-fw fa-check" ng-if="contact.nextOfKin"></i></td>
+      <td data-th="Source">{{ contact.source }}</td>
     </tr>
 
     <tr ng-if="!contacts.length">

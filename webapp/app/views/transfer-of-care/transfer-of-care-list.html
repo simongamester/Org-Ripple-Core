@@ -5,7 +5,7 @@
     <input type="text" class="form-control" placeholder="Filter..." ng-model="query[queryBy]" />
 </div>
 
-<table class="table table-bordered table-striped table-hover">
+<table class="table table-bordered table-striped table-hover rwd-table">
   <thead>
   <tr>
     <th>Transfer</th>
@@ -19,11 +19,11 @@
   <tbody>
 
   <tr dir-paginate="transfer in transferofCareComposition | filter:query | itemsPerPage: 6 " current-page="currentPage"  ng-click="go('{{transfer.sourceId}}')" ng-class="{info: selected(transfer.sourceId)}">
-    <td>Transfer #{{($index + 1)}}</td>
-    <td>{{transfer.siteFrom}}</td>
-    <td>{{transfer.siteTo}}</td>
-    <td class="dateTime">{{transfer.dateOfTransfer}}</td>
-    <td>local</td>
+    <td data-th="Transfer">Transfer #{{($index + 1)}}</td>
+    <td data-th="From (Site / Organisation)">{{transfer.siteFrom}}</td>
+    <td data-th="To (Site / Organisation)">{{transfer.siteTo}}</td>
+    <td data-th="Date / Time" class="dateTime">{{transfer.dateOfTransfer}}</td>
+    <td data-th="Source">local</td>
   </tr>
 
   <tr ng-if="!transferofCareComposition.length">

@@ -5,7 +5,7 @@
   <input type="text" class="form-control" placeholder="Filter..." ng-model="query" />
 </div>
 
-<table class="table table-bordered table-striped table-hover">
+<table class="table table-bordered table-striped table-hover rwd-table">
   <thead>
     <tr>
       <th>Date of Referral</th>
@@ -17,10 +17,10 @@
 
   <tbody>
     <tr dir-paginate="referral in referrals | filter:search | itemsPerPage: 9" current-page="currentPage"  ng-click="go('{{referral.sourceId}}')" ng-class="{info: selected(referral.sourceId)}">
-      <td class="dateTime">{{ referral.dateOfReferral}}</td>
-      <td>{{ referral.referralFrom }}</td>
-      <td>{{ referral.referralTo }}</td>
-      <td>{{ referral.source }}</td>
+      <td data-th="Date of Referral" class="dateTime">{{ referral.dateOfReferral}}</td>
+      <td data-th="Referral From">{{ referral.referralFrom }}</td>
+      <td data-th="Referral To">{{ referral.referralTo }}</td>
+      <td data-th="Source">{{ referral.source }}</td>
     </tr>
 
     <tr ng-if="!referrals.length">

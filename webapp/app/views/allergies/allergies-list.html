@@ -5,7 +5,7 @@
     <input type="text" class="form-control" placeholder="Filter..." ng-model="query" />
 </div>
 
-<table class="table table-bordered table-striped table-hover">
+<table class="table table-bordered table-striped table-hover rwd-table">
   <thead>
     <tr>
       <th>Cause</th>
@@ -16,9 +16,9 @@
 
   <tbody>
     <tr dir-paginate="allergy in allergies | filter:search | itemsPerPage : 9" current-page="currentPage"  ng-click="go('{{allergy.sourceId}}', '{{allergy.source}}')" ng-class="{info: selected(allergy.sourceId)}">
-      <td>{{ allergy.cause }}</td>
-      <td>{{ allergy.reaction }}</td>
-      <td>{{ allergy.source }}</td>
+      <td data-th="Cause">{{ allergy.cause }}</td>
+      <td data-th="Reaction">{{ allergy.reaction }}</td>
+      <td data-th="Source">{{ allergy.source }}</td>
     </tr>
 
     <tr ng-if="!allergies.length">
