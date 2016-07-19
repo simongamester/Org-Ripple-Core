@@ -589,10 +589,57 @@ legend {
 
 .header-icon {
   width: auto;
-  height: 60px;
+  height: 40px;
   cursor: pointer;
   content: url($header-logo-url);
 }
+
+  @media (min-width: 768px){
+    .header-icon {
+      height: 60px;
+    }
+  }
+  
+  /* Mobile Nav */
+  
+  .header-nav .navbar-header .navbar-brand {
+    padding: 8px;
+  }
+  
+  .header-nav.navbar-default {
+    background-color: #fff;
+    margin-bottom: 0;
+    border-bottom: none;
+  }
+  
+  .header-nav.navbar {
+    min-height: 55px;
+  }
+  
+  .header-nav .nav-tabs {
+    margin-top: 3px;
+  }
+  
+  .header-nav .nav-tabs > li > a,
+  .header-nav .nav-tabs > li.active > a, 
+  .header-nav .nav-tabs > li.active > a:hover, 
+  .header-nav .nav-tabs > li.active > a:focus,
+  .header-nav .nav-tabs {
+    border: none;
+  }
+  
+    .header-nav .nav-tabs > li > a {
+      font-size: 18px;
+      color: $icon-chevron-color;
+      background: inherit;
+    }
+    
+      .header-nav .nav-tabs > li > a:hover,
+      .header-nav .nav-tabs > li.active > a {
+        color: $icon-user-color;
+        background: inherit;
+      }
+  
 
 /* Main search bar for home page */
 .search-logo {
