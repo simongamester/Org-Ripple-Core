@@ -117,9 +117,14 @@ li {
 
 .section-north {
   min-height: 74px;
-  border: 1px solid #fff;
-  border-bottom: 1px solid #e7e7e7;
 }
+
+  @media (min-width: 768px){
+    .section-north {
+      border: 1px solid #fff;
+      border-bottom: 1px solid #e7e7e7;
+    }
+  }
 
 #page-wrapper {
   padding: 0;
@@ -803,11 +808,29 @@ i.clearAll {
   color: #000000;
   margin-left: -5.5%;
   margin-right: 0px;
+/*
   padding-top: 10px;
   padding-bottom: 10px;
+*/
   border-top: 1px solid #CCCCCC;
   border-bottom: 1px solid #CCCCCC;
 }
+
+  .header-toolbar .inner {
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+
+  .header-toolbar .navbar-toggle {
+    margin: 0;
+    position: relative;
+    padding: 11px 10px;
+  }
+  
+     .header-toolbar .navbar-toggle .icon-bar {
+       color: #fff;
+       border: 1px solid #fff;
+     }
 
 .previous-page-arrow {
   float: left;

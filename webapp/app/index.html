@@ -340,16 +340,33 @@
   <!-- Header toolbar mobile -->
   <div class="row header-toolbar visible-xs">
     <div class="col-xs-2">
-      <span class="glyphicon glyphicon-arrow-left previous-page-arrow" ng-if="previousPage && currentUser.role=='idcr'" ng-click="goBack()"></span>
+      <div class="innner">
+        <span class="glyphicon glyphicon-arrow-left previous-page-arrow" ng-if="previousPage && currentUser.role=='idcr'" ng-click="goBack()"></span>
+      </div>
     </div>
     <div class="col-xs-8 current-page-title-mobile">
-      <span>{{pageHeader}}</span>
+      <div class="inner">
+        <span>{{pageHeader}}</span>
+      </div>
+    </div>
+    <div class="col-xs-2 text-right">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar-nav" aria-expanded="false" ng-if=(userContextViewExists)>
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+  </div>
+  <div class="visible-xs mobile-sidebar navbar-default">
+    <div class="collapse navbar-collapse sidebar" id="sidebar-nav">
+      <ul side-menu class="nav" ui-view="actions"></ul>
     </div>
   </div>
   <!-- /.Header toolbar mobile-->
   
     <!-- Sidebar-->
-    <div class="wrapper navbar-default sidebar" role="navigation">
+    <div class="wrapper navbar-default sidebar hidden-xs" role="navigation">
       <div class="sidebar-nav navbar-collapse">
         <ul side-menu class="nav" ui-view="actions"></ul>
       </div>
