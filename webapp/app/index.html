@@ -271,25 +271,76 @@
       
       <!-- Tab panes -->
       <div class="tab-content">
-        <div role="tabpanel" class="tab-pane" id="tab-notifications">Notifications content</div>
-        <div role="tabpanel" class="tab-pane" id="tab-user">User content</div>
-        <div role="tabpanel" class="tab-pane" id="tab-search">
+        
+        <div role="tabpanel" class="tab-pane row hide" id="tab-blank"></div>
+        
+        <!-- Notification -->
+        <div role="tabpanel" class="tab-pane row" id="tab-notifications">
+          <div class="notifications-header">
+            Notifications (2)
+          </div>
+          <div class="notifications-body">
+            <ul>
+              <li>
+                <div class="notification-info">Information from Loquid Logic (Social Care) is currently unavailable.</div>
+                <div class="notification-time">5 minutes ago</div>
+              </li>
+              <li>
+                <div class="notification-info">Information from Loquid Logic (Social Care) is currently unavailable.</div>
+                <div class="notification-time">5 minutes ago</div>
+              </li>
+            </ul>
+          </div>
+        </div>
+        
+        <!-- User Profile -->
+        <div role="tabpanel" class="tab-pane row" id="tab-user">
+            <div class="col-xs-12">
+                
+              <div class="user-type superuser">Super User</div>
+              <!--<div class="user-type clinician">Clinician</div>-->
+              <!--<div class="user-type patient">Patient</div>-->
+              
+              <div class="user-profile-image"><i class="fa fa-user"></i></div>
+              <p><strong>User Name:</strong> {{currentUser.role}}</p>
+              <p>{{currentUser.email}}</p>              
+              <p>10/05/2099</p>
+            </div>
+            <div class="col-xs-12 options">
+              <ul>
+                <li><a href="" class="btn">Settings</a></li>
+                <li><a href="" class="btn">Admin Console</a></li>
+              </ul>
+              <ul>
+                <li><a href="" class="signout btn">SIGN OUT  <i class="fa fa-sign-out"></i></a></li>
+              </ul>
+            </div>
+        </div>
+        <!-- User Profile -->
+        
+        
+        <!-- Mobile Nav Search -->
+        <div role="tabpanel" class="tab-pane row" id="tab-search">
           
-          <!-- Mobile Nav Search -->
-    			<div class="" id="mobile-nav-search">
+    			<div id="mobile-nav-search">
     			  <div class="col-xs-12 header-search-mobile">
+      			  
+      			  <button class="btn btn-info" ng-click="searchFunction();"><i class="fa fa-search"></i></button>
+      			  
               <div class="search-left-inner-addon">
                 <div ng-show="reportMode" class="ng-cloak" ng-cloak><span ng-cloak ng-show="reportMode" class="label ng-cloak report-label">Reports&nbsp;<i ng-show="reportMode" ng-click="cancelSearchMode()" class="fa fa-times"></i></span></div>
                 <div><i ng-show="searchExpression !== '' || reportMode" ng-click="cancelReportMode()" class="clearAll fa fa-times-circle"></i></div>
                 <input class="form-control" placeholder="Search..." type="text" typeahead="report for report in reportTypes | filter:$viewValue" ng-model="searchExpression" ng-keyup="checkExpression()" ng-trim="false" ng-class="{moveRight: reportMode}" />
               </div>
+              
             </div>
-            <div class="col-xs-12 header-search-mobile">
-              <button class="btn btn-info" ng-click="searchFunction();"><i class="fa fa-search"></i> Search</button>
-            </div>									
-    			</div><!-- Mobile Nav Search -->
+            
+    			</div>
           
         </div>
+        <!-- Mobile Nav Search -->
+        
+        
       </div>
 		</div><!-- /.container-fluid -->
 	</nav>
