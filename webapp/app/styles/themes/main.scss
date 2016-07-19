@@ -2038,6 +2038,11 @@ tr.ng-scope.selectedItemLeft {
   font-size: 18px;
 }
 
+  .patient-list-full-subheader span.subheader {
+    min-width: 300px;
+    display: inline-block;
+  }
+
 .patient-details-tabs {
   text-align: right;
 }
