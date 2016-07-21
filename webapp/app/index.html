@@ -261,20 +261,39 @@
   			<a ng-if="title" class="navbar-brand" ng-click="goHome()"><img class="header-icon nav-logo" alt="{{title}}"> {{title}}</a>
 
 				<!-- Nav tabs -->
+				<!--
 				<ul class="nav nav-tabs pull-right" role="tablist">
-          <li role="presentation"><a href="#tab-notifications" aria-controls="tab-notifications" role="tab" data-toggle="tab"><i class="fa fa-bell-o"><span class="count">2</span></i></a></li>
-          <li role="presentation"><a href="#tab-user" aria-controls="tab-user" role="tab" data-toggle="tab"><i class="fa fa-user"></i></a></li>
-          <li role="presentation"><a href="#tab-search" aria-controls="tab-search" role="tab" data-toggle="tab"><i class="fa fa-search"></i></a></li>
+          <li role="presentation"><a href="#tab-notifications" aria-controls="tab-notifications" role="tab" data-toggle="tab">
+            <i class="fa fa-bell-o"><span class="count">2</span></i></a>
+          </li>
+          <li role="presentation"><a href="#tab-user" aria-controls="tab-user" role="tab" data-toggle="tab">
+            <i class="fa fa-user"></i></a>
+          </li>
+          <li role="presentation"><a href="#tab-search" aria-controls="tab-search" role="tab" data-toggle="tab">
+            <i class="fa fa-search"></i></a>
+          </li>
+        </ul>
+        -->
+        <ul class="nav nav-tabs pull-right" role="tablist">
+          <li><a ng-click="changeNavTab('notifications')">
+            <i class="fa fa-bell-o"><span class="count">2</span></i></a>
+          </li>
+          <li><a ng-click="changeNavTab('user')">
+            <i class="fa fa-user"></i></a>
+          </li>
+          <li><a ng-click="changeNavTab('search')">
+            <i class="fa fa-search"></i></a>
+          </li>
         </ul>
       </div>
       
       <!-- Tab panes -->
-      <div class="tab-content">
+      <div class="tab-content" ng-switch="currentNavTab">
         
-        <div role="tabpanel" class="tab-pane row hide" id="tab-blank"></div>
+        
         
         <!-- Notification -->
-        <div role="tabpanel" class="tab-pane row" id="tab-notifications">
+        <div ng-switch-when="notifications" class="pane row" id="tab-notifications">
           <div class="notifications-header">
             Notifications (2)
           </div>
@@ -294,7 +313,7 @@
         <!-- /.Notification -->
         
         <!-- User Profile -->
-        <div role="tabpanel" class="tab-pane row" id="tab-user">
+        <div ng-switch-when="user" class="pane row" id="tab-user">
             <div class="col-xs-12">
                 
               <div class="user-type superuser">Super User</div>
@@ -319,7 +338,7 @@
         <!-- /.User Profile -->
         
         <!-- Mobile Nav Search -->
-        <div role="tabpanel" class="tab-pane row" id="tab-search">
+        <div ng-switch-when="search" class="pane row" id="tab-search">
           
     			<div id="mobile-nav-search">
     			  <div class="col-xs-12 header-search-mobile">
@@ -341,6 +360,8 @@
         
       </div>
       <!-- /.Tab panes -->
+      
+      
       
 		</div><!-- /.container-fluid -->
 	</nav>
