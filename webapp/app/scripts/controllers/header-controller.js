@@ -337,4 +337,10 @@ angular.module('rippleDemonstrator')
       }
     }
     
+    $scope.activeNavTab = function(thisTab){
+      if( thisTab == $scope.currentNavTab ){
+        return 'active';
+      }
+    }
+    
   });

@@ -260,28 +260,14 @@
 			<div class="navbar-header">
   			<a ng-if="title" class="navbar-brand" ng-click="goHome()"><img class="header-icon nav-logo" alt="{{title}}"> {{title}}</a>
 
-				<!-- Nav tabs -->
-				<!--
-				<ul class="nav nav-tabs pull-right" role="tablist">
-          <li role="presentation"><a href="#tab-notifications" aria-controls="tab-notifications" role="tab" data-toggle="tab">
-            <i class="fa fa-bell-o"><span class="count">2</span></i></a>
-          </li>
-          <li role="presentation"><a href="#tab-user" aria-controls="tab-user" role="tab" data-toggle="tab">
-            <i class="fa fa-user"></i></a>
-          </li>
-          <li role="presentation"><a href="#tab-search" aria-controls="tab-search" role="tab" data-toggle="tab">
-            <i class="fa fa-search"></i></a>
-          </li>
-        </ul>
-        -->
         <ul class="nav nav-tabs pull-right" role="tablist">
-          <li><a ng-click="changeNavTab('notifications')">
+          <li ng-class="activeNavTab('notifications')"><a ng-click="changeNavTab('notifications')">
             <i class="fa fa-bell-o"><span class="count">2</span></i></a>
           </li>
-          <li><a ng-click="changeNavTab('user')">
+          <li ng-class="activeNavTab('user')"><a ng-click="changeNavTab('user')">
             <i class="fa fa-user"></i></a>
           </li>
-          <li><a ng-click="changeNavTab('search')">
+          <li ng-class="activeNavTab('search')"><a ng-click="changeNavTab('search')">
             <i class="fa fa-search"></i></a>
           </li>
         </ul>
@@ -289,8 +275,6 @@
       
       <!-- Tab panes -->
       <div class="tab-content" ng-switch="currentNavTab">
-        
-        
         
         <!-- Notification -->
         <div ng-switch-when="notifications" class="pane row" id="tab-notifications">
