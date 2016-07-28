@@ -6,7 +6,7 @@
 </div>
 
 
-<table class="listTable table table-bordered table-striped table-hover">
+<table class="listTable table table-bordered table-striped table-hover rwd-table">
   <thead>
     <tr>
       <th>Name</th>
@@ -17,10 +17,10 @@
   </thead>
   <tbody>
     <tr dir-paginate="eolcareplan in eolcareplans | filter:search | itemsPerPage: 9" current-page="currentPage"  ng-click="go('{{eolcareplan.sourceId}}')" ng-class="{info: selected(eolcareplan.sourceId)}">
-      <td>{{ eolcareplan.name }}</td>
-      <td>{{ eolcareplan.type }}</td>
-      <td class="dateTime">{{ eolcareplan.date | date:'y-MM-dd'}}</td>
-      <td>{{ eolcareplan.source }}</td>
+      <td data-th="Name">{{ eolcareplan.name }}</td>
+      <td data-th="Type">{{ eolcareplan.type }}</td>
+      <td data-th="Date" class="dateTime">{{ eolcareplan.date | date:'y-MM-dd'}}</td>
+      <td data-th="Source">{{ eolcareplan.source }}</td>
     </tr>
 
     <tr ng-if="!eolcareplans.length">

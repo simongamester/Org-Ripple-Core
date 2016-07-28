@@ -1,7 +1,7 @@
 <h3><strong>Medications</strong></h3>
 
 
-<table class="table table-bordered table-striped table-hover">
+<table class="table table-bordered table-striped table-hover rwd-table">
   <thead>
     <tr>
       <th>Name</th>
@@ -12,9 +12,9 @@
 
   <tbody>
     <tr dir-paginate="medication in medications| filter:query | itemsPerPage: 9 " current-page="currentPage"  ng-click="go('{{ medication.sourceId }}', '{{ medication.source }}')" ng-class="{info: selected(medication.sourceId)}">
-      <td>{{ medication.name }}</td>
-      <td>{{ medication.doseAmount }}</td>
-      <td>{{ medication.source}}</td>
+      <td data-th="Name">{{ medication.name }}</td>
+      <td data-th="Dose Amount">{{ medication.doseAmount }}</td>
+      <td data-th="Source">{{ medication.source}}</td>
     </tr>
 
     <tr ng-if="!medications.length">

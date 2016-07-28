@@ -6,7 +6,7 @@
 </div>
 
 
-<table class="table table-bordered table-striped table-hover">
+<table class="table table-bordered table-striped table-hover rwd-table">
   <thead>
     <tr>
       <th>Procedure Name</th>
@@ -17,10 +17,10 @@
   </thead>
   <tbody>
     <tr dir-paginate="procedure in procedures | filter:search  | itemsPerPage: 9" current-page="currentPage"  ng-click="go('{{procedure.sourceId}}','{{procedure.source}}')" ng-class="{info: selected(procedure.sourceId)}">
-      <td>{{procedure.name}}</td>
-      <td class="dateTime">{{procedure.date}}</td>
-      <td>{{procedure.time}}</td>
-      <td>{{procedure.source}}</td>
+      <td data-th="Name">{{procedure.name}}</td>
+      <td data-th="Date" class="dateTime">{{procedure.date}}</td>
+      <td data-th="Time">{{procedure.time}}</td>
+      <td data-th="Source">{{procedure.source}}</td>
     </tr>
     <tr ng-if="!procedures.length">
       <td colspan="4"><span class="label label-default">No procedures</span></td>
