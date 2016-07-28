@@ -615,10 +615,206 @@ legend {
 
 .header-icon {
   width: auto;
-  height: 60px;
+  height: 40px;
   cursor: pointer;
   content: url($header-logo-url);
+  margin-right: 5px;
+  position: relative;
+  top: -2px;
 }
+
+  @media (min-width: 768px){
+    .header-icon {
+      height: 60px;
+    }
+  }
+  
+  /* Mobile Nav */
+  
+  .header-nav .navbar-header .navbar-brand {
+    padding: 6px 8px 8px 5px;
+  }
+  
+  .header-nav.navbar-default {
+    background-color: #fff;
+    margin-bottom: 0;
+    border-bottom: none;
+  }
+  
+  .header-nav.navbar {
+    min-height: 55px;
+  }
+  
+  .header-nav .nav-tabs {
+    margin-top: 3px;
+  }
+  
+    .header-nav .nav-tabs i {
+      position: relative;
+    }
+    
+      .header-nav .nav-tabs .count {
+        position: absolute;
+        top: -5px;
+        right: -9px;
+        font-size: 10px;
+        font-family: arial;
+        background-color: $icon-chevron-color;
+        color: #fff;
+        display: block;
+        padding: 1px 0;
+        width: 12px;
+        text-align: center;
+        border-radius: 50%;
+        font-weight: 600;
+      }
+  
+  .header-nav .nav-tabs > li > a,
+  .header-nav .nav-tabs > li.active > a, 
+  .header-nav .nav-tabs > li.active > a:hover, 
+  .header-nav .nav-tabs > li.active > a:focus,
+  .header-nav .nav-tabs {
+    border: none;
+  }
+  
+    .header-nav .nav-tabs > li > a {
+      font-size: 18px;
+      color: $icon-chevron-color;
+      background: inherit;
+    }
+    
+      .header-nav .nav-tabs > li > a:hover,
+      .header-nav .nav-tabs > li.active > a {
+        color: $icon-user-color;
+        background: inherit;
+      }
+      
+      .header-nav .nav-tabs > li > a:hover .count,
+      .header-nav .nav-tabs > li.active > a .count {
+        background-color: $icon-user-color;
+      }
+      
+  .header-nav .pane {
+    background-color: #f7f7f7;
+    border-top: 1px solid #e7e7e7;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  
+  /* User Profile (Mobile) */
+  
+  #tab-user .user-type {
+    text-transform: uppercase;
+    display: block;
+    padding: 2px 5px 0px 5px;
+    float: right;
+    font-size: 12px;
+  }
+  
+    #tab-user .user-type.superuser {
+      background-color: orange;
+      color: #fff;
+    }
+    
+    #tab-user .user-type.clinician {
+      background-color: blue;
+      color: #fff;
+    }
+    
+    #tab-user .user-type.patient {
+      background-color: green;
+      color: #fff;
+    }
+    
+    #tab-user .options ul {
+      margin-top: 10px;
+      margin-bottom: 5px;
+    }
+    
+    #tab-user .options a.btn {
+      background-color: #fff;
+      width: 100%;
+      border-radius: 0;
+      border-color: #e7e7e7;
+      border-style: solid;
+      border-bottom-width: 1px;
+      border-left-width: 1px;
+      border-right-width: 1px;
+      border-top-width: 0;
+      font-weight: 400;
+    }
+    
+      #tab-user .options a.btn:hover {
+        background-color: #f7f7f7;
+      }
+    
+      #tab-user .options li:first-child a.btn {
+        border-top-width: 1px;
+      }
+      
+    #tab-user .options a.btn.signout {
+      border-color: #057BC0;
+      background-color: #057BC0;
+      color: #fff;
+    }
+    
+      #tab-user .options a.btn.signout:hover {
+        background-color: #096498;
+      }
+      
+  /* Notifications */
+  
+  #tab-notifications {
+    padding-top: 5px;
+    padding-bottom: 0;
+  }
+  
+    #tab-notifications .notifications-header {
+      border-bottom: 1px solid #e7e7e7;
+      padding: 0 15px 5px 15px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+  
+    #tab-notifications .notifications-body {
+      font-size: 12px;
+      background-color: #fff;
+    }
+      
+      #tab-notifications .notifications-body li {
+        padding: 10px 15px 10px 15px;
+        border-bottom: 1px solid #e7e7e7;
+        cursor: pointer;
+      }
+      
+        #tab-notifications .notifications-body li:hover {
+          background-color: #f7f7f7;
+        }
+      
+      #tab-notifications .notifications-body .notification-info {
+        margin-bottom: 5px;
+      }
+      
+      #tab-notifications .notifications-body .notification-time {
+        font-size: 11px;
+        color: #999;
+      }
+      
+  /* Search */
+  
+  #tab-search {
+    position: relative;
+  }
+  
+    #tab-search button.btn-info {
+      position: absolute;
+      right: 15px;
+      top: 0;
+    }
+  
+    #tab-search .header-search-mobile {
+      padding-right: 65px;
+    }
 
 /* Main search bar for home page */
 
@@ -760,10 +956,7 @@ i.clearAll {
 }
 
 .header-search-mobile {
-  padding-left: 45px;
-  padding-right: 45px;
-  padding-bottom: 10px;
-  font-family: hero;
+  font-family: 'hero';
 }
 
 .header-search {
@@ -1179,34 +1372,15 @@ svg {
   border-radius: 3px;
   background-color: #eef8e7;
   text-align: center;
+  width: 80px;
+  line-height: 1.2em;
+  float: left;
+  margin-right: 15px;
 }
 
-
-/* User Profile Mobile */
-
-@media (max-width: 767px) {
-  .navbar-nav .open .dropdown-menu {
-    top: 100%;
-    left: 0;
-    float: left;
-    width: 310px;
-    margin: 2px 0 0;
-    font-size: 14px;
-    text-align: left;
-    list-style: none;
-    background-color: #fff;
-    -webkit-background-clip: padding-box;
-    background-clip: padding-box;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
-    z-index: 9999;
-    position: absolute;
-    display: block;
-    line-height: 0;
+  #tab-user p {
+     margin: 0 0 8px 0;
   }
-}
 
 
 /* Patient List */
