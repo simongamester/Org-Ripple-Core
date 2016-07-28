@@ -264,75 +264,102 @@
   </div>
   <!-- /.Header -->
 
-  <!-- Header mobile -->
-  <div class="row header-background-mobile visible-xs">
-    <div class="col-xs-12 header-left-mobile">
-      <div class="glyphs g">
-        <p class="header-title-1" ng-if="title"><img alt="Ripple Icon" class="header-icon" ng-click="goHome()"> {{title}}</p>
-      </div>
-    </div>
+  <!-- New Mobile Navbar -->
+  <nav class="navbar navbar-default header-nav visible-xs">
+    <div class="container-fluid">
+			<div class="navbar-header">
+  			<a ng-if="title" class="navbar-brand" ng-click="goHome()"><img class="header-icon nav-logo" alt="{{title}}"> {{title}}</a>
 
-    <div class="col-xs-12 header-right-mobile">
-      <!--<span class="glyphicon glyphicon-user"></span>
-          <span>Demonstration</span> -->
-
-      <!-- User Profile -->
-      <div class="navbar-collapse">
-
-        <ul class="nav navbar-nav navbar-right">
-          <li class="dropdown-profile">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <span class="glyphicon glyphicon-user"></span>
-              <span class="header-title-3">Demonstration</span>
-              <span class="glyphicon glyphicon-chevron-down"></span>
-            </a>
-            <ul class="dropdown-menu">
-              <li>
-                <div class="navbar-login">
-                  <div class="row">
-                    <div class="col-xs-4">
-                      <div class="user-profile-image"><i class="glyphicon glyphicon-user"></i></div>
-                    </div>
-                    <div class="col-xs-8">
-                      <p class="dropdown-profile-text"><b>User Name</b></p>
-                      <p class="dropdown-profile-text"><b>{{currentUser.role}}</b></p>
-                      <p class="dropdown-profile-text"> {{currentUser.email}} </p>
-                      <p class="dropdown-profile-text">10/05/2099</p>
-                    </div>
-                  </div>
-                </div>
-              </li>
-              <li class="divider"></li>
-              <li>
-                <div class="navbar-login navbar-login-session">
-                  <div class="row">
-                    <div class="col-lg-12">
-                      <p>
-                        <a href="https://ripple-identity-uat.answerappcloud.com/signout" class="btn btn-danger btn-block">Sign Out</a>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </li>
-            </ul>
+        <ul class="nav nav-tabs pull-right" role="tablist">
+          <li ng-class="activeNavTab('notifications')"><a ng-click="changeNavTab('notifications')">
+            <i class="fa fa-bell-o"><span class="count">2</span></i></a>
+          </li>
+          <li ng-class="activeNavTab('user')"><a ng-click="changeNavTab('user')">
+            <i class="fa fa-user"></i></a>
+          </li>
+          <li ng-class="activeNavTab('search')"><a ng-click="changeNavTab('search')">
+            <i class="fa fa-search"></i></a>
           </li>
         </ul>
       </div>
-      <!-- /.User Profile -->
-    </div>
-
-    <div class="col-xs-12 header-search-mobile">
-      <div class="search-left-inner-addon">
-        <div ng-show="reportMode" class="ng-cloak" ng-cloak><span ng-cloak ng-show="reportMode" class="label ng-cloak report-label">Reports&nbsp;<i ng-show="reportMode" ng-click="cancelSearchMode()" class="fa fa-times"></i></span></div>
-        <div><i ng-show="searchExpression !== '' || reportMode" ng-click="cancelReportMode()" class="clearAll fa fa-times-circle"></i></div>
-        <input class="form-control" placeholder="Search..." type="text" typeahead="report for report in reportTypes | filter:$viewValue" ng-model="searchExpression" ng-keyup="checkExpression()" ng-trim="false" ng-class="{moveRight: reportMode}" />
+      
+      <!-- Tab panes -->
+      <div class="tab-content" ng-switch="currentNavTab">
+        
+        <!-- Notification -->
+        <div ng-switch-when="notifications" class="pane row" id="tab-notifications">
+          <div class="notifications-header">
+            Notifications (2)
+          </div>
+          <div class="notifications-body">
+            <ul>
+              <li>
+                <div class="notification-info">Information from Liquid Logic (Social Care) is currently unavailable.</div>
+                <div class="notification-time">5 minutes ago</div>
+              </li>
+              <li>
+                <div class="notification-info">Information from Liquid Logic (Social Care) is currently unavailable.</div>
+                <div class="notification-time">5 minutes ago</div>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /.Notification -->
+        
+        <!-- User Profile -->
+        <div ng-switch-when="user" class="pane row" id="tab-user">
+            <div class="col-xs-12">
+                
+              <div class="user-type superuser">Super User</div>
+              <!--<div class="user-type clinician">Clinician</div>-->
+              <!--<div class="user-type patient">Patient</div>-->
+              
+              <div class="user-profile-image"><i class="fa fa-user"></i></div>
+              <p><strong>User Name:</strong> {{currentUser.role}}</p>
+              <p>{{currentUser.email}}</p>              
+              <p>10/05/2099</p>
+            </div>
+            <div class="col-xs-12 options">
+              <ul>
+                <li><a href="" class="btn">Settings</a></li>
+                <li><a href="" class="btn">Admin Console</a></li>
+              </ul>
+              <ul>
+                <li><a href="https://ripple-identity-uat.answerappcloud.com/signout" class="signout btn">SIGN OUT  <i class="fa fa-sign-out"></i></a></li>
+              </ul>
+            </div>
+        </div>
+        <!-- /.User Profile -->
+        
+        <!-- Mobile Nav Search -->
+        <div ng-switch-when="search" class="pane row" id="tab-search">
+          
+    			<div id="mobile-nav-search">
+    			  <div class="col-xs-12 header-search-mobile">
+      			  
+      			  <button class="btn btn-info" ng-click="searchFunction();"><i class="fa fa-search"></i></button>
+      			  
+              <div class="search-left-inner-addon">
+                <div ng-show="reportMode" class="ng-cloak" ng-cloak><span ng-cloak ng-show="reportMode" class="label ng-cloak report-label">Reports&nbsp;<i ng-show="reportMode" ng-click="cancelSearchMode()" class="fa fa-times"></i></span></div>
+                <div><i ng-show="searchExpression !== '' || reportMode" ng-click="cancelReportMode()" class="clearAll fa fa-times-circle"></i></div>
+                <input class="form-control" placeholder="Search..." type="text" typeahead="report for report in reportTypes | filter:$viewValue" ng-model="searchExpression" ng-keyup="checkExpression()" ng-trim="false" ng-class="{moveRight: reportMode}" />
+              </div>
+              
+            </div>
+            
+    			</div>
+          
+        </div>
+        <!-- /.Mobile Nav Search -->
+        
       </div>
-    </div>
-    <div class="col-xs-12 header-search-mobile">
-      <button class="btn btn-info" ng-click="searchFunction();"><i class="fa fa-search"></i> Search</button>
-    </div>
-  </div>
-  <!-- /.Header mobile -->
+      <!-- /.Tab panes -->
+      
+      
+      
+		</div><!-- /.container-fluid -->
+	</nav>
+  <!-- /.New Mobile Navbar -->
 
   <!-- Header toolbar -->
   <div class="row header-toolbar hidden-xs">
