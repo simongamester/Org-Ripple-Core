@@ -42,9 +42,8 @@
           <span ng-class="{'selectedTab': tab == 'dateTime'}" ng-click="viewDateTime()">Date / Time</span>
           <span ng-class="{'selectedTab': tab == 'counts'}" ng-click="viewCounts()" class="countsTab">Counts</span>
         </div>
-        
+       
         <div class="col-md-12 col-sm-12 col-xs-12">
-          
           <table ng-if="tab == 'patientInfo'" class="table table-striped table-bordered table-hover rwd-table">
             <thead>
               <tr>
@@ -65,7 +64,6 @@
               </tr>
             </tbody>
           </table>
-          
           <table ng-if="tab == 'dateTime' || tab == 'counts'" class="table dateCountTable table-striped table-bordered table-hover rwd-table">
             <thead>
               <tr>
@@ -101,19 +99,22 @@
               </tr>
             </tbody>
           </table>
-
-        <div class="text-center">
-          <pagination page="pagingInfo.page" total-items="pagingInfo.totalItems" previous-text="&lsaquo;" next-text="&rsaquo;" items-per-page="15" max-size="10" rotate="false" boundary-links="false" ng-model="pagingInfo.page"></pagination>
-          <div ng-if="pagingInfo.totalItems != 0">{{pageInfoText}}</div>
-        </div>
-        
-      </div>
   
+          <div class="text-center">
+            <pagination page="pagingInfo.page" total-items="pagingInfo.totalItems" previous-text="&lsaquo;" next-text="&rsaquo;" items-per-page="15" max-size="10" rotate="false" boundary-links="false" ng-model="pagingInfo.page"></pagination>
+            <div ng-if="pagingInfo.totalItems != 0">{{pageInfoText}}</div>
+          </div>
+          
+        </div>
+          
+      </div>
+    
       <div ng-show="pagingInfo.totalItems == 0" ng-cloak class="ng-cloak">
         <div ng-cloak class="col-md-12 col-sm-12 col-xs-12 ng-cloak">
           <div ng-cloak class="no-results ng-cloak" ng-bind="noResults"></div>
         </div>
       </div>
+      
       
     </div>
   </div>
