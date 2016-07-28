@@ -595,25 +595,46 @@ legend {
 }
 
 /* Main search bar for home page */
-.search-logo {
-  width: 30%;
-  display: block;
-  margin: 0 auto;
-  content: url($search-logo-url);
-}
 
 .main-search {
-  position: absolute;
   font-size: 20px;
   color: #FFF;
-  font-family: hero;
-  top: 10%;
-  left: 28%;
-  right: 0;
-  bottom: 0;
-  height: 100%;
-  width: 40%;
+  font-family: 'hero';
+  padding-top: 5%;
 }
+
+  .search-logo {
+    max-width: 180px;
+    width: 20%;
+    display: block;
+    margin: 0 auto 5% auto;
+    content: url("../images/search-ripple-logo.png");
+  }
+
+  .main-search-inner {
+    padding-right: 110px;
+    position: relative;
+  }
+  
+    .main-search-inner .btn {
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 100px;
+    }
+  
+  /* Search button in mobile view*/
+  @media (max-width: 768px) {
+    
+    .main-search-inner {
+      padding-right: 60px;
+    }
+    
+    .main-search-inner .btn {
+      width: 50px;
+    }
+  }
+  
 
 /* Header - Search Bar */
 .searchBarHidden {
@@ -669,11 +690,9 @@ legend {
 
 i.clearAll {
   position: absolute;
-  padding: 2px 0px;
-  margin-top: 7px;
-  margin-left: 95%;
-  height: 25px;
-  color: red
+  color: red; 
+  right: 117px;
+  top: 7px;
 }
 
 .search-left-inner-addon i.fa.fa-times {
@@ -724,8 +743,25 @@ i.clearAll {
 .header-search {
   font-size: 20px;
   color: #FFF;
-  font-family: hero;
+  font-family: 'hero';
+  padding-top: 12px;
 }
+
+  .header-search-inner {
+    position: relative;
+  }
+  
+  .header-search-inner .search-left-inner-addon {
+    margin-right: 110px;
+  }
+  
+  .header-search .searchButton {
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin: 0;
+    width: 100px;
+  }
 
 .header-left {
   padding-left: 40px;
@@ -736,7 +772,7 @@ i.clearAll {
   text-align: center;
   padding-right: 60px;
   max-height: 45px;
-  font-family: hero;
+  font-family: "Hero";
 }
 
 .header-right {
@@ -751,6 +787,23 @@ i.clearAll {
   color: #000000;
   padding-left: 45px;
   font-family: "Hero";
+}
+
+
+/* Search button in tablet and small desktop view*/
+@media (min-width: 768px) and (max-width: 1199px) {
+  
+  .header-search-inner .search-left-inner-addon {
+    margin-right: 60px;
+  }
+  
+  .header-search .searchButton {
+    width: 50px;
+  }
+  
+  i.clearAll {
+    right: 67px;
+  }
 }
 
 .glyphicon-user:before {
