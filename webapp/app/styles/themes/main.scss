@@ -599,25 +599,46 @@ legend {
 }
 
 /* Main search bar for home page */
-.search-logo {
-  width: 30%;
-  display: block;
-  margin: 0 auto;
-  content: url($search-logo-url);
-}
 
 .main-search {
-  position: absolute;
   font-size: 20px;
   color: #FFF;
-  font-family: hero;
-  top: 10%;
-  left: 28%;
-  right: 0;
-  bottom: 0;
-  height: 100%;
-  width: 40%;
+  font-family: 'hero';
+  padding-top: 5%;
 }
+
+  .search-logo {
+    max-width: 180px;
+    width: 20%;
+    display: block;
+    margin: 0 auto 5% auto;
+    content: url("../images/search-ripple-logo.png");
+  }
+
+  .main-search-inner {
+    padding-right: 110px;
+    position: relative;
+  }
+  
+    .main-search-inner .btn {
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 100px;
+    }
+  
+  /* Search button in mobile view*/
+  @media (max-width: 768px) {
+    
+    .main-search-inner {
+      padding-right: 60px;
+    }
+    
+    .main-search-inner .btn {
+      width: 50px;
+    }
+  }
+  
 
 /* Header - Search Bar */
 .searchBarHidden {
@@ -673,11 +694,9 @@ legend {
 
 i.clearAll {
   position: absolute;
-  padding: 2px 0px;
-  margin-top: 7px;
-  margin-left: 95%;
-  height: 25px;
-  color: red
+  color: red; 
+  right: 117px;
+  top: 7px;
 }
 
 .search-left-inner-addon i.fa.fa-times {
@@ -728,8 +747,25 @@ i.clearAll {
 .header-search {
   font-size: 20px;
   color: #FFF;
-  font-family: hero;
+  font-family: 'hero';
+  padding-top: 12px;
 }
+
+  .header-search-inner {
+    position: relative;
+  }
+  
+  .header-search-inner .search-left-inner-addon {
+    margin-right: 110px;
+  }
+  
+  .header-search .searchButton {
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin: 0;
+    width: 100px;
+  }
 
 .header-left {
   padding-left: 40px;
@@ -740,7 +776,7 @@ i.clearAll {
   text-align: center;
   padding-right: 60px;
   max-height: 45px;
-  font-family: hero;
+  font-family: "Hero";
 }
 
 .header-right {
@@ -755,6 +791,23 @@ i.clearAll {
   color: #000000;
   padding-left: 45px;
   font-family: "Hero";
+}
+
+
+/* Search button in tablet and small desktop view*/
+@media (min-width: 768px) and (max-width: 1199px) {
+  
+  .header-search-inner .search-left-inner-addon {
+    margin-right: 60px;
+  }
+  
+  .header-search .searchButton {
+    width: 50px;
+  }
+  
+  i.clearAll {
+    right: 67px;
+  }
 }
 
 .glyphicon-user:before {
@@ -1183,7 +1236,7 @@ table.table {
 
 .table tbody tr td {
   vertical-align: middle;
-  height: 37px;
+  /* height: 37px; */
 }
 
 .table tbody tr td:first-child {
@@ -2139,7 +2192,7 @@ span.selectedTab {
 }
 
 .orderDateTime {
-  width: 23%;
+//   width: 23%;
 }
 
 .reportTypeSet {
@@ -2301,4 +2354,70 @@ div#age-chart div.morris-hover.morris-default-style {
 .patientFilterOptions:hover {
   text-decoration: overline;
   cursor: pointer !important;
+}
+
+
+// Responsive Tables - http://codepen.io/geoffyuen/pen/FCBEg
+
+.rwd-table {  
+  min-width: 300px; // adjust to your needs
+  
+  tr {
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  th {
+    display: none; // for accessibility, use a visually hidden method here instead! Thanks, reddit!   
+  }
+  
+  td {
+    display: block; 
+    
+    &:first-child {
+      padding-top: .5em;
+      padding-left: .5em;
+    }
+    &:last-child {
+      border-bottom: 1px solid #999;
+    }
+
+    &:before {
+      content: attr(data-th)": "; // who knew you could do this? The internet, that's who.
+      font-weight: bold;
+
+      // optional stuff to make it look nicer
+      width: 8em; // magic number :( adjust according to your own content
+      display: inline-block;
+      padding-right: 10px;
+      // end options
+      
+      @media (min-width: $breakpoint-alpha) {
+        display: none;
+      }
+    }
+  }
+  
+  td.dateTime {
+    width: auto;
+  }
+  
+  th, td {
+    text-align: left;
+    
+    @media (min-width: $breakpoint-alpha) {
+      display: table-cell;
+      padding: .25em .5em;
+      
+      &:first-child {
+      }
+      
+      &:last-child {
+        border-bottom: 1px solid #ddd;
+      }
+    }
+
+  }
+  
+  
 }
