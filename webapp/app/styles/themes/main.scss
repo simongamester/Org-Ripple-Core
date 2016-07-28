@@ -16,6 +16,10 @@ body,
   margin-right: auto;
 }
 
+.section-content {
+  margin-top: 15px;
+}
+
 body {
   background: url($background-image-url) center 100px no-repeat #ffffff;
   background-size: 100% auto;
@@ -108,15 +112,19 @@ li {
 /* Index */
 
 .section {
-  padding-right: 15px;
+  /* padding-right: 15px; */
 }
 
 .section-north {
   min-height: 74px;
-  border: 1px solid #fff;
-  border-bottom: 1px solid #e7e7e7;
-  width: 99%;
 }
+
+  @media (min-width: 768px){
+    .section-north {
+      border: 1px solid #fff;
+      border-bottom: 1px solid #e7e7e7;
+    }
+  }
 
 #page-wrapper {
   padding: 0;
@@ -132,7 +140,7 @@ li {
   /*Disabled scroll*/
   /*border-right: 1px solid #e7e7e7;*/
   /*overflow-y: scroll;*/
-  height: 100%;
+  /* height: 100%; */
 }
 
 .col-left {
@@ -143,10 +151,12 @@ li {
 
 .section-main,
 .section-detail {
+  /*
   padding-top: 15px;
   padding-bottom: 15px;
   padding-left: 15px;
   height: 568px;
+  */
 }
 
 .section-row {
@@ -362,18 +372,34 @@ legend {
   margin-top: 20px;
 }
 
-.panel-patient .list-inline {
-  margin-bottom: 0;
-  margin-top: 2px;
-}
+  .panel-patient .list-inline {
+    margin-bottom: 0;
+    margin-top: 2px;
+  }
+  
+    @media (min-width: 992px){
+      .panel-patient .list-inline {
+        text-align: right;
+      }
+    }
+    
+  .panel-patient .panel-body label {
+    margin-bottom: 0;
+  }
 
 .panel-patient .list-inline label {
   color: #fff;
 }
 
 .panel-patient .panel-body {
-  padding: 0;
+  
 }
+  
+  @media (min-width: 768px){
+    .panel-patient .panel-body {
+      padding: 0;
+    }
+  }
 
 .panel-patient .table {
   margin: 0;
@@ -835,11 +861,29 @@ i.clearAll {
   color: #000000;
   margin-left: -5.5%;
   margin-right: 0px;
+/*
   padding-top: 10px;
   padding-bottom: 10px;
+*/
   border-top: 1px solid #CCCCCC;
   border-bottom: 1px solid #CCCCCC;
 }
+
+  .header-toolbar .inner {
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+
+  .header-toolbar .navbar-toggle {
+    margin: 0;
+    position: relative;
+    padding: 11px 10px;
+  }
+  
+     .header-toolbar .navbar-toggle .icon-bar {
+       color: #fff;
+       border: 1px solid #fff;
+     }
 
 .previous-page-arrow {
   float: left;
@@ -1904,7 +1948,7 @@ textarea#procedureNotes {
 }
 
 .section-detail .btn-info {
-  margin-right: 20px;
+  margin-left: 20px;
   margin-top: 20px;
 }
 
@@ -1930,18 +1974,25 @@ textarea#procedureNotes {
 }
 
 div.transbox {
-  background-color: #fafafa;
+  background-color: #fff;
   opacity: 0.7;
   filter: alpha(opacity=70);
   color: #000000;
-  margin-right: 5%;
 }
 
 div.transbox .innerTransbox {
-  padding-right: 20px;
-  padding-left: 20px;
+  padding-left: 0;
+  padding-right: 0;
   padding-bottom: 15px;
 }
+
+  /* disable transbox padding on mobile to alins when stacked */
+  @media (min-width: 992px) {
+    div.transbox .innerTransbox {
+      padding-right: 20px;
+      padding-left: 20px;
+    }
+  }
 
 td.dateTime {
   width: 130px;
